@@ -1,5 +1,920 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QNDHM DSC Registration & Integration Management</title>
+    <style>
+            :root {
+                --maroon: #8A1538;
+                --maroon-dark: #5E0D28;
+                --maroon-soft: #F8EEF2;
+                --gold: #B89656;
+                --ink: #1F2937;
+                --muted: #667085;
+                --line: #E6EAF0;
+                --surface: #FFFFFF;
+                --canvas: #F5F7FA;
+                --success: #17864B;
+                --warning: #C47A12;
+                --danger: #C9344A;
+                --blue: #1769AA;
+                --shadow: 0 8px 24px rgba(17,24,39,.07);
+            }
+
+            * {
+                box-sizing: border-box
+            }
+
+            html {
+                scroll-behavior: smooth
+            }
+
+            body {
+                margin: 0;
+                background: var(--canvas);
+                color: var(--ink);
+                font-family: Inter,Segoe UI,Arial,sans-serif;
+                font-size: 14px
+            }
+
+            button, input, select, textarea {
+                font: inherit
+            }
+
+            .app {
+                /* display: grid; */
+                /* grid-template-columns: 250px 1fr; */
+                min-height: 100vh
+            }
+
+            .sidebar {
+                position: fixed;
+                inset: 0 auto 0 0;
+                width: 250px;
+                color: #fff;
+                background: linear-gradient(180deg,var(--maroon-dark),var(--maroon) 55%,#6A0F2E);
+                padding: 18px 16px;
+                overflow: auto;
+                z-index: 20
+            }
+
+            .brand {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                padding: 4px 6px 22px;
+                border-bottom: 1px solid rgba(255,255,255,.15)
+            }
+
+            .emblem {
+                width: 46px;
+                height: 46px;
+                border: 1px solid rgba(255,255,255,.55);
+                border-radius: 12px;
+                display: grid;
+                place-items: center;
+                font-weight: 800;
+                letter-spacing: .5px
+            }
+
+            .brand strong {
+                display: block;
+                font-size: 15px
+            }
+
+            .brand small {
+                opacity: .78;
+                line-height: 1.35
+            }
+
+            .side-title {
+                margin: 22px 10px 8px;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 1.2px;
+                opacity: .6
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 11px;
+                color: #fff;
+                text-decoration: none;
+                padding: 11px 12px;
+                border-radius: 9px;
+                margin: 3px 0;
+                opacity: .83
+            }
+
+                .nav-link:hover, .nav-link.active {
+                    background: rgba(255,255,255,.14);
+                    opacity: 1
+                }
+
+            .nav-icon {
+                width: 21px;
+                text-align: center
+            }
+
+            .side-note {
+                margin-top: 30px;
+                padding: 16px 12px;
+                border-top: 1px solid rgba(255,255,255,.14);
+                text-align: center;
+                color: #F3D8AF;
+                line-height: 1.8
+            }
+
+            .main {
+                grid-column: 2;
+                min-width: 0
+            }
+
+            .topbar {
+                height: 76px;
+                background: #fff;
+                border-bottom: 1px solid var(--line);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 28px;
+                position: sticky;
+                top: 0;
+                z-index: 10
+            }
+
+                .topbar h1 {
+                    font-size: 20px;
+                    margin: 0;
+                    color: var(--maroon)
+                }
+
+                .topbar p {
+                    margin: 4px 0 0;
+                    color: var(--muted);
+                    font-size: 12px
+                }
+
+            .user {
+                display: flex;
+                align-items: center;
+                gap: 10px
+            }
+
+            .avatar {
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                background: var(--maroon);
+                color: #fff;
+                display: grid;
+                place-items: center;
+                font-weight: 700
+            }
+
+            .user small {
+                display: block;
+                color: var(--muted)
+            }
+
+            .page {
+                padding: 22px 26px 100px;
+                max-width: 1600px;
+                margin: auto
+            }
+
+            .kpis {
+                display: grid;
+                grid-template-columns: repeat(6,minmax(150px,1fr));
+                gap: 12px;
+                margin-bottom: 18px
+            }
+
+            .kpi {
+                background: #fff;
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 15px;
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                box-shadow: 0 2px 9px rgba(20,24,40,.03)
+            }
+
+            .kpi-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                background: var(--maroon-soft);
+                color: var(--maroon);
+                display: grid;
+                place-items: center;
+                font-size: 18px
+            }
+
+            .kpi b {
+                display: block;
+                font-size: 20px;
+                color: var(--maroon)
+            }
+
+            .kpi span {
+                font-size: 11px;
+                color: var(--muted)
+            }
+
+            .workspace {
+                display: grid;
+                grid-template-columns: 260px minmax(0,1fr);
+                gap: 16px
+            }
+
+            .step-panel, .content-card {
+                background: #fff;
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                box-shadow: var(--shadow)
+            }
+
+            .step-panel {
+                padding: 14px;
+                align-self: start;
+                position: sticky;
+                top: 96px
+            }
+
+            .progress-head {
+                padding: 4px 5px 14px
+            }
+
+                .progress-head b {
+                    color: var(--maroon)
+                }
+
+            .progress-track {
+                height: 6px;
+                background: #EDF0F4;
+                border-radius: 10px;
+                margin-top: 10px;
+                overflow: hidden
+            }
+
+            .progress-bar {
+                height: 100%;
+                width: 10%;
+                background: linear-gradient(90deg,var(--maroon),var(--gold));
+                transition: .25s
+            }
+
+            .step-btn {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border: 0;
+                background: transparent;
+                padding: 10px 8px;
+                border-radius: 9px;
+                text-align: left;
+                color: #4B5563;
+                cursor: pointer;
+                margin: 2px 0
+            }
+
+                .step-btn:hover {
+                    background: #F7F8FA
+                }
+
+                .step-btn.active {
+                    background: var(--maroon-soft);
+                    color: var(--maroon);
+                    font-weight: 700
+                }
+
+                .step-btn.done .step-num {
+                    background: var(--success);
+                    color: #fff;
+                    border-color: var(--success)
+                }
+
+            .step-num {
+                width: 28px;
+                height: 28px;
+                border: 1px solid #CDD3DC;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                flex: 0 0 auto;
+                font-size: 12px
+            }
+
+            .step-btn.active .step-num {
+                background: var(--maroon);
+                border-color: var(--maroon);
+                color: #fff
+            }
+
+            .content-card {
+                padding: 0;
+                overflow: hidden
+            }
+
+            .content-head {
+                padding: 20px 22px;
+                border-bottom: 1px solid var(--line);
+                display: flex;
+                justify-content: space-between;
+                align-items: center
+            }
+
+                .content-head h2 {
+                    margin: 0;
+                    color: var(--maroon);
+                    font-size: 20px
+                }
+
+                .content-head p {
+                    margin: 5px 0 0;
+                    color: var(--muted);
+                    font-size: 12px
+                }
+
+            .status-chip {
+                padding: 7px 11px;
+                border-radius: 20px;
+                background: #FFF7E7;
+                color: #9A6413;
+                font-weight: 700;
+                font-size: 12px
+            }
+
+            .tab {
+                display: none;
+                padding: 22px
+            }
+
+                .tab.active {
+                    display: block
+                }
+
+            .section {
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 18px;
+                margin-bottom: 16px
+            }
+
+            .section-title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 16px
+            }
+
+                .section-title h3 {
+                    margin: 0;
+                    font-size: 15px;
+                    color: #344054
+                }
+
+                .section-title span {
+                    font-size: 12px;
+                    color: var(--muted)
+                }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(2,minmax(0,1fr));
+                gap: 16px
+            }
+
+                .grid.three {
+                    grid-template-columns: repeat(3,minmax(0,1fr))
+                }
+
+            .field.full {
+                grid-column: 1/-1
+            }
+
+            .field label {
+                display: block;
+                margin-bottom: 7px;
+                font-weight: 600;
+                font-size: 12px;
+                color: #344054
+            }
+
+            .req {
+                color: #E53935
+            }
+
+            .field input, .field select, .field textarea {
+                width: 100%;
+                border: 1px solid #D5DAE2;
+                border-radius: 8px;
+                background: #fff;
+                padding: 11px 12px;
+                outline: none;
+                color: #26313E
+            }
+
+            .field textarea {
+                min-height: 88px;
+                resize: vertical
+            }
+
+                .field input:focus, .field select:focus, .field textarea:focus {
+                    border-color: var(--maroon);
+                    box-shadow: 0 0 0 3px rgba(138,21,56,.09)
+                }
+
+            .inline {
+                display: flex;
+                gap: 8px
+            }
+
+                .inline select {
+                    width: 105px
+                }
+
+            .helper {
+                font-size: 11px;
+                color: var(--muted);
+                margin-top: 5px
+            }
+
+            .check-grid {
+                display: grid;
+                grid-template-columns: repeat(2,minmax(0,1fr));
+                gap: 10px
+            }
+
+            .check {
+                display: flex;
+                gap: 9px;
+                align-items: center;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                padding: 11px;
+                background: #FBFCFD
+            }
+
+                .check input {
+                    accent-color: var(--maroon)
+                }
+
+            .table-wrap {
+                overflow: auto;
+                border: 1px solid var(--line);
+                border-radius: 9px
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                min-width: 650px
+            }
+
+            th {
+                background: #303841;
+                color: #fff;
+                text-align: left;
+                padding: 11px;
+                font-size: 12px
+            }
+
+            td {
+                padding: 11px;
+                border-bottom: 1px solid var(--line);
+                font-size: 12px
+            }
+
+            tr:last-child td {
+                border-bottom: 0
+            }
+
+            .pill {
+                display: inline-block;
+                padding: 4px 8px;
+                border-radius: 14px;
+                font-weight: 700;
+                font-size: 11px
+            }
+
+            .green {
+                background: #E8F6EE;
+                color: var(--success)
+            }
+
+            .amber {
+                background: #FFF4DE;
+                color: var(--warning)
+            }
+
+            .red {
+                background: #FDECEF;
+                color: var(--danger)
+            }
+
+            .blue {
+                background: #E9F3FC;
+                color: var(--blue)
+            }
+
+            .btn {
+                border: 0;
+                border-radius: 8px;
+                padding: 10px 14px;
+                cursor: pointer;
+                font-weight: 700
+            }
+
+            .btn-primary {
+                background: var(--maroon);
+                color: #fff
+            }
+
+            .btn-outline {
+                background: #fff;
+                border: 1px solid var(--maroon);
+                color: var(--maroon)
+            }
+
+            .btn-light {
+                background: #EEF1F5;
+                color: #344054
+            }
+
+            .actions-inline {
+                display: flex;
+                justify-content: flex-end;
+                gap: 8px;
+                margin-top: 14px
+            }
+
+            .timeline {
+                display: grid;
+                grid-template-columns: repeat(6,1fr);
+                gap: 0;
+                padding: 20px 5px
+            }
+
+            .stage {
+                text-align: center;
+                position: relative
+            }
+
+                .stage:before {
+                    content: "";
+                    position: absolute;
+                    top: 15px;
+                    left: -50%;
+                    width: 100%;
+                    height: 3px;
+                    background: #D9DEE5
+                }
+
+                .stage:first-child:before {
+                    display: none
+                }
+
+            .dot {
+                position: relative;
+                z-index: 1;
+                width: 32px;
+                height: 32px;
+                border: 3px solid #D4D9E0;
+                border-radius: 50%;
+                background: #fff;
+                display: grid;
+                place-items: center;
+                margin: auto
+            }
+
+            .stage.done .dot {
+                background: var(--success);
+                border-color: var(--success);
+                color: #fff
+            }
+
+            .stage.current .dot {
+                border-color: var(--blue);
+                box-shadow: 0 0 0 4px #DDEDFC
+            }
+
+            .stage.done:before, .stage.current:before {
+                background: var(--success)
+            }
+
+            .stage b {
+                display: block;
+                font-size: 11px;
+                margin-top: 9px
+            }
+
+            .stage small {
+                color: var(--muted);
+                font-size: 10px
+            }
+
+            .review {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                gap: 14px
+            }
+
+            .review-card {
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                padding: 15px
+            }
+
+                .review-card h4 {
+                    margin: 0 0 10px;
+                    color: var(--maroon)
+                }
+
+            .review-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 7px 0;
+                border-bottom: 1px dashed #E4E7EC;
+                font-size: 12px
+            }
+
+                .review-row:last-child {
+                    border: 0
+                }
+
+                .review-row span {
+                    color: var(--muted)
+                }
+
+            .footer-actions {
+                position: fixed;
+                left: 250px;
+                right: 0;
+                bottom: 0;
+                background: rgba(255,255,255,.96);
+                border-top: 1px solid var(--line);
+                padding: 13px 26px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 15
+            }
+
+                .footer-actions small {
+                    color: var(--muted)
+                }
+
+            .footer-buttons {
+                display: flex;
+                gap: 10px
+            }
+
+            .toast {
+                position: fixed;
+                right: 24px;
+                bottom: 82px;
+                background: #26313E;
+                color: #fff;
+                padding: 12px 16px;
+                border-radius: 8px;
+                box-shadow: var(--shadow);
+                opacity: 0;
+                transform: translateY(8px);
+                pointer-events: none;
+                transition: .22s;
+                z-index: 30
+            }
+
+                .toast.show {
+                    opacity: 1;
+                    transform: none
+                }
+            @@media(max - width:1180px) {
+                .kpis {
+                    grid-template-columns: repeat(3,1fr)
+                }
+
+                .grid.three {
+                    grid-template-columns: repeat(2,1fr)
+                }
+            }
+            @@media(max - width:850px) {
+                .app {
+                    display: block
+                }
+
+                .sidebar {
+                    display: none
+                }
+
+                .main {
+                    grid-column: auto
+                }
+
+                .workspace {
+                    grid-template-columns: 1fr
+                }
+
+                .step-panel {
+                    position: static
+                }
+
+                .kpis {
+                    grid-template-columns: repeat(2,1fr)
+                }
+
+                .footer-actions {
+                    left: 0
+                }
+
+                .topbar {
+                    padding: 0 16px
+                }
+
+                .page {
+                    padding: 16px 14px 100px
+                }
+
+                .grid, .grid.three, .review {
+                    grid-template-columns: 1fr
+                }
+
+                .timeline {
+                    grid-template-columns: repeat(3,1fr);
+                    row-gap: 25px
+                }
+            }
+    </style>
+</head>
+<body>
+    <div class="app">
+     
+
+        <main class="main">
+            <header class="topbar"><div><h1>QATAR NATIONAL DIGITAL HEALTH MISSION (QNDHM)</h1><p>Digital Solution Company Registration &amp; Integration Management</p></div><div class="user"><div class="avatar">JD</div><div><b>John Doe</b><small>Integrator Admin</small></div></div></header>
+            <div class="page">
+                @* <section class="kpis">
+                    <div class="kpi"><div class="kpi-icon">▥</div><div><b>1,420+</b><span>Connected Facilities</span></div></div>
+                    <div class="kpi"><div class="kpi-icon">♙</div><div><b>10,500+</b><span>Registered Professionals</span></div></div>
+                    <div class="kpi"><div class="kpi-icon">⌘</div><div><b>175+</b><span>Active Integrators</span></div></div>
+                    <div class="kpi"><div class="kpi-icon">⇄</div><div><b>2.3M+</b><span>Daily Transactions</span></div></div>
+                    <div class="kpi"><div class="kpi-icon">▣</div><div><b>18</b><span>Open Support Tickets</span></div></div>
+                    <div class="kpi"><div class="kpi-icon">✓</div><div><b>92%</b><span>Certified Integrators</span></div></div>
+                </section> *@
+
+                <div class="workspace">
+                    <aside class="step-panel">
+                        <div class="progress-head"><b>Application progress</b><div class="progress-track"><div id="progressBar" class="progress-bar"></div></div></div>
+                        <button class="step-btn active" data-tab="profile"><span class="step-num">1</span><span>Profile Details</span></button>
+                        <button class="step-btn" data-tab="organization"><span class="step-num">2</span><span>Organization Details</span></button>
+                        <button class="step-btn" data-tab="contacts"><span class="step-num">3</span><span>Contacts &amp; SPOCs</span></button>
+                        <button class="step-btn" data-tab="product"><span class="step-num">4</span><span>Product &amp; Integration</span></button>
+                        <button class="step-btn" data-tab="onboarding"><span class="step-num">5</span><span>Onboarding Timeline</span></button>
+                        <button class="step-btn" data-tab="compliance"><span class="step-num">6</span><span>Compliance Assessment</span></button>
+                        <button class="step-btn" data-tab="security"><span class="step-num">7</span><span>Security Assessment</span></button>
+                        <button class="step-btn" data-tab="support"><span class="step-num">8</span><span>Support &amp; Tickets</span></button>
+                        <button class="step-btn" data-tab="review"><span class="step-num">9</span><span>Review &amp; Submit</span></button>
+                    </aside>
+
+                    <section class="content-card">
+                        <div class="content-head"><div><h2 id="pageTitle">Profile Details</h2><p id="pageSub">Create the primary QNDHM portal profile.</p></div><span class="status-chip">Draft</span></div>
+
+                        <div id="profile" class="tab active">
+                            <div class="section">
+                                <div class="section-title"><h3>Portal profile</h3><span>Step 1 of 9</span></div><div class="grid">
+                                <div class="field"><label>QNDHM Registration ID <span class="req">*</span></label><input value="QNDHM-DSC-2026-00125" readonly></div>
+                                <div class="field"><label>Account Type <span class="req">*</span></label><select><option>Digital Solution Company (DSC)</option><option>Healthcare Facility</option><option>Healthcare Professional</option></select></div>
+                                <div class="field"><label>Portal Username <span class="req">*</span></label><input value="meditech.admin"></div>
+                                <div class="field"><label>Official Email <span class="req">*</span></label><input type="email" value="admin@meditech.qa"></div>
+                                <div class="field"><label>Preferred Language</label><select><option>English</option><option>Arabic</option></select></div>
+                                <div class="field"><label>Application Owner</label><input value="Ahmed Al Qahtani"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="organization" class="tab">
+                        <div class="section">
+                            <div class="section-title"><h3>Organization information</h3><span>Legal and registered details</span></div><div class="grid three">
+                            <div class="field"><label>Organization Name <span class="req">*</span></label><input value="MediTech Solutions W.L.L."></div>
+                            <div class="field"><label>Organization Type <span class="req">*</span></label><select><option>Digital Solution Company</option><option>Hospital</option><option>Clinic</option><option>Laboratory</option><option>Pharmacy</option></select></div>
+                            <div class="field"><label>Commercial Registration No. <span class="req">*</span></label><input value="CRN-1234567890"></div>
+                            <div class="field"><label>Ministry License No.</label><input value="ML-987654321"></div>
+                            <div class="field"><label>Website URL</label><input value="https://www.meditech.qa"></div>
+                            <div class="field"><label>Doha Municipality <span class="req">*</span></label><select><option>West Bay</option><option>Al Rayyan</option><option>Doha</option></select></div>
+                            <div class="field full"><label>Registered Address <span class="req">*</span></label><textarea>Al Muntazah, West Bay, Doha, State of Qatar</textarea></div>
+                            <div class="field"><label>Postal Code</label><input value="12233"></div>
+                            <div class="field"><label>Establishment Date</label><input type="date" value="2020-05-10"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="contacts" class="tab">
+                    <div class="section">
+                        <div class="section-title"><h3>Add contact</h3><span>Primary, technical, functional and compliance SPOCs</span></div><div class="grid three">
+                        <div class="field"><label>Role <span class="req">*</span></label><select id="contactRole"><option>Primary Contact</option><option>Technical SPOC</option><option>Functional SPOC</option><option>Compliance SPOC</option><option>Security SPOC</option></select></div>
+                        <div class="field"><label>Full Name <span class="req">*</span></label><input id="contactName" placeholder="Enter full name"></div>
+                        <div class="field"><label>Designation</label><input id="contactDesignation" placeholder="Enter designation"></div>
+                        <div class="field"><label>Email <span class="req">*</span></label><input id="contactEmail" type="email" placeholder="name@organization.qa"></div>
+                        <div class="field"><label>Primary Mobile <span class="req">*</span></label><div class="inline"><select><option>+974</option></select><input id="contactMobile" placeholder="Mobile number"></div></div>
+                        <div class="field"><label>Alternate Mobile</label><div class="inline"><select><option>+974</option></select><input placeholder="Alternate number"></div></div>
+                    </div><div class="actions-inline"><button class="btn btn-primary" onclick="addContact()">+ Add Contact</button></div>
+                </div>
+                <div class="section"><div class="section-title"><h3>Contact directory</h3><span>3 contacts</span></div><div class="table-wrap"><table><thead><tr><th>Role</th><th>Name</th><th>Designation</th><th>Email</th><th>Mobile</th><th>Action</th></tr></thead><tbody id="contactRows"><tr><td>Primary Contact</td><td>Ahmed Al Qahtani</td><td>Integration Manager</td><td>ahmed.qahtani@meditech.qa</td><td>+974 50123456</td><td>✎ &nbsp; 🗑</td></tr><tr><td>Technical SPOC</td><td>Sara Khan</td><td>Technical Lead</td><td>sara.khan@meditech.qa</td><td>+974 55887766</td><td>✎ &nbsp; 🗑</td></tr><tr><td>Compliance SPOC</td><td>Mohammed Ali</td><td>Compliance Lead</td><td>m.ali@meditech.qa</td><td>+974 66778899</td><td>✎ &nbsp; 🗑</td></tr></tbody></table></div></div>
+            </div>
+
+            <div id="product" class="tab">
+                <div class="section">
+                    <div class="section-title"><h3>Digital health product</h3><span>Product and requested integrations</span></div><div class="grid">
+                    <div class="field"><label>Product Category <span class="req">*</span></label><select><option>Health Information Exchange</option><option>Hospital Information System</option><option>Electronic Medical Record</option><option>Claims Platform</option></select></div>
+                    <div class="field"><label>Solution Type <span class="req">*</span></label><select><option>API Based Solution</option><option>Web Application</option><option>Mobile Application</option></select></div>
+                    <div class="field"><label>Product Name <span class="req">*</span></label><input value="MediConnect HIE"></div>
+                    <div class="field"><label>Integration Type <span class="req">*</span></label><select><option>Provider - Provider</option><option>Provider - Payer</option><option>Registry Integration</option></select></div>
+                    <div class="field full"><label>Product Description <span class="req">*</span></label><textarea>Interoperability solution for exchanging health data across facilities using QNDHM standards and APIs.</textarea></div>
+                </div>
+            </div>
+            <div class="section"><div class="section-title"><h3>Integration scope</h3><span>Select all that apply</span></div><div class="check-grid"><label class="check"><input type="checkbox" checked>Healthcare Professional Registry (Q-HPR)</label><label class="check"><input type="checkbox" checked>Healthcare Facility Registry (Q-HFR)</label><label class="check"><input type="checkbox" checked>Health Information Exchange (Q-HIE)</label><label class="check"><input type="checkbox" checked>Consent Manager</label><label class="check"><input type="checkbox">Claims Exchange</label><label class="check"><input type="checkbox">ePrescription</label></div></div>
+        </div>
+
+        <div id="onboarding" class="tab">
+            <div class="section"><div class="section-title"><h3>Integration journey</h3><span>Current stage: Compliance Testing</span></div><div class="timeline"><div class="stage done"><div class="dot">✓</div><b>Registration</b><small>10 Oct 2026</small></div><div class="stage done"><div class="dot">✓</div><b>Sandbox</b><small>20 Oct 2026</small></div><div class="stage current"><div class="dot"></div><b>Compliance</b><small>In progress</small></div><div class="stage"><div class="dot"></div><b>Pilot</b><small>Pending</small></div><div class="stage"><div class="dot"></div><b>Certification</b><small>Pending</small></div><div class="stage"><div class="dot"></div><b>Production</b><small>Pending</small></div></div></div>
+            <div class="section"><div class="grid"><div class="field"><label>Sandbox Access Date</label><input type="date" value="2026-10-20"></div><div class="field"><label>Compliance Assessment Date</label><input type="date" value="2026-11-05"></div><div class="field"><label>Pilot Launch Date</label><input type="date"></div><div class="field"><label>Production Go-Live Date</label><input type="date"></div><div class="field"><label>Onboarding Session Planned On</label><input type="date"></div><div class="field"><label>Q/A Session Preference</label><input type="datetime-local"></div></div></div>
+        </div>
+
+        <div id="compliance" class="tab">
+            <div class="section"><div class="section-title"><h3>Functional testing &amp; compliance</h3><span>Assessment partner information</span></div><div class="grid three"><div class="field"><label>Compliance Partner</label><input value="Approved Assessment Partner"></div><div class="field"><label>Assessment Start Date</label><input type="date" value="2026-11-05"></div><div class="field"><label>Assessment End Date</label><input type="date" value="2026-11-20"></div><div class="field"><label>Milestone</label><select><option>Milestone 2</option><option>Milestone 1</option><option>Milestone 3</option></select></div><div class="field"><label>Risk Rating</label><select><option>Low</option><option>Medium</option><option>High</option></select></div><div class="field"><label>Compliance Status</label><select><option>Observation Open</option><option>Passed</option><option>Re-test Required</option><option>Certified</option></select></div><div class="field full"><label>Findings Summary</label><textarea>Minor observations related to API error handling and data validation.</textarea></div></div></div>
+        </div>
+
+        <div id="security" class="tab">
+            <div class="section"><div class="section-title"><h3>Security assessment (VAPT)</h3><span>Security testing and closure tracking</span></div><div class="grid three"><div class="field"><label>Security Auditor</label><input value="Approved Cyber Security Agency"></div><div class="field"><label>VAPT Start Date</label><input type="date" value="2026-11-22"></div><div class="field"><label>VAPT End Date</label><input type="date" value="2026-12-02"></div><div class="field"><label>Risk Severity</label><select><option>Medium</option><option>Low</option><option>High</option><option>Critical</option></select></div><div class="field"><label>Closure Status</label><select><option>In Progress</option><option>Closed</option><option>Re-test Required</option></select></div><div class="field"><label>Certification Reference</label><input placeholder="Enter certificate/reference number"></div><div class="field full"><label>Security Findings</label><textarea>Two medium and one low severity issue identified.</textarea></div></div></div>
+        </div>
+
+        <div id="support" class="tab">
+            <div class="section"><div class="section-title"><h3>Add support interaction</h3><span>Linked with QNDHM support ticketing</span></div><div class="grid three"><div class="field"><label>Interaction Date</label><input type="date" value="2026-10-12"></div><div class="field"><label>Able to Connect</label><select><option>Yes</option><option>No</option></select></div><div class="field"><label>Issue Type</label><select><option>Technical</option><option>Functional</option><option>Service Request</option></select></div><div class="field"><label>QNDHM Ticket ID</label><input value="QNDHM-TKT-2026-0112"></div><div class="field"><label>Ticket Status</label><select><option>Open</option><option>In Progress</option><option>Closed</option></select></div><div class="field"><label>Assigned To</label><input value="API Support Team"></div><div class="field full"><label>Summary</label><textarea>Facing issue in sandbox API authentication.</textarea></div></div><div class="actions-inline"><button class="btn btn-primary">+ Add Interaction</button></div></div>
+            <div class="section"><div class="section-title"><h3>Communication &amp; ticket history</h3><span>3 records</span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Connect</th><th>Summary</th><th>Issue Type</th><th>Ticket ID</th><th>Status</th></tr></thead><tbody><tr><td>12 Oct 2026</td><td>Yes</td><td>Sandbox authentication issue</td><td>Technical</td><td>QNDHM-TKT-0112</td><td><span class="pill red">Open</span></td></tr><tr><td>05 Oct 2026</td><td>Yes</td><td>Additional API package requested</td><td>Service Request</td><td>QNDHM-TKT-0098</td><td><span class="pill green">Closed</span></td></tr><tr><td>30 Sep 2026</td><td>No</td><td>Follow-up on client credential discovery</td><td>Technical</td><td>QNDHM-TKT-0085</td><td><span class="pill amber">In Progress</span></td></tr></tbody></table></div></div>
+        </div>
+
+        <div id="review" class="tab">
+            <div class="section"><div class="section-title"><h3>Review application</h3><span>Verify all sections before submission</span></div><div class="review"><div class="review-card"><h4>Profile</h4><div class="review-row"><span>Registration ID</span><b>QNDHM-DSC-2026-00125</b></div><div class="review-row"><span>Account Type</span><b>DSC</b></div><div class="review-row"><span>Status</span><b class="pill green">Complete</b></div></div><div class="review-card"><h4>Organization</h4><div class="review-row"><span>Name</span><b>MediTech Solutions</b></div><div class="review-row"><span>CR Number</span><b>CRN-1234567890</b></div><div class="review-row"><span>Status</span><b class="pill green">Complete</b></div></div><div class="review-card"><h4>Integration</h4><div class="review-row"><span>Product</span><b>MediConnect HIE</b></div><div class="review-row"><span>Requested Modules</span><b>4</b></div><div class="review-row"><span>Status</span><b class="pill green">Complete</b></div></div><div class="review-card"><h4>Assessments</h4><div class="review-row"><span>Compliance</span><b class="pill amber">Observation Open</b></div><div class="review-row"><span>Security</span><b class="pill blue">In Progress</b></div><div class="review-row"><span>Submission ready</span><b>Yes</b></div></div></div></div>
+            <div class="section"><label class="check"><input id="declaration" type="checkbox">I confirm that the information provided is accurate and authorize submission for QNDHM review.</label></div>
+        </div>
+    </section>
+</div>
+</div>
+</main>
+</div>
+
+<div class="footer-actions"><small id="saveStatus">Last saved locally: not yet saved</small><div class="footer-buttons"><button class="btn btn-outline" onclick="saveDraft()">Save as Draft</button><button id="prevBtn" class="btn btn-light" onclick="move(-1)" disabled>Previous</button><button id="nextBtn" class="btn btn-primary" onclick="move(1)">Save &amp; Continue</button></div></div>
+<div id="toast" class="toast">Draft saved</div>
+<script>
+        const steps = [
+            ['profile', 'Profile Details', 'Create the primary QNDHM portal profile.'],
+            ['organization', 'Organization Details', 'Provide legal and registered organization information.'],
+            ['contacts', 'Contacts & SPOCs', 'Manage primary, functional, technical and compliance contacts.'],
+            ['product', 'Product & Integration', 'Describe the product and select requested QNDHM integrations.'],
+            ['onboarding', 'Onboarding Timeline', 'Plan the journey from registration to production go-live.'],
+            ['compliance', 'Compliance Assessment', 'Track functional testing, observations and certification.'],
+            ['security', 'Security Assessment', 'Record VAPT details, findings and closure status.'],
+            ['support', 'Support & Tickets', 'Maintain communication logs and QNDHM support ticket history.'],
+            ['review', 'Review & Submit', 'Review the complete application before submission.']
+        ];
+        let current = 0;
+        const buttons = [...document.querySelectorAll('.step-btn')];
+        function showStep(index) {
+            current = Math.max(0, Math.min(index, steps.length - 1));
+            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+            document.getElementById(steps[current][0]).classList.add('active');
+            buttons.forEach((b, i) => { b.classList.toggle('active', i === current); b.classList.toggle('done', i < current); if (i < current) b.querySelector('.step-num').textContent = '✓'; else b.querySelector('.step-num').textContent = i + 1; });
+            document.getElementById('pageTitle').textContent = steps[current][1];
+            document.getElementById('pageSub').textContent = steps[current][2];
+            document.getElementById('progressBar').style.width = ((current + 1) / steps.length * 100) + '%';
+            document.getElementById('prevBtn').disabled = current === 0;
+            document.getElementById('nextBtn').textContent = current === steps.length - 1 ? 'Submit for Review' : 'Save & Continue';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        buttons.forEach((b, i) => b.addEventListener('click', () => showStep(i)));
+        function move(dir) {
+            if (current === steps.length - 1 && dir === 1) {
+                if (!document.getElementById('declaration').checked) { toast('Please accept the declaration before submission'); return; }
+                toast('Application submitted for QNDHM review'); return;
+            }
+            saveDraft(false); showStep(current + dir);
+        }
+        function saveDraft(show = true) {
+            const now = new Date().toLocaleString(); localStorage.setItem('qndhmDraftSaved', now); document.getElementById('saveStatus').textContent = 'Last saved locally: ' + now; if (show) toast('Draft saved successfully');
+        }
+        function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200) }
+        function addContact() {
+            const role = document.getElementById('contactRole').value, name = document.getElementById('contactName').value.trim(), des = document.getElementById('contactDesignation').value.trim(), email = document.getElementById('contactEmail').value.trim(), mobile = document.getElementById('contactMobile').value.trim();
+            if (!name || !email || !mobile) { toast('Enter name, email and mobile number'); return; }
+            const tr = document.createElement('tr'); tr.innerHTML = `<td>${role}</td><td>${name}</td><td>${des || '-'}</td><td>${email}</td><td>+974 ${mobile}</td><td>✎ &nbsp; 🗑</td>`; document.getElementById('contactRows').appendChild(tr); toast('Contact added');
+        }
+        showStep(0);
+</script>
+</body>
+</html>

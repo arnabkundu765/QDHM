@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QNDHM Registration Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=P300;400;500;600;700;800&display=swap
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f6fa;
+}
+
+:root{
+--qatar:#8A1538;
+--gold:#B58E5F;
+--light:#fafafa;
+}
+
+.container{
+padding:20px;
+}
+
+/* TOP BAR */
+
+.top-bar{
+background:white;
+padding:15px 25px;
+border-radius:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.06);
+}
+
+.logo{
+font-weight:700;
+color:var(--qatar);
+font-size:22px;
+}
+
+.stats{
+display:flex;
+gap:15px;
+}
+
+.stat{
+background:#fff;
+padding:15px 25px;
+border-radius:15px;
+min-width:180px;
+text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+
+.stat h3{
+font-size:26px;
+color:var(--qatar);
+}
+
+/* MAIN */
+
+.main{
+display:flex;
+gap:20px;
+}
+
+/* LEFT */
+
+.sidebar{
+width:350px;
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.sidebar-top{
+padding:35px;
+text-align:center;
+}
+
+.sidebar h1{
+font-size:34px;
+color:var(--qatar);
+line-height:1.2;
+margin-bottom:15px;
+}
+
+.tagline{
+color:var(--gold);
+font-weight:600;
+}
+
+.steps{
+padding:30px;
+}
+
+.step{
+display:flex;
+align-items:flex-start;
+margin-bottom:30px;
+}
+
+.circle{
+width:42px;
+height:42px;
+border-radius:50%;
+background:var(--qatar);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-right:15px;
+font-weight:600;
+}
+
+.pending{
+background:#ddd;
+color:#555;
+}
+
+.step-content h4{
+margin-bottom:5px;
+}
+
+.skyline{
+height:260px;
+background:url('qatar-background.jpg');
+background-size:cover;
+background-position:center;
+}
+
+/* RIGHT */
+
+.content{
+flex:1;
+background:white;
+border-radius:20px;
+padding:30px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.content h2{
+color:var(--qatar);
+margin-bottom:25px;
+}
+
+.card{
+border:1px solid #eee;
+border-radius:15px;
+padding:25px;
+margin-bottom:20px;
+}
+
+.card-title{
+font-size:20px;
+font-weight:600;
+margin-bottom:20px;
+color:var(--qatar);
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.input-group{
+display:flex;
+flex-direction:column;
+}
+
+label{
+margin-bottom:8px;
+font-size:14px;
+font-weight:500;
+}
+
+input,
+select{
+padding:14px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.integration-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.integration-item{
+padding:15px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+/* DOCUMENTS */
+
+.doc-area{
+border:2px dashed #ccc;
+border-radius:15px;
+padding:40px;
+text-align:center;
+color:#666;
+margin-bottom:20px;
+}
+
+.doc{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+border:1px solid #eee;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.upload-btn{
+background:var(--qatar);
+color:white;
+padding:10px 18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.buttons{
+display:flex;
+gap:15px;
+margin-top:20px;
+}
+
+.save{
+padding:16px 35px;
+border:2px solid var(--qatar);
+background:white;
+color:var(--qatar);
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+}
+
+.submit{
+padding:16px 35px;
+background:var(--qatar);
+color:white;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:20px;
+background:linear-gradient(135deg,#8A1538,#6d0f2c);
+padding:25px;
+border-radius:20px;
+color:white;
+display:flex;
+justify-content:space-around;
+}
+
+.footer-card{
+text-align:center;
+max-width:250px;
+}
+
+.footer-card h4{
+margin-bottom:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="top-bar">
+
+<div class="logo">
+QATAR NATIONAL DIGITAL HEALTH MISSION (QNDHM)
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h3>1,420+</h3>
+<p>Connected Facilities</p>
+</div>
+
+<div class="stat">
+<h3>10,500+</h3>
+<p>Professionals</p>
+</div>
+
+<div class="stat">
+<h3>175+</h3>
+<p>Integrators</p>
+</div>
+
+<div class="stat">
+<h3>2.3M+</h3>
+<p>Transactions</p>
+</div>
+
+</div>
+</div>
+
+<div class="main">
+
+<!-- LEFT PANEL -->
+
+<div class="sidebar">
+
+<div class="sidebar-top">
+
+<h1>QNDHM</h1>
+
+<p class="tagline">
+One Nation • One Health Network • Connected Care
+</p>
+
+</div>
+
+<div class="steps">
+
+<div class="step">
+<div class="circle">✓</div>
+<div class="step-content">
+<h4>Account Creation</h4>
+<p>Create Portal Account</p>
+</div>
+</div>
+
+<div class="step">
+<div class="circle">✓</div>
+<div class="step-content">
+<h4>Organization Details</h4>
+<p>Provide Information</p>
+</div>
+</div>
+
+<div class="step">
+<div class="circle pending">3</div>
+<div class="step-content">
+<h4>Verification</h4>
+<p>Document Review</p>
+</div>
+</div>
+
+<div class="step">
+<div class="circle pending">4</div>
+<div class="step-content">
+<h4>Compliance Review</h4>
+<p>Security Assessment</p>
+</div>
+</div>
+
+<div class="step">
+<div class="circle pending">5</div>
+<div class="step-content">
+<h4>Go Live</h4>
+<p>Connect to National Network</p>
+</div>
+</div>
+
+</div>
+
+<div class="skyline"></div>
+
+</div>
+
+<!-- RIGHT PANEL -->
+
+<div class="content">
+
+<h2>Register for QNDHM</h2>
+
+<div class="card">
+
+<div class="card-title">
+Organization Information
+</div>
+
+<div class="grid">
+
+<div class="input-group">
+<label>Organization Name</label>
+<input type="text">
+</div>
+
+<div class="input-group">
+<label>Organization Type</label>
+<select>
+<option>Hospital</option>
+<option>Clinic</option>
+<option>Laboratory</option>
+<option>Pharmacy</option>
+<option>Digital Solution Company</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>Commercial Registration Number</label>
+<input type="text">
+</div>
+
+<div class="input-group">
+<label>License Number</label>
+<input type="text">
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+Primary Contact
+</div>
+
+<div class="grid">
+
+<div class="input-group">
+<label>Full Name</label>
+<input type="text">
+</div>
+
+<div class="input-group">
+<label>Designation</label>
+<input type="text">
+</div>
+
+<div class="input-group">
+<label>Email</label>
+<input type="email">
+</div>
+
+<div class="input-group">
+<label>Mobile Number</label>
+<input type="text">
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+Integration Requirements
+</div>
+
+<div class="integration-grid">
+
+<div class="integration-item">
+<input type="checkbox"> Healthcare Facility Registry (Q-HFR)
+</div>
+
+<div class="integration-item">
+<input type="checkbox"> Healthcare Professional Registry (Q-HPR)
+</div>
+
+<div class="integration-item">
+<input type="checkbox"> Health Information Exchange (Q-HIE)
+</div>
+
+<div class="integration-item">
+<input type="checkbox"> ePrescription
+</div>
+
+<div class="integration-item">
+<input type="checkbox"> Claims Exchange
+</div>
+
+<div class="integration-item">
+<input type="checkbox"> Consent Manager
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+Document Upload
+</div>
+
+<div class="doc-area">
+Drag & Drop Files Here
+</div>
+
+<div class="doc">
+Trade License
+<button class="upload-btn">Upload</button>
+</div>
+
+<div class="doc">
+Healthcare License
+<button class="upload-btn">Upload</button>
+</div>
+
+<div class="doc">
+Authorization Letter
+<button class="upload-btn">Upload</button>
+</div>
+
+<div class="buttons">
+<button class="save">Save Draft</button>
+<button class="submit">Submit Registration</button>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+
+<div class="footer-card">
+<h4>Secure</h4>
+<p>Trusted national healthcare network</p>
+</div>
+
+<div class="footer-card">
+<h4>Compliant</h4>
+<p>Aligned with Qatar Data Protection laws</p>
+</div>
+
+<div class="footer-card">
+<h4>Interoperable</h4>
+<p>Seamless health information exchange</p>
+</div>
+
+<div class="footer-card">
+<h4>24x7 Support</h4>
+<p>National Support Operations Center</p>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
