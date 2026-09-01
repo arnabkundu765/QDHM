@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QNDHM Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;display=swap
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f4f4;
+}
+
+.main-container{
+width:100%;
+min-height:100vh;
+background:white;
+}
+
+/* HEADER */
+
+.header{
+padding:20px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #ddd;
+}
+
+.logo{
+font-size:18px;
+font-weight:600;
+color:#8A1538;
+}
+
+.title-section{
+text-align:center;
+}
+
+.title-section h1{
+font-size:48px;
+font-weight:800;
+color:#8A1538;
+}
+
+.title-section p{
+margin-top:10px;
+color:#444;
+font-size:18px;
+}
+
+.title-section .tagline{
+margin-top:10px;
+color:#b38b59;
+font-weight:600;
+}
+
+/* MAIN */
+
+.content{
+display:flex;
+padding:30px;
+gap:30px;
+}
+
+/* LEFT */
+
+.left{
+flex:2;
+position:relative;
+min-height:650px;
+background:
+linear-gradient(
+rgba(255,255,255,.85),
+rgba(255,255,255,.85)),
+url('doha.jpg');
+
+background-size:cover;
+background-position:center;
+border-radius:20px;
+overflow:hidden;
+}
+
+.left-content{
+padding:40px;
+}
+
+.left-content h2{
+font-size:42px;
+color:#8A1538;
+margin-bottom:20px;
+}
+
+.left-content p{
+font-size:18px;
+line-height:1.8;
+color:#444;
+max-width:400px;
+}
+
+/* CENTER PLATFORM */
+
+.platform-wrapper{
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+}
+
+.platform{
+width:250px;
+height:250px;
+border-radius:50%;
+background:#8A1538;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+box-shadow:0 0 50px rgba(138,21,56,.3);
+}
+
+.platform h3{
+font-size:34px;
+font-weight:700;
+}
+
+.platform p{
+font-size:15px;
+margin-top:10px;
+}
+
+/* NODES */
+
+.node{
+position:absolute;
+background:white;
+width:120px;
+height:120px;
+border-radius:50%;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:10px;
+font-size:14px;
+font-weight:600;
+}
+
+.node1{top:100px;left:48%;}
+.node2{top:180px;left:75%;}
+.node3{bottom:170px;left:75%;}
+.node4{bottom:80px;left:48%;}
+.node5{bottom:170px;left:15%;}
+.node6{top:180px;left:15%;}
+
+/* RIGHT */
+
+.right{
+flex:1;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.section-title{
+font-size:28px;
+font-weight:700;
+color:#8A1538;
+margin-bottom:10px;
+}
+
+.portal-card{
+background:white;
+border-radius:18px;
+padding:24px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+transition:.3s;
+cursor:pointer;
+border-left:8px solid #8A1538;
+}
+
+.portal-card:hover{
+transform:translateY(-5px);
+}
+
+.portal-header{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:10px;
+}
+
+.icon{
+width:60px;
+height:60px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+color:white;
+}
+
+.red{background:#8A1538;}
+.gold{background:#b38b59;}
+.green{background:#5a9447;}
+.blue{background:#2367d1;}
+
+.portal-title{
+font-weight:700;
+font-size:20px;
+}
+
+.portal-card ul{
+margin-left:20px;
+color:#555;
+line-height:1.8;
+}
+
+.access{
+margin-top:15px;
+font-weight:700;
+color:#8A1538;
+}
+
+/* BUILDING BLOCKS */
+
+.blocks{
+margin:20px 30px;
+padding:25px;
+background:white;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.05);
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:20px;
+text-align:center;
+}
+
+.block{
+font-size:14px;
+font-weight:600;
+}
+
+/* FOOTER */
+
+.footer{
+background:#8A1538;
+padding:25px;
+color:white;
+display:flex;
+justify-content:space-around;
+text-align:center;
+}
+
+.stat h3{
+font-size:28px;
+}
+
+.stat p{
+font-size:14px;
+opacity:.9;
+}
+
+@media(max-width:1200px){
+
+.content{
+flex-direction:column;
+}
+
+.blocks{
+grid-template-columns:repeat(2,1fr);
+}
+
+.footer{
+flex-wrap:wrap;
+gap:20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main-container">
+
+<div class="header">
+
+<div class="logo">
+Qatar MoPH
+</div>
+
+<div class="title-section">
+<h1>QATAR NATIONAL DIGITAL HEALTH MISSION</h1>
+<p>Building a Connected, Interoperable & Citizen-Centric Healthcare Ecosystem for Qatar</p>
+
+<div class="tagline">
+One Nation • One Health Network • Connected Care
+</div>
+</div>
+
+<div class="logo">
+eHealth Qatar 2030
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="left">
+
+<div class="left-content">
+
+<h2>
+A UNIFIED DIGITAL HEALTH ECOSYSTEM
+FOR A HEALTHIER QATAR
+</h2>
+
+<p>
+QNDHM enables secure exchange of health information,
+seamless interoperability and better healthcare outcomes.
+</p>
+
+</div>
+
+<div class="platform-wrapper">
+<div class="platform">
+<div>
+<h3>QNDHM</h3>
+<p>CORE PLATFORM</p>
+</div>
+</div>
+</div>
+
+<div class="node node1">Hospitals</div>
+<div class="node node2">Pharmacies</div>
+<div class="node node3">Citizens</div>
+<div class="node node4">Digital Health Apps</div>
+<div class="node node5">Healthcare Professionals</div>
+<div class="node node6">Laboratories</div>
+
+</div>
+
+<div class="right">
+
+<div class="section-title">
+Select Your Access Portal
+</div>
+
+<div class="portal-card">
+
+<div class="portal-header">
+<div class="icon red">🎧</div>
+<div class="portal-title">Support Operations Center</div>
+</div>
+
+<ul>
+<li>Ticket Management</li>
+<li>OS Ticket Activities</li>
+<li>SLA Monitoring</li>
+<li>National Helpdesk</li>
+</ul>
+
+<div class="access">
+Access Portal →
+</div>
+
+</div>
+
+<div class="portal-card">
+
+<div class="portal-header">
+<div class="icon gold">🏥</div>
+<div class="portal-title">Healthcare Facility Portal</div>
+</div>
+
+<ul>
+<li>Hospitals</li>
+<li>Clinics</li>
+<li>Pharmacy Networks</li>
+<li>Facility Dashboard</li>
+</ul>
+
+<div class="access">
+Access Portal →
+</div>
+
+</div>
+
+<div class="portal-card">
+
+<div class="portal-header">
+<div class="icon green">👨‍⚕️</div>
+<div class="portal-title">Healthcare Professional Portal</div>
+</div>
+
+<ul>
+<li>Practitioner Registry</li>
+<li>Clinical Access</li>
+<li>Digital Identity</li>
+<li>Credential Management</li>
+</ul>
+
+<div class="access">
+Access Portal →
+</div>
+
+</div>
+
+<div class="portal-card">
+
+<div class="portal-header">
+<div class="icon blue">API</div>
+<div class="portal-title">DSC / Integrator Portal</div>
+</div>
+
+<ul>
+<li>Sandbox Access</li>
+<li>API Gateway</li>
+<li>Certification Workflow</li>
+<li>Compliance Dashboard</li>
+</ul>
+
+<div class="access">
+Access Portal →
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="blocks">
+
+<div class="block">Healthcare Professional Registry (Q-HPR)</div>
+<div class="block">Healthcare Facility Registry (Q-HFR)</div>
+<div class="block">Health Information Exchange (Q-HIE)</div>
+<div class="block">Consent Manager</div>
+<div class="block">Insurance & Claims Exchange</div>
+<div class="block">ePrescription Network</div>
+<div class="block">National Support Operations Center</div>
+
+</div>
+
+<div class="footer">
+
+<div class="stat">
+<h3>30+</h3>
+<p>Hospitals</p>
+</div>
+
+<div class="stat">
+<h3>10,000+</h3>
+<p>Healthcare Professionals</p>
+</div>
+
+<div class="stat">
+<h3>Millions</h3>
+<p>Secure Health Transactions Daily</p>
+</div>
+
+<div class="stat">
+<h3>100%</h3>
+<p>Secure & Compliant</p>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
