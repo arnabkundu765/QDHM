@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QNDHM Partner CRM Summary</title>
+    <style>
+        :root {
+            --maroon: #8A1538;
+            --dark: #5C0D28;
+            --soft: #F8EEF2;
+            --gold: #B89555;
+            --bg: #F5F7FA;
+            --ink: #202936;
+            --muted: #687386;
+            --line: #E2E7EE;
+            --green: #16824A;
+            --amber: #B76E00;
+            --red: #C9364D;
+            --blue: #176AA6;
+            --shadow: 0 8px 24px rgba(20, 25, 38, .07)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 14px/1.4 "Segoe UI", Arial, sans-serif
+        }
+
+        button,
+        input,
+        select {
+            font: inherit
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 238px 1fr;
+            min-height: 100vh
+        }
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+            width: 238px;
+            padding: 18px 14px;
+            color: #fff;
+            background: linear-gradient(180deg, var(--dark), var(--maroon) 58%, #690F30);
+            z-index: 20
+        }
+
+        .brand {
+            display: flex;
+            gap: 11px;
+            align-items: center;
+            padding: 4px 5px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, .15)
+        }
+
+        .logo {
+            width: 46px;
+            height: 46px;
+            border: 1px solid rgba(255, 255, 255, .6);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-weight: 800
+        }
+
+        .brand b {
+            display: block
+        }
+
+        .brand small {
+            opacity: .75
+        }
+
+        .nav-title {
+            margin: 22px 10px 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: .55
+        }
+
+        .nav {
+            display: flex;
+            gap: 11px;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            padding: 11px 12px;
+            border-radius: 9px;
+            margin: 3px 0;
+            opacity: .82
+        }
+
+        .nav:hover,
+        .nav.active {
+            background: rgba(255, 255, 255, .14);
+            opacity: 1
+        }
+
+        .mission {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            right: 25px;
+            text-align: center;
+            color: #F3D6A2;
+            line-height: 1.8
+        }
+
+        .main {
+            grid-column: 2;
+            min-width: 0
+        }
+
+        .topbar {
+            height: 74px;
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+            padding: 0 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10
+        }
+
+        .topbar h1 {
+            margin: 0;
+            color: var(--maroon);
+            font-size: 20px
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .user {
+            display: flex;
+            gap: 9px;
+            align-items: center
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--maroon);
+            color: #fff;
+            font-weight: 700
+        }
+
+        .page {
+            padding: 22px 26px 50px;
+            max-width: 1700px;
+            margin: auto
+        }
+
+        .welcome {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 14px
+        }
+
+        .welcome h2 {
+            margin: 0 0 4px;
+            font-size: 22px
+        }
+
+        .welcome p {
+            margin: 0;
+            color: var(--muted)
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .primary {
+            background: var(--maroon);
+            color: #fff
+        }
+
+        .outline {
+            background: #fff;
+            color: var(--maroon);
+            border: 1px solid var(--maroon)
+        }
+
+        .light {
+            background: #EEF1F5;
+            color: #344054
+        }
+
+        .danger {
+            background: #FDECEF;
+            color: var(--red)
+        }
+
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(145px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px
+        }
+
+        .kpi {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 9px rgba(20, 24, 40, .03)
+        }
+
+        .kpi-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .kpi-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--soft);
+            color: var(--maroon);
+            display: grid;
+            place-items: center;
+            font-size: 18px
+        }
+
+        .kpi b {
+            display: block;
+            margin-top: 9px;
+            font-size: 23px;
+            color: var(--maroon)
+        }
+
+        .kpi span {
+            font-size: 11px;
+            color: var(--muted)
+        }
+
+        .mini-trend {
+            font-size: 10px;
+            color: var(--green)
+        }
+
+        .panel {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            overflow: hidden
+        }
+
+        .panel-head {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: center
+        }
+
+        .panel-head h3 {
+            margin: 0;
+            font-size: 17px
+        }
+
+        .panel-head p {
+            margin: 3px 0 0;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .filters {
+            padding: 14px 20px;
+            background: #FBFCFD;
+            border-bottom: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr) auto;
+            gap: 10px
+        }
+
+        .control {
+            width: 100%;
+            border: 1px solid #D5DBE4;
+            border-radius: 8px;
+            padding: 10px 11px;
+            background: #fff;
+            outline: none
+        }
+
+        .control:focus {
+            border-color: var(--maroon);
+            box-shadow: 0 0 0 3px rgba(138, 21, 56, .08)
+        }
+
+        .table-wrap {
+            overflow: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1150px
+        }
+
+        th {
+            padding: 12px 14px;
+            color: #526070;
+            background: #F6F8FA;
+            border-bottom: 1px solid var(--line);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .35px;
+            text-align: left
+        }
+
+        td {
+            padding: 13px 14px;
+            border-bottom: 1px solid #EDF0F4;
+            font-size: 12px;
+            vertical-align: middle
+        }
+
+        tbody tr:hover {
+            background: #FCF8FA
+        }
+
+        .id-link {
+            color: var(--maroon);
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        .org {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .org-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: var(--soft);
+            color: var(--maroon);
+            display: grid;
+            place-items: center;
+            font-weight: 800
+        }
+
+        .org b {
+            display: block
+        }
+
+        .org small {
+            color: var(--muted)
+        }
+
+        .pill {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 5px 9px;
+            font-size: 10px;
+            font-weight: 800
+        }
+
+        .green {
+            background: #E7F6ED;
+            color: var(--green)
+        }
+
+        .amber {
+            background: #FFF2DA;
+            color: var(--amber)
+        }
+
+        .red {
+            background: #FDECEF;
+            color: var(--red)
+        }
+
+        .blue {
+            background: #E8F3FC;
+            color: var(--blue)
+        }
+
+        .gray {
+            background: #EEF1F5;
+            color: #596579
+        }
+
+        .progress {
+            width: 95px;
+            height: 7px;
+            background: #E8ECF1;
+            border-radius: 8px;
+            overflow: hidden;
+            display: inline-block;
+            margin-right: 6px
+        }
+
+        .progress i {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--maroon), #C64A6D)
+        }
+
+        .action {
+            border: 0;
+            background: #F0F3F6;
+            border-radius: 7px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin-right: 3px
+        }
+
+        .table-footer {
+            padding: 13px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .pages button {
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 6px;
+            padding: 6px 9px;
+            margin-left: 4px
+        }
+
+        .pages .active {
+            background: var(--maroon);
+            color: #fff
+        }
+
+        .empty {
+            padding: 45px;
+            text-align: center;
+            color: var(--muted);
+            display: none
+        }
+
+        /* drawer */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(18, 24, 33, .42);
+            z-index: 40;
+            opacity: 0;
+            pointer-events: none;
+            transition: .2s
+        }
+
+        .overlay.open {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        .drawer {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: min(860px, 92vw);
+            background: var(--bg);
+            box-shadow: -14px 0 35px rgba(17, 24, 39, .22);
+            transform: translateX(100%);
+            transition: .25s;
+            display: flex;
+            flex-direction: column
+        }
+
+        .overlay.open .drawer {
+            transform: none
+        }
+
+        .drawer-head {
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .drawer-head h2 {
+            margin: 0;
+            color: var(--maroon);
+            font-size: 20px
+        }
+
+        .drawer-head p {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .drawer-actions {
+            display: flex;
+            gap: 8px
+        }
+
+        .close {
+            border: 0;
+            background: #EEF1F5;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            padding: 0 20px;
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+            overflow: auto
+        }
+
+        .tab-btn {
+            border: 0;
+            background: transparent;
+            padding: 13px 10px;
+            white-space: nowrap;
+            color: #5F6C7B;
+            cursor: pointer;
+            border-bottom: 3px solid transparent
+        }
+
+        .tab-btn.active {
+            color: var(--maroon);
+            border-bottom-color: var(--maroon);
+            font-weight: 800
+        }
+
+        .drawer-body {
+            padding: 18px;
+            overflow: auto;
+            flex: 1
+        }
+
+        .tab-content {
+            display: none
+        }
+
+        .tab-content.active {
+            display: block
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 17px;
+            margin-bottom: 14px
+        }
+
+        .card h3 {
+            margin: 0 0 15px;
+            font-size: 15px;
+            color: #344054
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px
+        }
+
+        .field label {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 5px
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            border: 1px solid #D8DDE5;
+            border-radius: 7px;
+            padding: 9px 10px;
+            background: #fff
+        }
+
+        .field textarea {
+            min-height: 80px;
+            resize: vertical
+        }
+
+        .field input:disabled,
+        .field select:disabled,
+        .field textarea:disabled {
+            background: #F7F8FA;
+            color: #354052;
+            border-color: #E6E9EE
+        }
+
+        .full {
+            grid-column: 1/-1
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            padding: 18px 0
+        }
+
+        .stage {
+            text-align: center;
+            position: relative
+        }
+
+        .stage:before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            left: -50%;
+            width: 100%;
+            height: 3px;
+            background: #D7DCE3
+        }
+
+        .stage:first-child:before {
+            display: none
+        }
+
+        .dot {
+            position: relative;
+            z-index: 1;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #D2D8E0;
+            background: #fff;
+            border-radius: 50%;
+            margin: auto;
+            display: grid;
+            place-items: center
+        }
+
+        .stage.done .dot {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff
+        }
+
+        .stage.current .dot {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 4px #DCECF8
+        }
+
+        .stage.done:before,
+        .stage.current:before {
+            background: var(--green)
+        }
+
+        .stage b {
+            display: block;
+            margin-top: 7px;
+            font-size: 10px
+        }
+
+        .stage small {
+            font-size: 9px;
+            color: var(--muted)
+        }
+
+        .drawer-foot {
+            background: #fff;
+            border-top: 1px solid var(--line);
+            padding: 13px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .mode {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #25303D;
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            z-index: 80;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: .2s
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: none
+        }
+
+        @media(max-width:1190px) {
+            .kpis {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .filters {
+                grid-template-columns: 2fr repeat(2, 1fr)
+            }
+
+            .filters .btn {
+                grid-column: auto
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:780px) {
+            .layout {
+                display: block
+            }
+
+            .sidebar {
+                display: none
+            }
+
+            .main {
+                grid-column: auto
+            }
+
+            .page {
+                padding: 16px 12px
+            }
+
+            .topbar {
+                padding: 0 14px
+            }
+
+            .topbar h1 {
+                font-size: 15px
+            }
+
+            .kpis {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .filters {
+                grid-template-columns: 1fr
+            }
+
+            .welcome {
+                align-items: flex-start;
+                gap: 12px
+            }
+
+            .timeline {
+                grid-template-columns: repeat(3, 1fr);
+                row-gap: 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo">QA</div>
+                <div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div>
+            </div>
+            <div class="nav-title">CRM workspace</div><a class="nav active" href="#">▦ Summary Dashboard</a><a
+                class="nav" href="QNDHM_DSC_Tabbbed_CRM_Form.html">＋ New Registration</a><a class="nav" href="#">♙
+                Partners</a><a class="nav" href="#">◫ Onboarding Pipeline</a><a class="nav" href="#">◷ Support
+                Tickets</a><a class="nav" href="#">✓ Compliance</a><a class="nav" href="#">⇄ Integrations</a><a
+                class="nav" href="#">▤ Reports</a>
+            <div class="mission"><b>QNDHM</b><br><small>One Nation<br>One Health Network<br>Connected Care</small></div>
+        </aside>
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <h1>QATAR NATIONAL DIGITAL HEALTH MISSION (QNDHM)</h1>
+                    <p>Partner CRM Summary &amp; Registration Management</p>
+                </div>
+                <div class="user">
+                    <div class="avatar">JD</div>
+                    <div><b>John Doe</b><small>CRM Admin</small></div>
+                </div>
+            </header>
+            <div class="page">
+                <div class="welcome">
+                    <div>
+                        <h2>Partner Registration Summary</h2>
+                        <p>View, search, preview and update all organization onboarding records.</p>
+                    </div><button class="btn primary" onclick="location.href='QNDHM_DSC_Tabbbed_CRM_Form.html'">＋ New
+                        Registration</button>
+                </div>
+                <section class="kpis">
+                    <div class="kpi">
+                        <div class="kpi-top">
+                            <div class="kpi-icon">▥</div><span class="mini-trend">↑ 12.5%</span>
+                        </div><b id="totalKpi">12</b><span>Total Applications</span>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-top">
+                            <div class="kpi-icon">◷</div><span class="mini-trend">Current</span>
+                        </div><b id="draftKpi">3</b><span>Draft Applications</span>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-top">
+                            <div class="kpi-icon">⌘</div><span class="mini-trend">Active</span>
+                        </div><b id="progressKpi">4</b><span>In Assessment</span>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-top">
+                            <div class="kpi-icon">✓</div><span class="mini-trend">This month</span>
+                        </div><b id="certKpi">3</b><span>Certified Partners</span>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-top">
+                            <div class="kpi-icon">⇄</div><span class="mini-trend">Live</span>
+                        </div><b id="prodKpi">2</b><span>Production Live</span>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-top">
+                            <div class="kpi-icon">▣</div><span class="mini-trend">Needs action</span>
+                        </div><b>7</b><span>Open Support Tickets</span>
+                    </div>
+                </section>
+                <section class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h3>Saved Registration Entries</h3>
+                            <p>Click a registration ID to open the complete record.</p>
+                        </div>
+                        <div><button class="btn outline" onclick="exportCSV()">⇩ Export CSV</button></div>
+                    </div>
+                    <div class="filters"><input id="search" class="control"
+                            placeholder="Search ID, organization, SPOC, product..." oninput="render()"><select
+                            id="typeFilter" class="control" onchange="render()">
+                            <option value="">All entity types</option>
+                            <option>Digital Solution Company</option>
+                            <option>Hospital</option>
+                            <option>Clinic</option>
+                            <option>Laboratory</option>
+                            <option>Pharmacy</option>
+                        </select><select id="stageFilter" class="control" onchange="render()">
+                            <option value="">All stages</option>
+                            <option>Draft</option>
+                            <option>Sandbox</option>
+                            <option>Compliance</option>
+                            <option>Security</option>
+                            <option>Certified</option>
+                            <option>Production</option>
+                        </select><select id="statusFilter" class="control" onchange="render()">
+                            <option value="">All statuses</option>
+                            <option>Draft</option>
+                            <option>Under Review</option>
+                            <option>Observation Open</option>
+                            <option>Approved</option>
+                            <option>Live</option>
+                        </select><select id="riskFilter" class="control" onchange="render()">
+                            <option value="">All risks</option>
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                        </select><button class="btn light" onclick="resetFilters()">Reset</button></div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Registration ID</th>
+                                    <th>Organization</th>
+                                    <th>Entity Type</th>
+                                    <th>Primary SPOC</th>
+                                    <th>Product</th>
+                                    <th>Current Stage</th>
+                                    <th>Progress</th>
+                                    <th>Open Tickets</th>
+                                    <th>Target Go-Live</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rows"></tbody>
+                        </table>
+                    </div>
+                    <div id="empty" class="empty">No matching applications found.</div>
+                    <div class="table-footer"><span id="recordCount"></span>
+                        <div class="pages"><button
+                                class="active">1</button><button>2</button><button>3</button><button>›</button></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="overlay" class="overlay" onclick="backdropClose(event)">
+        <section class="drawer">
+            <div class="drawer-head">
+                <div>
+                    <h2 id="drawerTitle">Partner Record</h2>
+                    <p id="drawerSub"></p>
+                </div>
+                <div class="drawer-actions"><button id="editTop" class="btn outline" onclick="toggleEdit()">✎
+                        Edit</button><button class="close" onclick="closeDrawer()">×</button></div>
+            </div>
+            <div class="tabs"><button class="tab-btn active" data-tab="overview">Profile</button><button class="tab-btn"
+                    data-tab="organization">Organization</button><button class="tab-btn"
+                    data-tab="contacts">Contacts</button><button class="tab-btn" data-tab="integration">Product &amp;
+                    Integration</button><button class="tab-btn" data-tab="timeline">Timeline</button><button
+                    class="tab-btn" data-tab="assessment">Assessments</button><button class="tab-btn"
+                    data-tab="tickets">Support Tickets</button></div>
+            <div class="drawer-body">
+                <div id="overview" class="tab-content active">
+                    <div class="card">
+                        <h3>Profile Details</h3>
+                        <div class="detail-grid">
+                            <div class="field"><label>Registration ID</label><input data-key="id" disabled></div>
+                            <div class="field"><label>Application Status</label><input data-key="status" disabled></div>
+                            <div class="field"><label>Portal Username</label><input value="meditech.admin" disabled>
+                            </div>
+                            <div class="field"><label>Official Email</label><input value="admin@meditech.qa" disabled>
+                            </div>
+                            <div class="field"><label>Application Owner</label><input data-key="spoc" disabled></div>
+                            <div class="field"><label>Risk</label><input data-key="risk" disabled></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="organization" class="tab-content">
+                    <div class="card">
+                        <h3>Organization Details</h3>
+                        <div class="detail-grid">
+                            <div class="field"><label>Organization Name</label><input data-key="org" disabled></div>
+                            <div class="field"><label>Entity Type</label><input data-key="type" disabled></div>
+                            <div class="field"><label>Commercial Registration No.</label><input value="CRN-1234567890"
+                                    disabled></div>
+                            <div class="field"><label>Ministry License No.</label><input value="ML-987654321" disabled>
+                            </div>
+                            <div class="field"><label>Website</label><input value="https://www.meditech.qa" disabled>
+                            </div>
+                            <div class="field"><label>Municipality</label><input value="West Bay" disabled></div>
+                            <div class="field full"><label>Registered Address</label><textarea
+                                    disabled>Al Muntazah, West Bay, Doha, State of Qatar</textarea></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="contacts" class="tab-content">
+                    <div class="card">
+                        <h3>Contacts &amp; SPOCs</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Role</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primary Contact</td>
+                                        <td data-text="spoc"></td>
+                                        <td>primary@partner.qa</td>
+                                        <td>+974 5012 3456</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Technical SPOC</td>
+                                        <td>Sara Khan</td>
+                                        <td>technical@partner.qa</td>
+                                        <td>+974 5588 7766</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Compliance SPOC</td>
+                                        <td>Mohammed Ali</td>
+                                        <td>compliance@partner.qa</td>
+                                        <td>+974 6677 8899</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="integration" class="tab-content">
+                    <div class="card">
+                        <h3>Product &amp; Integration Details</h3>
+                        <div class="detail-grid">
+                            <div class="field"><label>Product Name</label><input data-key="product" disabled></div>
+                            <div class="field"><label>Solution Type</label><input value="API Based Solution" disabled>
+                            </div>
+                            <div class="field"><label>Integration Type</label><input value="Provider - Provider"
+                                    disabled></div>
+                            <div class="field"><label>Requested APIs</label><input value="Q-HPR, Q-HFR, Q-HIE, Consent"
+                                    disabled></div>
+                            <div class="field full"><label>Description</label><textarea
+                                    disabled>Interoperability solution for secure healthcare data exchange using QNDHM standards and APIs.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="timeline" class="tab-content">
+                    <div class="card">
+                        <h3>Onboarding Journey</h3>
+                        <div class="timeline">
+                            <div class="stage done">
+                                <div class="dot">✓</div><b>Registration</b><small>Complete</small>
+                            </div>
+                            <div class="stage done">
+                                <div class="dot">✓</div><b>Sandbox</b><small>Complete</small>
+                            </div>
+                            <div class="stage current">
+                                <div class="dot"></div><b>Compliance</b><small>Current</small>
+                            </div>
+                            <div class="stage">
+                                <div class="dot"></div><b>Security</b><small>Pending</small>
+                            </div>
+                            <div class="stage">
+                                <div class="dot"></div><b>Certification</b><small>Pending</small>
+                            </div>
+                            <div class="stage">
+                                <div class="dot"></div><b>Production</b><small>Pending</small>
+                            </div>
+                        </div>
+                        <div class="detail-grid">
+                            <div class="field"><label>Current Stage</label><input data-key="stage" disabled></div>
+                            <div class="field"><label>Progress</label><input data-key="progressText" disabled></div>
+                            <div class="field"><label>Target Go-Live</label><input data-key="goLive" disabled></div>
+                            <div class="field"><label>Last Updated</label><input data-key="updated" disabled></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="assessment" class="tab-content">
+                    <div class="card">
+                        <h3>Compliance &amp; Security Assessments</h3>
+                        <div class="detail-grid">
+                            <div class="field"><label>Compliance Status</label><input value="Observation Open" disabled>
+                            </div>
+                            <div class="field"><label>Risk Rating</label><input data-key="risk" disabled></div>
+                            <div class="field"><label>Security Status</label><input value="In Progress" disabled></div>
+                            <div class="field"><label>VAPT Findings</label><input value="2 Medium, 1 Low" disabled>
+                            </div>
+                            <div class="field full"><label>Findings Summary</label><textarea
+                                    disabled>Minor observations related to API error handling, validation and security configuration.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tickets" class="tab-content">
+                    <div class="card">
+                        <h3>Support Ticket History</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Ticket ID</th>
+                                        <th>Subject</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Assigned To</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>QNDHM-TKT-0112</td>
+                                        <td>Sandbox API authentication</td>
+                                        <td><span class="pill red">High</span></td>
+                                        <td><span class="pill red">Open</span></td>
+                                        <td>API Support</td>
+                                    </tr>
+                                    <tr>
+                                        <td>QNDHM-TKT-0098</td>
+                                        <td>Additional API package</td>
+                                        <td><span class="pill amber">Medium</span></td>
+                                        <td><span class="pill green">Closed</span></td>
+                                        <td>Integration Team</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="drawer-foot"><span class="mode" id="modeText">Preview mode: fields are read-only</span>
+                <div><button class="btn light" onclick="closeDrawer()">Close</button> <button id="saveBtn"
+                        class="btn primary" style="display:none" onclick="saveRecord()">Save Changes</button></div>
+            </div>
+        </section>
+    </div>
+    <div id="toast" class="toast"></div>
+    <script>
+        const records = [
+            {id: 'QNDHM-DSC-2026-00125', org: 'MediTech Solutions W.L.L.', type: 'Digital Solution Company', spoc: 'Ahmed Al Qahtani', product: 'MediConnect HIE', stage: 'Compliance', progress: 60, tickets: 2, goLive: '15 Dec 2026', status: 'Observation Open', risk: 'Low', updated: '28 Aug 2026'},
+            {id: 'QNDHM-HSP-2026-00124', org: 'Hamad Medical Corporation', type: 'Hospital', spoc: 'Ibrahim Al-Abdulla', product: 'HMC Clinical Exchange', stage: 'Production', progress: 100, tickets: 0, goLive: '02 Nov 2026', status: 'Live', risk: 'Low', updated: '27 Aug 2026'},
+            {id: 'QNDHM-HSP-2026-00123', org: 'Sidra Medicine', type: 'Hospital', spoc: 'Faisal Al-Thani', product: 'Sidra EMR Gateway', stage: 'Certified', progress: 90, tickets: 1, goLive: '20 Sep 2026', status: 'Approved', risk: 'Low', updated: '27 Aug 2026'},
+            {id: 'QNDHM-LAB-2026-00122', org: 'Doha Diagnostics Laboratory', type: 'Laboratory', spoc: 'Ali Mohamed', product: 'LabConnect Qatar', stage: 'Security', progress: 72, tickets: 3, goLive: '05 Oct 2026', status: 'Under Review', risk: 'Medium', updated: '26 Aug 2026'},
+            {id: 'QNDHM-DSC-2026-00121', org: 'HealthTech Solutions', type: 'Digital Solution Company', spoc: 'Rashed Al-Qahtani', product: 'HealthLink API', stage: 'Sandbox', progress: 35, tickets: 1, goLive: '12 Nov 2026', status: 'Under Review', risk: 'Low', updated: '25 Aug 2026'},
+            {id: 'QNDHM-PHM-2026-00120', org: 'Prime Pharmacy', type: 'Pharmacy', spoc: 'Saeed Al-Hajri', product: 'Qatar ePrescription', stage: 'Compliance', progress: 68, tickets: 0, goLive: '28 Oct 2026', status: 'Observation Open', risk: 'Medium', updated: '24 Aug 2026'},
+            {id: 'QNDHM-CLN-2026-00119', org: 'Life Care Clinic', type: 'Clinic', spoc: 'Fatima Al-Mansoori', product: 'LifeCare HIS', stage: 'Draft', progress: 15, tickets: 0, goLive: 'Not planned', status: 'Draft', risk: 'Low', updated: '23 Aug 2026'},
+            {id: 'QNDHM-HSP-2026-00118', org: 'Al Ahli Hospital', type: 'Hospital', spoc: 'Omar Hassan', product: 'Al Ahli HIE', stage: 'Sandbox', progress: 30, tickets: 1, goLive: '05 Jan 2027', status: 'Under Review', risk: 'Low', updated: '22 Aug 2026'},
+            {id: 'QNDHM-CLN-2026-00117', org: 'Medicare Plus', type: 'Clinic', spoc: 'Noor Al-Emadi', product: 'Medicare Connect', stage: 'Certified', progress: 88, tickets: 1, goLive: '18 Sep 2026', status: 'Approved', risk: 'Low', updated: '21 Aug 2026'},
+            {id: 'QNDHM-PHM-2026-00116', org: 'Wellcare Pharmacy', type: 'Pharmacy', spoc: 'Khalid Al-Ansari', product: 'WellRx', stage: 'Production', progress: 100, tickets: 0, goLive: '10 Nov 2026', status: 'Live', risk: 'Low', updated: '20 Aug 2026'},
+            {id: 'QNDHM-DSC-2026-00115', org: 'Qatar Care Digital', type: 'Digital Solution Company', spoc: 'Huda Al-Meer', product: 'CareFlow', stage: 'Compliance', progress: 75, tickets: 2, goLive: '15 Jan 2027', status: 'Observation Open', risk: 'High', updated: '19 Aug 2026'},
+            {id: 'QNDHM-LAB-2026-00114', org: 'National Reference Lab', type: 'Laboratory', spoc: 'Mariam Saleh', product: 'NRL Exchange', stage: 'Draft', progress: 10, tickets: 0, goLive: 'Not planned', status: 'Draft', risk: 'Low', updated: '18 Aug 2026'}];
+        let currentRecord = null, isEdit = false;
+        function pillClass(v) {if (['Live', 'Approved', 'Production', 'Certified', 'Low'].includes(v)) return 'green'; if (['Observation Open', 'Compliance', 'Medium'].includes(v)) return 'amber'; if (['Draft'].includes(v)) return 'gray'; if (['High'].includes(v)) return 'red'; return 'blue'}
+        function render() {const q = document.getElementById('search').value.toLowerCase(), type = document.getElementById('typeFilter').value, stage = document.getElementById('stageFilter').value, status = document.getElementById('statusFilter').value, risk = document.getElementById('riskFilter').value; const filtered = records.filter(r => (!q || Object.values(r).join(' ').toLowerCase().includes(q)) && (!type || r.type === type) && (!stage || r.stage === stage) && (!status || r.status === status) && (!risk || r.risk === risk)); document.getElementById('rows').innerHTML = filtered.map(r => `<tr><td><a class="id-link" onclick="openRecord('${r.id}',false)">${r.id}</a><br><small style="color:#8791A0">Updated ${r.updated}</small></td><td><div class="org"><div class="org-icon">${r.org[0]}</div><div><b>${r.org}</b><small>${r.product}</small></div></div></td><td>${r.type}</td><td>${r.spoc}</td><td>${r.product}</td><td><span class="pill ${pillClass(r.stage)}">${r.stage}</span></td><td><span class="progress"><i style="width:${r.progress}%"></i></span>${r.progress}%</td><td><span class="pill ${r.tickets ? 'red' : 'green'}">${r.tickets}</span></td><td>${r.goLive}</td><td><span class="pill ${pillClass(r.status)}">${r.status}</span></td><td><button class="action" title="Preview" onclick="openRecord('${r.id}',false)">◉</button><button class="action" title="Edit" onclick="openRecord('${r.id}',true)">✎</button></td></tr>`).join(''); document.getElementById('empty').style.display = filtered.length ? 'none' : 'block'; document.getElementById('recordCount').textContent = `Showing ${filtered.length} of ${records.length} entries`}
+        function resetFilters() {['search', 'typeFilter', 'stageFilter', 'statusFilter', 'riskFilter'].forEach(id => document.getElementById(id).value = ''); render()}
+        function openRecord(id, edit) {currentRecord = records.find(r => r.id === id); document.getElementById('drawerTitle').textContent = currentRecord.org; document.getElementById('drawerSub').textContent = currentRecord.id + ' • ' + currentRecord.type; document.querySelectorAll('[data-key]').forEach(el => {const k = el.dataset.key; el.value = k === 'progressText' ? currentRecord.progress + '%' : (currentRecord[k] ?? el.value)}); document.querySelectorAll('[data-text="spoc"]').forEach(el => el.textContent = currentRecord.spoc); document.getElementById('overlay').classList.add('open'); setEdit(edit); showTab('overview')}
+        function closeDrawer() {document.getElementById('overlay').classList.remove('open')}
+        function backdropClose(e) {if (e.target.id === 'overlay') closeDrawer()}
+        function setEdit(v) {isEdit = v; document.querySelectorAll('.drawer-body input,.drawer-body select,.drawer-body textarea').forEach(el => {if (!el.hasAttribute('data-key') || el.dataset.key !== 'id') el.disabled = !v}); document.getElementById('modeText').textContent = v ? 'Edit mode: update fields and save changes' : 'Preview mode: fields are read-only'; document.getElementById('editTop').textContent = v ? 'Cancel Edit' : '✎ Edit'; document.getElementById('saveBtn').style.display = v ? 'inline-block' : 'none'}
+        function toggleEdit() {setEdit(!isEdit)}
+        function saveRecord() {document.querySelectorAll('[data-key]').forEach(el => {const k = el.dataset.key; if (k && k !== 'id' && k !== 'progressText' && currentRecord[k] !== undefined) currentRecord[k] = el.value}); setEdit(false); render(); toast('Record updated successfully')}
+        function showTab(id) {document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active')); document.querySelectorAll('.tab-btn').forEach(x => x.classList.toggle('active', x.dataset.tab === id)); document.getElementById(id).classList.add('active')}
+        document.querySelectorAll('.tab-btn').forEach(b => b.onclick = () => showTab(b.dataset.tab));
+        function exportCSV() {const headers = ['Registration ID', 'Organization', 'Entity Type', 'SPOC', 'Product', 'Stage', 'Progress', 'Open Tickets', 'Target Go-Live', 'Status', 'Risk']; const rows = records.map(r => [r.id, r.org, r.type, r.spoc, r.product, r.stage, r.progress + '%', r.tickets, r.goLive, r.status, r.risk]); const csv = [headers, ...rows].map(a => a.map(v => '"' + String(v).replaceAll('"', '""') + '"').join(',')).join('\n'); const blob = new Blob([csv], {type: 'text/csv'}), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'QNDHM_Partner_Registrations.csv'; a.click(); URL.revokeObjectURL(a.href); toast('CSV exported')}
+        function toast(msg) {const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200)} render();
+    </script>
+</body>
+
+</html>

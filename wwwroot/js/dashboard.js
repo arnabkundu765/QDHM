@@ -1,0 +1,259 @@
+﻿const records = [{
+    id: 'QNDHM-DSC-2026-00125',
+    org: 'MediTech Solutions W.L.L.',
+    type: 'Digital Solution Company',
+    spoc: 'Ahmed Al Qahtani',
+    product: 'MediConnect HIE',
+    stage: 'Compliance',
+    progress: 60,
+    tickets: 2,
+    goLive: '15 Dec 2026',
+    status: 'Observation Open',
+    risk: 'Low',
+    updated: '28 Aug 2026'
+}, {
+    id: 'QNDHM-HSP-2026-00124',
+    org: 'Hamad Medical Corporation',
+    type: 'Hospital',
+    spoc: 'Ibrahim Al-Abdulla',
+    product: 'HMC Clinical Exchange',
+    stage: 'Production',
+    progress: 100,
+    tickets: 0,
+    goLive: '02 Nov 2026',
+    status: 'Live',
+    risk: 'Low',
+    updated: '27 Aug 2026'
+}, {
+    id: 'QNDHM-HSP-2026-00123',
+    org: 'Sidra Medicine',
+    type: 'Hospital',
+    spoc: 'Faisal Al-Thani',
+    product: 'Sidra EMR Gateway',
+    stage: 'Certified',
+    progress: 90,
+    tickets: 1,
+    goLive: '20 Sep 2026',
+    status: 'Approved',
+    risk: 'Low',
+    updated: '27 Aug 2026'
+}, {
+    id: 'QNDHM-LAB-2026-00122',
+    org: 'Doha Diagnostics Laboratory',
+    type: 'Laboratory',
+    spoc: 'Ali Mohamed',
+    product: 'LabConnect Qatar',
+    stage: 'Security',
+    progress: 72,
+    tickets: 3,
+    goLive: '05 Oct 2026',
+    status: 'Under Review',
+    risk: 'Medium',
+    updated: '26 Aug 2026'
+}, {
+    id: 'QNDHM-DSC-2026-00121',
+    org: 'HealthTech Solutions',
+    type: 'Digital Solution Company',
+    spoc: 'Rashed Al-Qahtani',
+    product: 'HealthLink API',
+    stage: 'Sandbox',
+    progress: 35,
+    tickets: 1,
+    goLive: '12 Nov 2026',
+    status: 'Under Review',
+    risk: 'Low',
+    updated: '25 Aug 2026'
+}, {
+    id: 'QNDHM-PHM-2026-00120',
+    org: 'Prime Pharmacy',
+    type: 'Pharmacy',
+    spoc: 'Saeed Al-Hajri',
+    product: 'Qatar ePrescription',
+    stage: 'Compliance',
+    progress: 68,
+    tickets: 0,
+    goLive: '28 Oct 2026',
+    status: 'Observation Open',
+    risk: 'Medium',
+    updated: '24 Aug 2026'
+}, {
+    id: 'QNDHM-CLN-2026-00119',
+    org: 'Life Care Clinic',
+    type: 'Clinic',
+    spoc: 'Fatima Al-Mansoori',
+    product: 'LifeCare HIS',
+    stage: 'Draft',
+    progress: 15,
+    tickets: 0,
+    goLive: 'Not planned',
+    status: 'Draft',
+    risk: 'Low',
+    updated: '23 Aug 2026'
+}, {
+    id: 'QNDHM-HSP-2026-00118',
+    org: 'Al Ahli Hospital',
+    type: 'Hospital',
+    spoc: 'Omar Hassan',
+    product: 'Al Ahli HIE',
+    stage: 'Sandbox',
+    progress: 30,
+    tickets: 1,
+    goLive: '05 Jan 2027',
+    status: 'Under Review',
+    risk: 'Low',
+    updated: '22 Aug 2026'
+}, {
+    id: 'QNDHM-CLN-2026-00117',
+    org: 'Medicare Plus',
+    type: 'Clinic',
+    spoc: 'Noor Al-Emadi',
+    product: 'Medicare Connect',
+    stage: 'Certified',
+    progress: 88,
+    tickets: 1,
+    goLive: '18 Sep 2026',
+    status: 'Approved',
+    risk: 'Low',
+    updated: '21 Aug 2026'
+}, {
+    id: 'QNDHM-PHM-2026-00116',
+    org: 'Wellcare Pharmacy',
+    type: 'Pharmacy',
+    spoc: 'Khalid Al-Ansari',
+    product: 'WellRx',
+    stage: 'Production',
+    progress: 100,
+    tickets: 0,
+    goLive: '10 Nov 2026',
+    status: 'Live',
+    risk: 'Low',
+    updated: '20 Aug 2026'
+}, {
+    id: 'QNDHM-DSC-2026-00115',
+    org: 'Qatar Care Digital',
+    type: 'Digital Solution Company',
+    spoc: 'Huda Al-Meer',
+    product: 'CareFlow',
+    stage: 'Compliance',
+    progress: 75,
+    tickets: 2,
+    goLive: '15 Jan 2027',
+    status: 'Observation Open',
+    risk: 'High',
+    updated: '19 Aug 2026'
+}, {
+    id: 'QNDHM-LAB-2026-00114',
+    org: 'National Reference Lab',
+    type: 'Laboratory',
+    spoc: 'Mariam Saleh',
+    product: 'NRL Exchange',
+    stage: 'Draft',
+    progress: 10,
+    tickets: 0,
+    goLive: 'Not planned',
+    status: 'Draft',
+    risk: 'Low',
+    updated: '18 Aug 2026'
+}];
+let currentRecord = null
+    , isEdit = false;
+function pillClass(v) {
+    if (['Live', 'Approved', 'Production', 'Certified', 'Low'].includes(v))
+        return 'green';
+    if (['Observation Open', 'Compliance', 'Medium'].includes(v))
+        return 'amber';
+    if (['Draft'].includes(v))
+        return 'gray';
+    if (['High'].includes(v))
+        return 'red';
+    return 'blue'
+}
+function render() {
+    const q1 = document.getElementById('search').value
+        , type = document.getElementById('typeFilter').value
+        , stage = document.getElementById('stageFilter').value
+        , status = document.getElementById('statusFilter').value
+        , risk = document.getElementById('riskFilter').value;
+    const q = q1 ? q1.toLowerCase() : q1; 
+    const filtered = records.filter(r => (!q || Object.values(r).join(' ').toLowerCase().includes(q)) && (!type || r.type === type) && (!stage || r.stage === stage) && (!status || r.status === status) && (!risk || r.risk === risk));
+    document.getElementById('rows').innerHTML = filtered.map(r => `<tr><td><a class="id-link" onclick="openRecord('${r.id}',false)">${r.id}</a><br><small style="color:#8791A0">Updated ${r.updated}</small></td><td><div class="org"><div class="org-icon">${r.org[0]}</div><div><b>${r.org}</b><small>${r.product}</small></div></div></td><td>${r.type}</td><td>${r.spoc}</td><td>${r.product}</td><td><span class="pill ${pillClass(r.stage)}">${r.stage}</span></td><td><span class="progress"><i style="width:${r.progress}%"></i></span>${r.progress}%</td><td><span class="pill ${r.tickets ? 'red' : 'green'}">${r.tickets}</span></td><td>${r.goLive}</td><td><span class="pill ${pillClass(r.status)}">${r.status}</span></td><td><button class="action" title="Preview" onclick="openRecord('${r.id}',false)">◉</button><button class="action" title="Edit" onclick="openRecord('${r.id}',true)">✎</button></td></tr>`).join('');
+    document.getElementById('empty').style.display = filtered.length ? 'none' : 'block';
+    document.getElementById('recordCount').textContent = `Showing ${filtered.length} of ${records.length} entries`
+}
+function resetFilters() {
+    ['search', 'typeFilter', 'stageFilter', 'statusFilter', 'riskFilter'].forEach(id => document.getElementById(id).value = '');
+    render()
+}
+function openRecord(id, edit) {
+    currentRecord = records.find(r => r.id === id);
+    document.getElementById('drawerTitle').textContent = currentRecord.org;
+    document.getElementById('drawerSub').textContent = currentRecord.id + ' • ' + currentRecord.type;
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const k = el.dataset.key;
+        el.value = k === 'progressText' ? currentRecord.progress + '%' : (currentRecord[k] ?? el.value)
+    }
+    );
+    document.querySelectorAll('[data-text="spoc"]').forEach(el => el.textContent = currentRecord.spoc);
+    document.getElementById('overlay').classList.add('open');
+    setEdit(edit);
+    showTab('overview')
+}
+function closeDrawer() {
+    document.getElementById('overlay').classList.remove('open')
+}
+function backdropClose(e) {
+    if (e.target.id === 'overlay')
+        closeDrawer()
+}
+function setEdit(v) {
+    isEdit = v;
+    document.querySelectorAll('.drawer-body input,.drawer-body select,.drawer-body textarea').forEach(el => {
+        if (!el.hasAttribute('data-key') || el.dataset.key !== 'id')
+            el.disabled = !v
+    }
+    );
+    document.getElementById('modeText').textContent = v ? 'Edit mode: update fields and save changes' : 'Preview mode: fields are read-only';
+    document.getElementById('editTop').textContent = v ? 'Cancel Edit' : '✎ Edit';
+    document.getElementById('saveBtn').style.display = v ? 'inline-block' : 'none'
+}
+function toggleEdit() {
+    setEdit(!isEdit)
+}
+function saveRecord() {
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const k = el.dataset.key;
+        if (k && k !== 'id' && k !== 'progressText' && currentRecord[k] !== undefined)
+            currentRecord[k] = el.value
+    }
+    );
+    setEdit(false);
+    render();
+    toast('Record updated successfully')
+}
+function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(x => x.classList.toggle('active', x.dataset.tab === id));
+    document.getElementById(id).classList.add('active')
+}
+document.querySelectorAll('.tab-btn').forEach(b => b.onclick = () => showTab(b.dataset.tab));
+function exportCSV() {
+    const headers = ['Registration ID', 'Organization', 'Entity Type', 'SPOC', 'Product', 'Stage', 'Progress', 'Open Tickets', 'Target Go-Live', 'Status', 'Risk'];
+    const rows = records.map(r => [r.id, r.org, r.type, r.spoc, r.product, r.stage, r.progress + '%', r.tickets, r.goLive, r.status, r.risk]);
+    const csv = [headers, ...rows].map(a => a.map(v => '"' + String(v).replaceAll('"', '""') + '"').join(',')).join('\n');
+    const blob = new Blob([csv], {
+        type: 'text/csv'
+    })
+        , a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'QNDHM_Partner_Registrations.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast('CSV exported')
+}
+function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200)
+}
+render();
