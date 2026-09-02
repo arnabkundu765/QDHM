@@ -1,309 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QNDHM Support Operations Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QNDHM Support Operations Login</title>
 
-<link href="https://fonts.googleapis.com/css2?familyt@300;400;500;600;700&display=swap
+    <link href="https://fonts.googleapis.com/css2?familyt@300;400;500;600;700&display=swap
 
-<style>
+    <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins',sans-serif;
+        }
 
-body{
-    background:#f5f6fa;
-    min-height:100vh;
-}
+        body {
+            background: #f5f6fa;
+            min-height: 100vh;
+        }
 
-.container{
-    display:flex;
-    min-height:100vh;
-}
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
 
-/* LEFT PANEL */
+        /* LEFT PANEL */
 
-.left-panel{
-    width:55%;
-    background:linear-gradient(
-    rgba(138,21,56,.85),
-    rgba(138,21,56,.80)),
-    url('doha-skyline.jpg');
-    background-size:cover;
-    background-position:center;
-    color:white;
-    padding:50px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
+        .left-panel {
+            width: 55%;
+            background: linear-gradient( rgba(138,21,56,.85), rgba(138,21,56,.80)), url('doha-skyline.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.logo-row{
-    position:absolute;
-    top:30px;
-    left:50px;
-}
+        .logo-row {
+            position: absolute;
+            top: 30px;
+            left: 50px;
+        }
 
-.mission-title{
-    font-size:52px;
-    font-weight:700;
-    line-height:1.2;
-    margin-bottom:30px;
-}
+        .mission-title {
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
 
-.subtitle{
-    font-size:22px;
-    opacity:.9;
-    max-width:700px;
-}
+        .subtitle {
+            font-size: 22px;
+            opacity: .9;
+            max-width: 700px;
+        }
 
-.features{
-    display:flex;
-    gap:40px;
-    margin-top:50px;
-}
+        .features {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+        }
 
-.feature{
-    text-align:center;
-}
+        .feature {
+            text-align: center;
+        }
 
-.feature-icon{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:rgba(255,255,255,.15);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:auto;
-    font-size:32px;
-}
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            font-size: 32px;
+        }
 
-/* RIGHT PANEL */
+        /* RIGHT PANEL */
 
-.right-panel{
-    width:45%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px;
-}
+        .right-panel {
+            width: 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
 
-.login-card{
-    background:white;
-    width:100%;
-    max-width:520px;
-    border-radius:20px;
-    padding:45px;
-    box-shadow:0 10px 40px rgba(0,0,0,.10);
-}
+        .login-card {
+            background: white;
+            width: 100%;
+            max-width: 520px;
+            border-radius: 20px;
+            padding: 45px;
+            box-shadow: 0 10px 40px rgba(0,0,0,.10);
+        }
 
-.back-link{
-    color:#8A1538;
-    text-decoration:none;
-    font-size:14px;
-}
+        .back-link {
+            color: #8A1538;
+            text-decoration: none;
+            font-size: 14px;
+        }
 
-.portal-icon{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:#8A1538;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:40px;
-    margin:20px auto;
-}
+        .portal-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #8A1538;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 20px auto;
+        }
 
-.portal-title{
-    text-align:center;
-    color:#8A1538;
-    font-size:28px;
-    font-weight:700;
-}
+        .portal-title {
+            text-align: center;
+            color: #8A1538;
+            font-size: 28px;
+            font-weight: 700;
+        }
 
-.portal-subtitle{
-    text-align:center;
-    color:#666;
-    margin-bottom:35px;
-}
+        .portal-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+        }
 
-.form-group{
-    margin-bottom:20px;
-}
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:500;
-}
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
 
-input{
-    width:100%;
-    padding:16px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:15px;
-}
+        input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+        }
 
-.extra{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:20px;
-    font-size:14px;
-}
+        .extra {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
 
-.login-btn{
-    width:100%;
-    border:none;
-    padding:18px;
-    border-radius:10px;
-    background:#8A1538;
-    color:white;
-    font-size:18px;
-    font-weight:600;
-    cursor:pointer;
-}
+        .login-btn {
+            width: 100%;
+            border: none;
+            padding: 18px;
+            border-radius: 10px;
+            background: #8A1538;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-.login-btn:hover{
-    background:#6d0f2c;
-}
+            .login-btn:hover {
+                background: #6d0f2c;
+            }
 
-.digital-id{
-    margin-top:20px;
-    width:100%;
-    padding:16px;
-    border:2px solid #8A1538;
-    color:#8A1538;
-    border-radius:10px;
-    background:white;
-    font-weight:600;
-    cursor:pointer;
-}
+        .digital-id {
+            margin-top: 20px;
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #8A1538;
+            color: #8A1538;
+            border-radius: 10px;
+            background: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-.security-box{
-    margin-top:30px;
-    padding:20px;
-    background:#fafafa;
-    border-radius:10px;
-}
+        .security-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 10px;
+        }
 
-.footer-note{
-    margin-top:15px;
-    text-align:center;
-    color:#777;
-    font-size:13px;
-}
-
-</style>
+        .footer-note {
+            margin-top: 15px;
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+        }
+    </style>
 
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="left-panel">
+        <div class="left-panel">
 
-        <h1 class="mission-title">
-            Qatar National Digital Health Mission
-            <br>(QNDHM)
-        </h1>
+            <h1 class="mission-title">
+                Qatar National Digital Health Mission
+                <br>(QNDHM)
+            </h1>
 
-        <p class="subtitle">
-            Building a Connected, Interoperable &
-            Citizen-Centric Healthcare Ecosystem for Qatar
-        </p>
+            <p class="subtitle">
+                Building a Connected, Interoperable &
+                Citizen-Centric Healthcare Ecosystem for Qatar
+            </p>
 
-        <div class="features">
+            <div class="features">
 
-            <div class="feature">
-                <div class="feature-icon">🛡️</div>
-                <div>Secure by Design</div>
-            </div>
+                <div class="feature">
+                    <div class="feature-icon">🛡️</div>
+                    <div>Secure by Design</div>
+                </div>
 
-            <div class="feature">
-                <div class="feature-icon">🔗</div>
-                <div>Interoperable</div>
-            </div>
+                <div class="feature">
+                    <div class="feature-icon">🔗</div>
+                    <div>Interoperable</div>
+                </div>
 
-            <div class="feature">
-                <div class="feature-icon">🏥</div>
-                <div>Healthcare Ecosystem</div>
+                <div class="feature">
+                    <div class="feature-icon">🏥</div>
+                    <div>Healthcare Ecosystem</div>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
+        <div class="right-panel">
 
-    <div class="right-panel">
+            <div class="login-card">
 
-        <div class="login-card">
-
-            #
+                #
                 ← Back to Portal Selection
-            </a>
+                </a>
 
-            <div class="portal-icon">🎧</div>
+                <div class="portal-icon">🎧</div>
 
-            <h2 class="portal-title">
-                Support Operations Center
-            </h2>
+                <h2 class="portal-title">
+                    Support Operations Center
+                </h2>
 
-            <p class="portal-subtitle">
-                Sign in to access your account
-            </p>
+                <p class="portal-subtitle">
+                    Sign in to access your account
+                </p>
 
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text"
-                    placeholder="Enter your username">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text"
+                           placeholder="Enter your username">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password"
+                           placeholder="Enter your password">
+                </div>
+
+                <div class="extra">
+                    <label>
+                        <input type="checkbox">
+                        Remember Me
+                    </label>
+
+                    #Forgot Password?</a>
+                </div>
+
+                <button class="login-btn">
+                    LOGIN
+                </button>
+
+                <button class="digital-id">
+                    Login with Qatar Digital ID
+                </button>
+
+                <div class="security-box">
+                    All access is monitored and protected in
+                    accordance with Qatar Data Protection
+                    Laws and International Standards.
+                </div>
+
+                <p class="footer-note">
+                    © Qatar Ministry of Public Health
+                </p>
+
             </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password"
-                    placeholder="Enter your password">
-            </div>
-
-            <div class="extra">
-                <label>
-                <input type="checkbox">
-                Remember Me
-                </label>
-
-                #Forgot Password?</a>
-            </div>
-
-            <button class="login-btn">
-                LOGIN
-            </button>
-
-            <button class="digital-id">
-                Login with Qatar Digital ID
-            </button>
-
-            <div class="security-box">
-                All access is monitored and protected in
-                accordance with Qatar Data Protection
-                Laws and International Standards.
-            </div>
-
-            <p class="footer-note">
-                © Qatar Ministry of Public Health
-            </p>
 
         </div>
 
     </div>
-
-</div>
 
 </body>
 </html>
+
+
+
+@*
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="~/css/Landing.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="main-container">
+
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+        <header class="header">
+
+            <div class="logo">
+                <img src="~/asset/moph_logo_25.png"
+                     alt="Qatar MoPH" />
+            </div>
+
+            <div class="title-section">
+
+                <h1>
+                    QATAR NATIONAL DIGITAL HEALTH MISSION
+                </h1>
+
+                <p>
+                    Building a Connected, Interoperable & Citizen-Centric
+                    Healthcare Ecosystem for Qatar
+                </p>
+
+                <div class="tagline">
+                    One Nation • One Health Network • Connected Care
+                </div>
+
+            </div>
+
+            <div class="logo">
+                <img src="~/asset/ehealth2030.png"
+                     alt="eHealth Qatar 2030" />
+            </div>
+
+        </header>
+
+        <!-- =====================================================
+             MAIN CONTENT
+        ====================================================== -->
+
+        <main class="content">
+
+
+            <!-- =================================================
+                 LEFT / MAIN IMAGE
+            ================================================== -->
+
+            <section class="left">
+
+                <div class="platform">
+
+                    <img src="~/asset/main.png"
+                         alt="Qatar National Digital Health Mission" />
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 RIGHT / PORTALS
+            ================================================== -->
+
+            <section class="right">
+
+                <div class="section-heading">
+                    <span>SELECT YOUR ACCESS PORTAL</span>
+                </div>
+
+
+                <!-- SUPPORT OPERATIONS -->
+
+                <div class="portal-card">
+
+                    @* <div class="icon red">
+                        *@
+                        @* <center><img src="~/asset/support.png" alt="Support Operations Center" /></center> *@
+                        <div class="icon red"><i class="fa fa-headset"></i></div>
+                        @*
+                    </div> *@
+                    @*
+                    <div class="portal-card-body">
+                        <div class="portal-title"> Support Operations Center </div>
+                        <ul class="portal-features">
+                            <li>SLA Monitoring</li>
+                            <li>National Helpdesk</li>
+
+                            <li>OS Ticket Activities</li>
+                            <li>Service Monitoring</li>
+
+                            <li>Ticket Management</li>
+                            <li>Escalation Management</li>
+                        </ul>
+                        <div class="access"> Access Portal → </div>
+                    </div>
+                    <div class="portal-chevron"> › </div>
+                </div>
+
+
+                <!-- HEALTHCARE FACILITY -->
+
+                <div class="portal-card" style="border-left:5px solid #b38b59">
+                    <div class="icon gold"><i class="fa-solid fa-hospital"></i></div>
+                    <div class="portal-card-body">
+                        <div class="portal-title" style="color:#b38b59;">Healthcare Facility Portal</div>
+                        <ul class="portal-features">
+                            <li>Hospitals</li>
+                            <li>Clinics</li>
+
+                            <li>Laboratories</li>
+                            <li>Facility Dashboard</li>
+
+                            <li>Pharmacy Networks</li>
+                            <li>System Integrations</li>
+                        </ul>
+
+                        <div class="access" style="color:#b38b59;">Access Portal →</div>
+                    </div>
+                    <div class="portal-chevron" style="color:#b38b59;"> › </div>
+                </div>
+
+
+                <!-- HEALTHCARE PROFESSIONAL -->
+
+                <div class="portal-card" style="border-left:5px solid #5a9447">
+
+                    <div class="icon green">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+
+                    <div class="portal-card-body">
+
+                        <div class="portal-title" style="color:#5a9447;">
+                            Healthcare Professional Portal
+                        </div>
+
+                        <ul class="portal-features">
+
+                            <li>Digital Identity</li>
+                            <li>Clinical Access</li>
+
+                            <li>License Verification</li>
+                            <li>Professional Services</li>
+
+                            <li>Practitioner Registry</li>
+                            <li>Credential Management</li>
+
+                        </ul>
+
+                        <div class="access" style="color:#5a9447;">
+                            Access Portal →
+                        </div>
+
+                    </div>
+
+                    <div class="portal-chevron" style="color:#5a9447;">
+                        ›
+                    </div>
+
+                </div>
+
+
+                <!-- DSC / INTEGRATOR -->
+
+                <div class="portal-card" style="border-left:5px solid #2367d1">
+
+                    <div class="icon blue">
+                        <i class="fa fa-code"></i>
+                    </div>
+
+                    <div class="portal-card-body">
+
+                        <div class="portal-title" style="color:#2367d1;">
+                            DSC / Integrator Portal
+                        </div>
+
+                        <ul class="portal-features">
+
+                            <li>API Gateway</li>
+                            <li>Certification Workflow</li>
+
+                            <li>Sandbox Access</li>
+                            <li>Production Integrations</li>
+
+                            <li>Developer Resources</li>
+                            <li>Compliance Dashboard</li>
+
+                        </ul>
+
+                        <div class="access" style="color:#2367d1;">
+                            Access Portal →
+                        </div>
+                    </div>
+                    <div class="portal-chevron" style="color:#2367d1;"> › </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+
+        <footer class="footer">
+
+            <div class="stat">
+                <h3>30+</h3>
+                <p>Hospitals</p>
+            </div>
+
+            <div class="stat">
+                <h3>10,000+</h3>
+                <p>Healthcare Professionals</p>
+            </div>
+
+            <div class="stat">
+                <h3>Millions</h3>
+                <p>Secure Health Transactions Daily</p>
+            </div>
+
+            <div class="stat">
+                <h3>100%</h3>
+                <p>Secure &amp; Compliant</p>
+            </div>
+
+        </footer>
+
+    </div>
+
+</body>
+</html>
+*@
