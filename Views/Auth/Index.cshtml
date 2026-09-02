@@ -1,76 +1,35 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8" />
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Qatar National Digital Health Mission</title>
-
-
-    <!-- =====================================================
-         ICONS
-    ====================================================== -->
-
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-
-    <!-- =====================================================
-         FONT
-    ====================================================== -->
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com" crossorigin>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-
-    <!-- =====================================================
-         PAGE CSS
-    ====================================================== -->
-
-    <link href="~/css/Landing.css"
-          rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+    <link href="~/css/Landing.css" rel="stylesheet" />
+    <script src="~/js/landing.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
 </head>
-
-
 <body>
 
     <div class="main-container">
-
-
-        <!-- =====================================================
-         HEADER
-    ====================================================== -->
+        <!-- ==========HEADER==============-->
 
         <header class="header">
-
             <!-- LEFT LOGO -->
 
             <div class="logo">
-
-                <img src="~/asset/moph_logo_25.png"
-                     alt="Qatar Ministry of Public Health" />
-
+                <img src="~/asset/moph_logo_25.png" alt="Qatar Ministry of Public Health" />
             </div>
-
-
+            
             <!-- TITLE -->
 
             <div class="title-section">
@@ -160,7 +119,7 @@
                      SUPPORT OPERATIONS CENTER
                 ================================================== -->
 
-                    <div class="portal-card" 
+                    <div class="portal-card card-1" 
                          data-title="Support Operations Center"
                          data-icon="fa-headset"
                          data-color="#8A1538">
@@ -222,7 +181,7 @@
                      HEALTHCARE FACILITY PORTAL
                 ================================================== -->
 
-                    <div class="portal-card" style="border-left:5px solid #b38b59"
+                    <div class="portal-card card-2" style="border-left:5px solid #b38b59"
                          data-title="Healthcare Facility Portal"
                          data-icon="fa-hospital"
                          data-color="#b38b59">
@@ -266,16 +225,8 @@
                                 Access Portal →
 
                             </div>
-
                         </div>
-
-
-                        <div class="portal-chevron" style="color:#b38b59;">
-
-                            ›
-
-                        </div>
-
+                        <div class="portal-chevron" style="color:#b38b59;"> › </div>
                     </div>
 
 
@@ -284,7 +235,7 @@
                      HEALTHCARE PROFESSIONAL PORTAL
                 ================================================== -->
 
-                    <div class="portal-card" style="border-left:5px solid #5a9447"
+                    <div class="portal-card card-3" style="border-left:5px solid #5a9447"
                          data-title="Healthcare Professional Portal"
                          data-icon="fa-user-doctor"
                          data-color="#5a9447">
@@ -346,7 +297,7 @@
                      DSC / INTEGRATOR PORTAL
                 ================================================== -->
 
-                    <div class="portal-card" style="border-left:5px solid #2367d1"
+                    <div class="portal-card card-4" style="border-left:5px solid #2367d1"
                          data-title="DSC / Integrator Portal"
                          data-icon="fa-code"
                          data-color="#2367d1">
@@ -521,63 +472,13 @@
                         ================================================== -->
 
                             <div class="extra">
-
-
-                                <label class="remember">
-
-                                    <input type="checkbox"
-                                           id="rememberMe" />
-
-                                    <span>
-                                        Remember Me
-                                    </span>
-
-                                </label>
-
-
-                                <a href="#"
-                                   class="forgot">
-
-                                    Forgot Password?
-
-                                </a>
-
-
+                                <label class="remember"><input type="checkbox" id="rememberMe" /> <span>Remember Me</span></label>
+                                <a href="#" class="forgot"> Forgot Password? </a>
                             </div>
 
+                            <button type="button" class="login-btn" onclick="Login()"> LOGIN </button>
 
-
-                            <!-- =================================================
-                             LOGIN BUTTON
-                        ================================================== -->
-
-                            <button type="button"
-                                    class="login-btn">
-
-                                LOGIN
-
-                            </button>
-
-
-
-                            <!-- =================================================
-                             DIGITAL ID
-                        ================================================== -->
-
-                            <button type="button"
-                                    class="digital-id">
-
-                                <i class="fa-solid fa-id-card"></i>
-
-                                Login with Qatar Digital ID
-
-                            </button>
-
-
-
-                            <!-- =================================================
-                             SECURITY MESSAGE
-                        ================================================== -->
+                            <button type="button" class="digital-id"> <i class="fa-solid fa-id-card"></i> Login with Qatar Digital ID </button>
 
                             <div class="security-box">
 
@@ -678,135 +579,7 @@
 
 
         </footer>
-
-
     </div>
-
-
-
-    <!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
-    <script>
-
-            document.addEventListener("DOMContentLoaded", function() {
-
-
-                /* =====================================================
-                   ELEMENTS
-                ====================================================== */
-
-                const rightSection =
-                    document.getElementById("rightSection");
-
-                const portalCards =
-                    document.querySelectorAll(".portal-card");
-
-                const backButton =
-                    document.getElementById("backToPortals");
-
-                const loginTitle =
-                    document.getElementById("loginTitle");
-
-                const loginIcon =
-                    document.getElementById("loginIcon");
-
-
-
-                /* =====================================================
-                   OPEN LOGIN
-                ====================================================== */
-
-                portalCards.forEach(function(card) {
-
-
-                    card.addEventListener("click", function() {
-
-
-                        /* Get portal information */
-
-                        const title =
-                            card.dataset.title;
-
-                        const icon =
-                            card.dataset.icon;
-
-                        const color =
-                            card.dataset.color;
-
-
-
-                        /* =================================================
-                           UPDATE LOGIN TITLE
-                        ================================================== */
-
-                        loginTitle.textContent =
-                            title;
-
-                        loginTitle.style.color =
-                            color;
-
-
-
-                        /* =================================================
-                           UPDATE LOGIN ICON
-                        ================================================== */
-
-                        loginIcon.style.background =
-                            color;
-
-                        loginIcon.innerHTML =
-                            `<i class="fa-solid ${icon}"></i>`;
-
-
-
-                        /* =================================================
-                           RESTART ICON ANIMATION
-                        ================================================== */
-
-                        loginIcon.classList.remove("animate");
-
-                        void loginIcon.offsetWidth;
-
-                        loginIcon.classList.add("animate");
-
-
-
-                        /* =================================================
-                           SHOW LOGIN
-                        ================================================== */
-
-                        rightSection.classList.add(
-                            "login-active"
-                        );
-
-                    });
-
-                });
-
-
-
-                /* =====================================================
-                   BACK TO PORTAL SELECTION
-                ====================================================== */
-
-                backButton.addEventListener("click", function() {
-
-
-                    rightSection.classList.remove(
-                        "login-active"
-                    );
-
-
-                });
-
-
-            });
-
-    </script>
-
-
 </body>
 
 </html>
