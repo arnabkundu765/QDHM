@@ -413,10 +413,13 @@
             .upload {
                 border: 2px dashed #ccd3dc;
                 border-radius: 10px;
-                padding: 30px;
-                text-align: center;
+                padding: 20px 20px 15px 20px;
+                text-align: left;
                 color: var(--muted)
             }
+                .upload input{
+                    margin-bottom: 10px;
+                }
 
             .btn {
                 border: 0;
@@ -648,6 +651,43 @@
                     grid-template-columns: 1fr
                 }
             }
+            .upload-field {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 14px;
+            }
+
+            .upload-field label {
+                width: 180px;
+                margin: 0;
+                flex-shrink: 0;
+            }
+
+            .upload-field input[type="file"] {
+                flex: 1;
+                margin: 0;
+            }
+
+                .upload-field a {
+                    display: none;
+                    width: 36px;
+                    height: 36px;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--m);
+                    text-decoration: none;
+                    border: 1px solid var(--line);
+                    border-radius: 8px;
+                    background: var(--soft);
+                    flex-shrink: 0;
+                    font-size: 18px;
+                }
+
+                    .upload-field a:hover {
+                        background: #f1dfe5;
+                    }
+
     </style>
 </head>
 <body>
@@ -659,8 +699,86 @@
             <div><b>John Doe</b><br /><small>@(ViewBag.Show ? "Facility Owner": "Support Operator")</small></div>
         </div>
     </header><div class="page">
-    <section id="registrationView" class="view active"><section class="kpis"><div class="kpi"><div class="ki">🏥</div><div><b>1,420+</b><span>Registered Facilities</span></div></div><div class="kpi"><div class="ki">✓</div><div><b>92%</b><span>Verified</span></div></div><div class="kpi"><div class="ki">⇄</div><div><b>830</b><span>Integrated</span></div></div><div class="kpi"><div class="ki">◷</div><div><b>47</b><span>Pending</span></div></div></section><div class="work"><aside class="steps"><div class="progress">Registration Progress<div class="track"><div id="bar" class="bar"></div></div></div><button class="step active" onclick="showStep(0)"><span class="num">1</span>Facility Profile</button><button class="step" onclick="showStep(1)"><span class="num">2</span>Licensing & Classification</button><button class="step" onclick="showStep(2)"><span class="num">3</span>Infrastructure & Services</button><button class="step" onclick="showStep(3)"><span class="num">4</span>Contacts & SPOCs</button><button class="step" onclick="showStep(4)"><span class="num">5</span>Systems & Interoperability</button><button class="step" onclick="showStep(5)"><span class="num">6</span>Documents</button><button class="step" onclick="showStep(6)"><span class="num">7</span>Verification</button><button class="step" onclick="showStep(7)"><span class="num">8</span>Review & Submit</button></aside><section class="content"><div class="head"><div><h2 id="stepTitle">Facility Profile</h2><p>Complete the applicable details and continue.</p></div><div style="margin-top: 10px"><span class="chip">Draft</span></div></div><div id="t0" class="tab active"><div class="section"><h3>Facility Details</h3><div class="grid"><div class="" data-role-field=""><label>Facility Registration ID</label><input type="text" value="QNDHM-FAC-2026-00081"></div><div class="" data-role-field=""><label>Facility Name</label><input type="text" value="Doha Care Hospital"></div><div class="" data-role-field=""><label>Facility Type</label><select><option>Hospital</option><option>Clinic</option><option>Laboratory</option><option>Pharmacy</option></select></div><div class="" data-role-field=""><label>Ownership</label><select><option>Government</option><option>Private</option></select></div><div class="full" data-role-field=""><label>Registered Address</label><textarea>West Bay, Doha</textarea></div></div></div></div><div id="t1" class="tab"><div class="section"><h3>License & Accreditation</h3><div class="grid"><div class="" data-role-field=""><label>Commercial Registration No.</label><input type="text" value="CRN-248501"></div><div class="" data-role-field=""><label>MoPH Facility License</label><input type="text" value="MOPH-FL-78210"></div><div class="" data-role-field=""><label>Valid From</label><input type="date" value=""></div><div class="" data-role-field=""><label>Valid To</label><input type="date" value=""></div><div class="" data-role-field=""><label>Accreditation</label><select><option>JCI</option><option>ISO</option><option>Other</option></select></div></div></div></div><div id="t2" class="tab"><div class="section"><h3>Capacity</h3><div class="grid"><div class="" data-role-field=""><label>Total Beds</label><input type="number" value="250"></div><div class="" data-role-field=""><label>ICU Beds</label><input type="number" value="32"></div><div class="" data-role-field=""><label>Operating Theatres</label><input type="number" value="8"></div><div class="" data-role-field=""><label>24x7 Emergency</label><select><option>Yes</option><option>No</option></select></div></div></div><div class="section"><h3>Services</h3><div class="checks"><label class="check"><input type="checkbox"> OPD</label><label class="check"><input type="checkbox"> IPD</label><label class="check"><input type="checkbox"> Emergency</label><label class="check"><input type="checkbox"> Laboratory</label><label class="check"><input type="checkbox"> Radiology</label><label class="check"><input type="checkbox"> Pharmacy</label><label class="check"><input type="checkbox"> Telemedicine</label><label class="check"><input type="checkbox"> Blood Bank</label></div></div></div><div id="t3" class="tab"><div class="section"><h3>Contacts</h3><div class="grid"><div class="" data-role-field=""><label>Primary Contact</label><input type="text" value="Ahmed Al Kuwari"></div><div class="" data-role-field=""><label>Designation</label><input type="text" value="Facility Administrator"></div><div class="" data-role-field=""><label>Email</label><input type="email" value="admin@dohacare.qa"></div><div class="" data-role-field=""><label>Mobile</label><input type="text" value="+974 5012 3456"></div></div></div></div><div id="t4" class="tab"><div class="section"><h3>Digital Systems</h3><div class="grid three"><div class="" data-role-field=""><label>Primary HIS/HMIS</label><input type="text" value="DohaCare HIS"></div><div class="" data-role-field=""><label>HMIS Vendor</label><input type="text" value="HealthSoft Qatar"></div><div class="" data-role-field=""><label>Deployment</label><select><option>On-Premises</option><option>Cloud</option><option>Hybrid</option></select></div><div class="" data-role-field=""><label>EMR Available</label><select><option>Yes</option><option>No</option></select></div><div class="" data-role-field=""><label>LIS</label><input type="text" value="LabConnect"></div><div class="" data-role-field=""><label>RIS/PACS</label><input type="text" value="MediImage PACS"></div></div></div><div class="section"><h3>QNDHM Scope</h3><div class="checks"><label class="check"><input type="checkbox"> Q-HFR</label><label class="check"><input type="checkbox"> Q-HPR</label><label class="check"><input type="checkbox"> Q-HIE</label><label class="check"><input type="checkbox"> Consent Manager</label><label class="check"><input type="checkbox"> ePrescription</label><label class="check"><input type="checkbox"> Claims Exchange</label></div></div></div><div id="t5" class="tab"><div class="section"><h3>Required Documents</h3><div class="upload">Trade License, MoPH License, Accreditation, Authorization, Privacy and Security Documents</div></div></div><div id="t6" class="tab"><div class="section"><h3>Verification</h3><div class="grid"><div class="" data-role-field=""><label>Status</label><select><option>Pending</option><option>In Review</option><option>Verified</option><option>Rejected</option></select></div><div class="" data-role-field=""><label>Verifier</label><input type="text" value="QNDHM Verification Team"></div><div class="" data-role-field=""><label>Verification Date</label><input type="date" value=""></div><div class="full" data-role-field=""><label>Observations</label><textarea></textarea></div></div></div></div><div id="t7" class="tab"><div class="section"><h3>Review</h3>Facility registration is ready for review and submission.</div></div></section></div></section><section id="supportView" class="view">
-        <div class="notice">Create a new support ticket and track its complete status, assignment, SLA and activity timeline.</div><div class="ticket-tabs"><button id="ttTrack" class="ticket-tab active" onclick="showTicketSection('track')">Track Tickets</button><button id="ttNew" class="ticket-tab" onclick="showTicketSection('new')">Generate New Ticket</button></div><div id="ticketTrackSection" class="support-grid"><div><div class="panel"><div class="panel-head"><div><h2>Support & Ticket Management</h2><small id="supportScope">All tickets visible for current role</small></div><button class="btn primary" onclick="newTicket()">+ Create Ticket</button></div><div class="filters"><input id="ticketSearch" placeholder="Search ticket ID, subject or registration ID" oninput="filterTickets()"><select id="ticketStatus" onchange="filterTickets()"><option value="">All Statuses</option><option>Open</option><option>In Progress</option><option>Awaiting User</option><option>Resolved</option><option>Closed</option></select><select id="ticketPriority" onchange="filterTickets()"><option value="">All Priorities</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select><select id="ticketCategory" onchange="filterTickets()"><option value="">All Categories</option><option>Registration</option><option>Documents</option><option>Integration</option><option>Compliance</option><option>Security</option><option>Production</option></select><button class="btn light" onclick="resetTickets()">Reset</button></div><div class="tablewrap"><table><thead><tr><th>Ticket ID</th><th>Registration ID</th><th>Subject</th><th>Category</th><th>Priority</th><th>Status</th><th>Assigned To</th><th>SLA</th><th>Action</th></tr></thead><tbody id="ticketRows"></tbody></table></div></div></div><aside><div class="section"><h3>Add / Update Ticket</h3><div class="grid"><div><label>Registration ID</label><input id="fReg" value="REG-2026-00125"></div><div><label>Ticket ID</label><input id="fTicket" value="QNDHM-TKT-2026-0112"></div><div class="full"><label>Subject</label><input id="fSubject" value="Sandbox authentication support"></div><div><label>Category</label><select id="fCategory"><option>Registration</option><option>Documents</option><option>Integration</option><option>Compliance</option><option>Security</option><option>Production</option></select></div><div><label>Priority</label><select id="fPriority"><option>Low</option><option>Medium</option><option selected>High</option><option>Critical</option></select></div><div data-role-field="agent"><label>Status</label><select id="fStatus"><option>Open</option><option>In Progress</option><option>Awaiting User</option><option>Resolved</option><option>Closed</option></select></div><div data-role-field="agent"><label>Assigned Agent</label><input id="fAgent" value="Integration Support"></div><div class="full"><label>Interaction Summary</label><textarea id="fSummary">Describe issue, response, action item and next step.</textarea></div></div><div class="support-actions"><button class="btn primary" onclick="saveTicket()">Save Ticket</button></div></div><div class="section"><h3>Role Permissions</h3><div id="permissions"></div></div></aside></div>
+    <section id="registrationView" class="view active"><section class="kpis"><div class="kpi"><div class="ki">🏥</div><div><b>1,420+</b><span>Registered Facilities</span></div></div><div class="kpi"><div class="ki">✓</div><div><b>92%</b><span>Verified</span></div></div><div class="kpi"><div class="ki">⇄</div><div><b>830</b><span>Integrated</span></div></div><div class="kpi"><div class="ki">◷</div><div><b>47</b><span>Pending</span></div></div></section><div class="work"><aside class="steps"><div class="progress">Registration Progress<div class="track"><div id="bar" class="bar"></div></div></div><button class="step active" onclick="showStep(0)"><span class="num">1</span>Facility Profile</button><button class="step" onclick="showStep(1)"><span class="num">2</span>Licensing & Classification</button><button class="step" onclick="showStep(2)"><span class="num">3</span>Infrastructure & Services</button><button class="step" onclick="showStep(3)"><span class="num">4</span>Contacts & SPOCs</button><button class="step" onclick="showStep(4)"><span class="num">5</span>Systems & Interoperability</button><button class="step" onclick="showStep(5)"><span class="num">6</span>Documents</button><button class="step" onclick="showStep(6)"><span class="num">7</span>Verification</button><button class="step" onclick="showStep(7)"><span class="num">8</span>Review & Submit</button></aside><section class="content"><div class="head"><div><h2 id="stepTitle">Facility Profile</h2><p>Complete the applicable details and continue.</p></div><div style="margin-top: 10px"><span class="chip">Draft</span></div></div><div id="t0" class="tab active"><div class="section"><h3>Facility Details</h3><div class="grid"><div class="" data-role-field=""><label>Facility Registration ID</label><input type="text" value="QNDHM-FAC-2026-00081"></div><div class="" data-role-field=""><label>Facility Name</label><input type="text" value="Doha Care Hospital"></div><div class="" data-role-field=""><label>Facility Type</label><select><option>Hospital</option><option>Clinic</option><option>Laboratory</option><option>Pharmacy</option></select></div><div class="" data-role-field=""><label>Ownership</label><select><option>Government</option><option>Private</option></select></div><div class="full" data-role-field=""><label>Registered Address</label><textarea>West Bay, Doha</textarea></div></div></div></div><div id="t1" class="tab"><div class="section"><h3>License & Accreditation</h3><div class="grid"><div class="" data-role-field=""><label>Commercial Registration No.</label><input type="text" value="CRN-248501"></div><div class="" data-role-field=""><label>MoPH Facility License</label><input type="text" value="MOPH-FL-78210"></div><div class="" data-role-field=""><label>Valid From</label><input type="date" value=""></div><div class="" data-role-field=""><label>Valid To</label><input type="date" value=""></div><div class="" data-role-field=""><label>Accreditation</label><select><option>JCI</option><option>ISO</option><option>Other</option></select></div></div></div></div><div id="t2" class="tab"><div class="section"><h3>Capacity</h3><div class="grid"><div class="" data-role-field=""><label>Total Beds</label><input type="number" value="250"></div><div class="" data-role-field=""><label>ICU Beds</label><input type="number" value="32"></div><div class="" data-role-field=""><label>Operating Theatres</label><input type="number" value="8"></div><div class="" data-role-field=""><label>24x7 Emergency</label><select><option>Yes</option><option>No</option></select></div></div></div><div class="section"><h3>Services</h3><div class="checks"><label class="check"><input type="checkbox"> OPD</label><label class="check"><input type="checkbox"> IPD</label><label class="check"><input type="checkbox"> Emergency</label><label class="check"><input type="checkbox"> Laboratory</label><label class="check"><input type="checkbox"> Radiology</label><label class="check"><input type="checkbox"> Pharmacy</label><label class="check"><input type="checkbox"> Telemedicine</label><label class="check"><input type="checkbox"> Blood Bank</label></div></div></div><div id="t3" class="tab"><div class="section"><h3>Contacts</h3><div class="grid"><div class="" data-role-field=""><label>Primary Contact</label><input type="text" value="Ahmed Al Kuwari"></div><div class="" data-role-field=""><label>Designation</label><input type="text" value="Facility Administrator"></div><div class="" data-role-field=""><label>Email</label><input type="email" value="admin@dohacare.qa"></div><div class="" data-role-field=""><label>Mobile</label><input type="text" value="+974 5012 3456"></div></div></div></div><div id="t4" class="tab"><div class="section"><h3>Digital Systems</h3><div class="grid three"><div class="" data-role-field=""><label>Primary HIS/HMIS</label><input type="text" value="DohaCare HIS"></div><div class="" data-role-field=""><label>HMIS Vendor</label><input type="text" value="HealthSoft Qatar"></div><div class="" data-role-field=""><label>Deployment</label><select><option>On-Premises</option><option>Cloud</option><option>Hybrid</option></select></div><div class="" data-role-field=""><label>EMR Available</label><select><option>Yes</option><option>No</option></select></div><div class="" data-role-field=""><label>LIS</label><input type="text" value="LabConnect"></div><div class="" data-role-field=""><label>RIS/PACS</label><input type="text" value="MediImage PACS"></div></div></div><div class="section"><h3>QNDHM Scope</h3><div class="checks"><label class="check"><input type="checkbox"> Q-HFR</label><label class="check"><input type="checkbox"> Q-HPR</label><label class="check"><input type="checkbox"> Q-HIE</label><label class="check"><input type="checkbox"> Consent Manager</label><label class="check"><input type="checkbox"> ePrescription</label><label class="check"><input type="checkbox"> Claims Exchange</label></div></div></div><div id="t5" class="tab"><div class="section"><h3>Required Documents</h3>
+        @* <div class="upload">
+                <label for="tradeLicense">Trade License</label>
+                <input type="file" id="tradeLicense" name="tradeLicense" accept=".pdf,.jpg,.jpeg,.png">
+
+                <label for="mophLicense">MoPH License</label>
+                <input type="file" id="mophLicense" name="mophLicense" accept=".pdf,.jpg,.jpeg,.png">
+
+                <label for="accreditation">Accreditation</label>
+                <input type="file" id="accreditation" name="accreditation" accept=".pdf,.jpg,.jpeg,.png">
+
+                <label for="authorization">Authorization</label>
+                <input type="file" id="authorization" name="authorization" accept=".pdf,.jpg,.jpeg,.png">
+
+                <label for="privacyDocuments">Privacy Documents</label>
+                <input type="file" id="privacyDocuments" name="privacyDocuments" accept=".pdf,.jpg,.jpeg,.png">
+
+                <label for="securityDocuments">Security Documents</label>
+                <input type="file" id="securityDocuments" name="securityDocuments" accept=".pdf,.jpg,.jpeg,.png">
+    </div> *@
+            <div class="upload">
+
+                    <div class="upload-field">
+                        <label for="tradeLicense">Trade License</label>
+                        <input type="file" id="tradeLicense" name="tradeLicense"
+                               accept=".pdf,.jpg,.jpeg,.png">
+                        <a href="#" id="tradeLicenseLink"
+                           target="_blank"
+                       title="View uploaded Trade License">👁</a>
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="mophLicense">MoPH License</label>
+                        <input type="file" id="mophLicense" name="mophLicense"
+                               accept=".pdf,.jpg,.jpeg,.png">
+                        <a href="#" id="mophLicenseLink"
+                           target="_blank"
+                           title="View uploaded MoPH License">👁</a>
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="accreditation">Accreditation</label>
+                        <input type="file" id="accreditation" name="accreditation"
+                               accept=".pdf,.jpg,.jpeg,.png">
+                        <a href="#" id="accreditationLink"
+                           target="_blank"
+                           title="View uploaded Accreditation">👁</a>
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="authorization">Authorization</label>
+                        <input type="file" id="authorization" name="authorization"
+                               accept=".pdf,.jpg,.jpeg,.png">
+                        <a href="#" id="authorizationLink"
+                           target="_blank"
+                           title="View uploaded Authorization">👁</a>
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="privacyDocuments">Privacy Documents</label>
+                        <input type="file" id="privacyDocuments" name="privacyDocuments"
+                               accept=".pdf,.jpg,.jpeg,.png">
+                        <a href="#" id="privacyDocumentsLink"
+                           target="_blank"
+                           title="View uploaded Privacy Documents">👁</a>
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="securityDocuments">Security Documents</label>
+                        <input type="file" id="securityDocuments" name="securityDocuments"
+                               accept=".pdf,.jpg,.jpeg,.png">
+                        <a href="#" id="securityDocumentsLink"
+                           target="_blank"
+                           title="View uploaded Security Documents">👁</a>
+                    </div>
+
+            </div>
+
+    </div></div><div id="t6" class="tab"><div class="section"><h3>Verification</h3><div class="grid"><div class="" data-role-field=""><label>Status</label><select><option>Pending</option><option>In Review</option><option>Verified</option><option>Rejected</option></select></div><div class="" data-role-field=""><label>Verifier</label><input type="text" value="QNDHM Verification Team"></div><div class="" data-role-field=""><label>Verification Date</label><input type="date" value=""></div><div class="full" data-role-field=""><label>Observations</label><textarea></textarea></div></div></div></div><div id="t7" class="tab"><div class="section"><h3>Review</h3>Facility registration is ready for review and submission.</div></div></section></div></section><section id="supportView" class="view">
+        <div class="notice">Create a new support ticket and track its complete status, assignment, SLA and activity timeline.</div><div class="ticket-tabs"><button id="ttTrack" class="ticket-tab active" onclick="showTicketSection('track')">Track Tickets</button><button id="ttNew" class="ticket-tab" onclick="showTicketSection('new')">Generate New Ticket</button></div><div id="ticketTrackSection" class="support-grid"><div><div class="panel"><div class="panel-head"><div><h2>Support & Ticket Management</h2><small id="supportScope">All tickets visible for current role</small></div><button class="btn primary" onclick="newTicket()">+ Create Ticket</button></div><div class="filters"><input id="ticketSearch" placeholder="Search ticket ID, subject or registration ID" oninput="filterTickets()"><select id="ticketStatus" onchange="filterTickets()"><option value="">All Statuses</option><option>Open</option><option>In Progress</option><option>Awaiting User</option><option>Resolved</option><option>Closed</option></select><select id="ticketPriority" onchange="filterTickets()"><option value="">All Priorities</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select><select id="ticketCategory" onchange="filterTickets()"><option value="">All Categories</option><option>Registration</option><option>Documents</option><option>Integration</option><option>Compliance</option><option>Security</option><option>Production</option></select><button class="btn light" onclick="resetTickets()">Reset</button></div><div class="tablewrap"><table><thead><tr><th>Ticket ID</th><th>Registration ID</th><th>Subject</th><th>Category</th><th>Priority</th><th>Status</th><th>Assigned To</th><th>SLA</th><th>Action</th></tr></thead><tbody id="ticketRows"></tbody></table></div></div></div>< aside style="display:none;"><div class="section"><h3>Add / Update Ticket</h3><div class="grid"><div><label>Registration ID</label><input id="fReg" value="REG-2026-00125"></div><div><label>Ticket ID</label><input id="fTicket" value="QNDHM-TKT-2026-0112"></div><div class="full"><label>Subject</label><input id="fSubject" value="Sandbox authentication support"></div><div><label>Category</label><select id="fCategory"><option>Registration</option><option>Documents</option><option>Integration</option><option>Compliance</option><option>Security</option><option>Production</option></select></div><div><label>Priority</label><select id="fPriority"><option>Low</option><option>Medium</option><option selected>High</option><option>Critical</option></select></div><div data-role-field="agent"><label>Status</label><select id="fStatus"><option>Open</option><option>In Progress</option><option>Awaiting User</option><option>Resolved</option><option>Closed</option></select></div><div data-role-field="agent"><label>Assigned Agent</label><input id="fAgent" value="Integration Support"></div><div class="full"><label>Interaction Summary</label><textarea id="fSummary">Describe issue, response, action item and next step.</textarea></div></div><div class="support-actions"><button class="btn primary" onclick="saveTicket()">Save Ticket</button></div></div><div class="section"><h3>Role Permissions</h3><div id="permissions"></div></div></aside></div>
         <div id="ticketNewSection" class="section hidden" style="margin:18px"><h3>Generate New Support Ticket</h3><div class="grid three"><div><label>Registration Type</label><select id="nType"><option>Healthcare Facility</option><option>Healthcare Professional</option><option>DSC / Integrator</option></select></div><div><label>Registration ID *</label><input id="nReg" placeholder="Enter registration ID"></div><div><label>Auto-Generated Ticket ID</label><input id="nTicket" readonly></div><div class="full"><label>Ticket Subject *</label><input id="nSubject" placeholder="Enter a clear issue title"></div><div><label>Issue Category *</label><select id="nCategory"><option>Registration</option><option>Profile Update</option><option>Document Verification</option><option>Sandbox / API</option><option>Integration</option><option>Compliance</option><option>Security</option><option>Production</option></select></div><div><label>Priority</label><select id="nPriority"><option>Low</option><option selected>Medium</option><option>High</option><option>Critical</option></select></div><div><label>Raised By</label><input id="nRaisedBy" value="Current Portal User"></div><div><label>Contact Email</label><input id="nEmail" type="email" placeholder="name@organization.qa"></div><div><label>Contact Mobile</label><input id="nMobile" placeholder="+974"></div><div class="full"><label>Issue Description *</label><textarea id="nDescription" placeholder="Describe the issue, steps performed, error message and expected result"></textarea></div><div class="full"><label>Attachment / Log Reference</label><input id="nAttachment" placeholder="Screenshot, log, document or secure file reference"></div></div><div class="support-actions"><button class="btn light" onclick="clearNewTicket()">Clear</button><button class="btn primary" onclick="generateTicket()">Generate Ticket</button></div></div>
         <div id="ticketTimelineSection" class="section hidden" style="margin:18px"><div class="panel-head" style="padding:0 0 14px;border:0"><div><h2 id="timelineTitle">Ticket Tracking</h2><small id="timelineSub"></small></div><button class="btn light" onclick="showTicketSection('track')">Back to Tickets</button></div><div class="grid three"><div><label>Current Status</label><input id="trackStatus" readonly></div><div><label>Assigned Team</label><input id="trackAgent" readonly></div><div><label>SLA</label><input id="trackSla" readonly></div></div><div class="timeline-box" id="timelineBox"></div><div class="section"><h3>Add Comment</h3><textarea id="trackComment" placeholder="Add update, response or additional information"></textarea><div class="support-actions"><button class="btn primary" onclick="addTrackingComment()">Add Comment</button></div></div></div>
     </section>
@@ -683,5 +801,30 @@
         function renderTimeline() { timelineBox.innerHTML = (trackedTicket.events || []).map(e => `<div class="timeline-item"><b>${e.title}</b><small>${e.date}</small><div>${e.note}</div></div>`).join('') }
         function addTrackingComment() { let text = trackComment.value.trim(); if (!trackedTicket || !text) return; trackedTicket.events.push({ title: 'Comment Added', date: new Date().toLocaleString(), note: text }); trackComment.value = ''; renderTimeline() }
         applyRole(); showStep(0);
+        const documentTypes = [
+            'tradeLicense',
+            'mophLicense',
+            'accreditation',
+            'authorization',
+            'privacyDocuments',
+            'securityDocuments'
+        ];
+
+        documentTypes.forEach(function(id) {
+            const input = document.getElementById(id);
+            const link = document.getElementById(id + 'Link');
+
+            input.addEventListener('change', function() {
+                if (this.files && this.files.length > 0) {
+                    const file = this.files[0];
+                    const fileUrl = URL.createObjectURL(file);
+
+                    link.href = fileUrl;
+                    link.target = '_blank';
+                    link.style.display = 'flex';
+                }
+            });
+        });
+
 </script></body>
 </html>
