@@ -1,0 +1,687 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Healthcare Facility Registration</title>
+    <style>
+            :root {
+                --m: #8A1538;
+                --md: #5b0d27;
+                --soft: #f8eef2;
+                --bg: #f5f7fa;
+                --ink: #26313d;
+                --muted: #687386;
+                --line: #e2e7ee;
+                --ok: #15804a;
+                --blue: #176aa6;
+                --warn: #b56c00
+            }
+
+            * {
+                box-sizing: border-box
+            }
+
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--ink);
+                font: 14px Segoe UI,Arial,sans-serif
+            }
+
+            .app {
+                display: grid;
+                grid-template-columns: 245px 1fr;
+                min-height: 100vh
+            }
+
+            .sidebar {
+                position: fixed;
+                inset: 0 auto 0 0;
+                width: 245px;
+                background: linear-gradient(180deg,var(--md),var(--m) 60%,#650e2d);
+                color: #fff;
+                padding: 18px 14px;
+                z-index: 20
+            }
+
+            .brand {
+                display: flex;
+                gap: 11px;
+                align-items: center;
+                padding: 4px 6px 20px;
+                border-bottom: 1px solid #ffffff26
+            }
+
+            .logo {
+                width: 45px;
+                height: 45px;
+                border: 1px solid #ffffff88;
+                border-radius: 11px;
+                display: grid;
+                place-items: center;
+                font-weight: 800
+            }
+
+            .brand b {
+                display: block
+            }
+
+            .brand small {
+                opacity: .75
+            }
+
+            .label {
+                margin: 21px 10px 8px;
+                text-transform: uppercase;
+                font-size: 10px;
+                letter-spacing: 1px;
+                opacity: .55
+            }
+
+            .nav {
+                width: 100%;
+                border: 0;
+                color: #fff;
+                background: transparent;
+                text-align: left;
+                padding: 11px 12px;
+                border-radius: 9px;
+                margin: 3px 0;
+                cursor: pointer;
+                font-weight: 600
+            }
+
+                .nav:hover, .nav.active {
+                    background: #ffffff22
+                }
+
+            .badge {
+                float: right;
+                background: #fff;
+                color: var(--m);
+                border-radius: 15px;
+                padding: 2px 7px;
+                font-size: 10px
+            }
+
+            .rolebox {
+                position: absolute;
+                left: 14px;
+                right: 14px;
+                bottom: 18px;
+                border-top: 1px solid #ffffff26;
+                padding-top: 14px
+            }
+
+                .rolebox label {
+                    display: block;
+                    font-size: 11px;
+                    opacity: .75;
+                    margin-bottom: 6px
+                }
+
+                .rolebox select {
+                    width: 100%;
+                    border: 1px solid #ffffff44;
+                    background: #fff;
+                    color: #333;
+                    border-radius: 8px;
+                    padding: 9px
+                }
+
+            .main {
+                grid-column: 2;
+                min-width: 0
+            }
+
+            .top {
+                height: 76px;
+                background: #fff;
+                border-bottom: 1px solid var(--line);
+                padding: 0 27px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                position: sticky;
+                top: 0;
+                z-index: 8
+            }
+
+                .top h1 {
+                    margin: 0;
+                    color: var(--m);
+                    font-size: 20px
+                }
+
+                .top p {
+                    margin: 4px 0 0;
+                    color: var(--muted);
+                    font-size: 12px
+                }
+
+            .user {
+                display: flex;
+                gap: 9px;
+                align-items: center
+            }
+            .avatar {
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                background: var(--m);
+                color: #fff;
+                display: grid;
+                place-items: center;
+                font-weight: 700
+            }
+
+            .page {
+                padding: 22px 26px 95px;
+                max-width: 1550px;
+                margin: auto
+            }
+
+            .view {
+                display: none
+            }
+
+                .view.active {
+                    display: block
+                }
+
+            .kpis {
+                display: grid;
+                grid-template-columns: repeat(4,1fr);
+                gap: 12px;
+                margin-bottom: 16px
+            }
+
+            .kpi {
+                background: #fff;
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 14px;
+                display: flex;
+                gap: 11px;
+                align-items: center
+            }
+
+            .ki {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                background: var(--soft);
+                color: var(--m);
+                display: grid;
+                place-items: center;
+                font-size: 18px
+            }
+
+            .kpi b {
+                display: block;
+                color: var(--m);
+                font-size: 19px
+            }
+
+            .kpi span {
+                font-size: 11px;
+                color: var(--muted)
+            }
+
+            .work {
+                display: grid;
+                grid-template-columns: 265px 1fr;
+                gap: 16px
+            }
+
+            .steps, .content, .panel {
+                background: #fff;
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                box-shadow: 0 8px 24px #11182710
+            }
+
+            .steps {
+                padding: 14px;
+                align-self: start;
+                position: sticky;
+                top: 98px
+            }
+
+            .progress {
+                font-weight: 700;
+                color: var(--m);
+                padding: 5px 5px 13px
+            }
+
+            .track {
+                height: 6px;
+                background: #edf0f4;
+                border-radius: 8px;
+                margin-top: 9px;
+                overflow: hidden
+            }
+
+            .bar {
+                height: 100%;
+                background: linear-gradient(90deg,var(--m),#bd4265);
+                width: 10%;
+                transition: .25s
+            }
+
+            .step {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border: 0;
+                background: transparent;
+                width: 100%;
+                padding: 10px 8px;
+                border-radius: 9px;
+                text-align: left;
+                color: #536071;
+                cursor: pointer
+            }
+
+                .step.active {
+                    background: var(--soft);
+                    color: var(--m);
+                    font-weight: 800
+                }
+
+            .num {
+                width: 28px;
+                height: 28px;
+                border: 1px solid #ccd3dc;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                flex: 0 0 auto
+            }
+
+            .step.active .num {
+                background: var(--m);
+                border-color: var(--m);
+                color: #fff
+            }
+
+            .head {
+                padding: 20px 22px;
+                border-bottom: 1px solid var(--line);
+                display: flex;
+                justify-content: space-between
+            }
+
+                .head h2 {
+                    margin: 0;
+                    color: var(--m);
+                    font-size: 20px
+                }
+
+                .head p {
+                    margin: 5px 0 0;
+                    color: var(--muted);
+                    font-size: 12px
+                }
+
+            .chip {
+                background: #fff1d8;
+                color: var(--warn);
+                border-radius: 18px;
+                padding: 7px 10px;
+                font-size: 11px;
+                font-weight: 800
+            }
+
+            .tab {
+                display: none;
+                padding: 22px
+            }
+
+                .tab.active {
+                    display: block
+                }
+
+            .section {
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 18px;
+                margin-bottom: 15px
+            }
+
+                .section h3 {
+                    margin: 0 0 15px;
+                    font-size: 15px
+                }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                gap: 14px
+            }
+
+                .grid.three {
+                    grid-template-columns: repeat(3,1fr)
+                }
+
+            .full {
+                grid-column: 1/-1
+            }
+
+            label {
+                display: block;
+                font-size: 12px;
+                font-weight: 700;
+                margin-bottom: 6px
+            }
+
+            input, select, textarea {
+                width: 100%;
+                border: 1px solid #d4dbe4;
+                border-radius: 8px;
+                padding: 10px 11px;
+                background: #fff
+            }
+
+            textarea {
+                min-height: 82px;
+                resize: vertical
+            }
+
+            .checks {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                gap: 9px
+            }
+
+            .check {
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                background: #fbfcfd;
+                padding: 10px
+            }
+
+                .check input {
+                    width: auto;
+                    accent-color: var(--m)
+                }
+
+            .upload {
+                border: 2px dashed #ccd3dc;
+                border-radius: 10px;
+                padding: 30px;
+                text-align: center;
+                color: var(--muted)
+            }
+
+            .btn {
+                border: 0;
+                border-radius: 8px;
+                padding: 10px 14px;
+                font-weight: 800;
+                cursor: pointer
+            }
+
+            .primary {
+                background: var(--m);
+                color: #fff
+            }
+
+            .outline {
+                background: #fff;
+                color: var(--m);
+                border: 1px solid var(--m)
+            }
+
+            .light {
+                background: #eef1f5;
+                color: #344054
+            }
+
+            .footer {
+                position: fixed;
+                left: 245px;
+                right: 0;
+                bottom: 0;
+                background: #fffffff5;
+                border-top: 1px solid var(--line);
+                padding: 13px 26px;
+                display: flex;
+                justify-content: space-between;
+                z-index: 12
+            }
+
+                .footer div {
+                    display: flex;
+                    gap: 9px
+                }
+
+            .panel-head {
+                padding: 18px 20px;
+                border-bottom: 1px solid var(--line);
+                display: flex;
+                justify-content: space-between;
+                align-items: center
+            }
+
+                .panel-head h2 {
+                    margin: 0;
+                    color: var(--m)
+                }
+
+            .filters {
+                padding: 14px 20px;
+                background: #fbfcfd;
+                border-bottom: 1px solid var(--line);
+                display: grid;
+                grid-template-columns: 2fr repeat(3,1fr) auto;
+                gap: 10px
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                min-width: 900px
+            }
+
+            th {
+                background: #303842;
+                color: #fff;
+                text-align: left;
+                padding: 11px;
+                font-size: 11px
+            }
+
+            td {
+                padding: 11px;
+                border-bottom: 1px solid var(--line);
+                font-size: 12px
+            }
+
+            .tablewrap {
+                overflow: auto
+            }
+
+            .pill {
+                display: inline-block;
+                padding: 4px 8px;
+                border-radius: 15px;
+                font-size: 10px;
+                font-weight: 800
+            }
+
+            .red {
+                background: #fdecef;
+                color: #c9364d
+            }
+
+            .green {
+                background: #e7f6ed;
+                color: #15804a
+            }
+
+            .amber {
+                background: #fff2da;
+                color: #b56c00
+            }
+
+            .blue {
+                background: #e8f3fc;
+                color: #176aa6
+            }
+
+            .support-grid {
+                display: grid;
+                grid-template-columns: 1.15fr .85fr;
+                gap: 16px;
+                padding: 18px
+            }
+
+            .support-actions {
+                display: flex;
+                justify-content: flex-end;
+                gap: 8px;
+                margin-top: 12px
+            }
+
+            .ticket-tabs {
+                display: flex;
+                gap: 6px;
+                padding: 14px 18px 0
+            }
+
+            .ticket-tab {
+                border: 1px solid var(--line);
+                background: #fff;
+                padding: 9px 13px;
+                border-radius: 8px 8px 0 0;
+                cursor: pointer
+            }
+
+                .ticket-tab.active {
+                    background: var(--m);
+                    color: #fff;
+                    border-color: var(--m)
+                }
+
+            .timeline-box {
+                border-left: 3px solid var(--m);
+                padding-left: 15px;
+                margin-top: 12px
+            }
+
+            .timeline-item {
+                position: relative;
+                padding: 0 0 16px 8px
+            }
+
+                .timeline-item:before {
+                    content: "";
+                    position: absolute;
+                    width: 9px;
+                    height: 9px;
+                    border-radius: 50%;
+                    background: var(--m);
+                    left: -20px;
+                    top: 4px
+                }
+
+                .timeline-item b {
+                    display: block
+                }
+
+                .timeline-item small {
+                    color: var(--muted)
+                }
+
+            .notice {
+                padding: 11px 14px;
+                background: #eaf4fc;
+                color: #175c8e;
+                border-radius: 8px;
+                margin-bottom: 14px
+            }
+
+            .hidden {
+                display: none !important
+            }
+            @@media(max - width:950px)
+
+            {
+                .sidebar {
+                    display: none
+                }
+
+                .app {
+                    display: block
+                }
+
+                .main {
+                    grid-column: auto
+                }
+
+                .work, .support-grid {
+                    grid-template-columns: 1fr
+                }
+
+                .steps {
+                    position: static
+                }
+
+                .footer {
+                    left: 0
+                }
+
+                .grid, .grid.three, .checks {
+                    grid-template-columns: 1fr
+                }
+
+                .kpis {
+                    grid-template-columns: repeat(2,1fr)
+                }
+
+                .filters {
+                    grid-template-columns: 1fr
+                }
+            }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar"><div class="brand"><div class="logo">QA</div><div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div></div><div class="label">Registration Workspace</div><button class="nav active" id="navRegistration" onclick="showView('registration')">▤ Facility Registration</button><button class="nav" id="navSupport" onclick="showView('support')">◷ Support & Tickets <span class="badge">3</span></button><button class="nav" onclick="location.href='/home/dashboard'">▦ CRM Summary</button><button class="nav" data-admin-only onclick="alert('Role and permission management')">⚙ Role Management</button><div class="rolebox"><label>Demo access role</label><select id="role" onchange="applyRole()"><option value="registrant">Registrant</option><option value="support">Support Agent</option><option value="reviewer">Reviewer</option><option value="admin">Administrator</option></select></div></aside><main class="main">
+        <header class="top">
+            <div><h1>QATAR NATIONAL DIGITAL HEALTH MISSION (QNDHM)</h1><p>Healthcare Facility Registration</p></div><div class="user">
+            <div class="avatar">JD</div>
+            <div><b>John Doe</b><br /><small>@(ViewBag.Show ? "Facility Owner": "Support Operator")</small></div>
+        </div>
+    </header><div class="page">
+    <section id="registrationView" class="view active"><section class="kpis"><div class="kpi"><div class="ki">🏥</div><div><b>1,420+</b><span>Registered Facilities</span></div></div><div class="kpi"><div class="ki">✓</div><div><b>92%</b><span>Verified</span></div></div><div class="kpi"><div class="ki">⇄</div><div><b>830</b><span>Integrated</span></div></div><div class="kpi"><div class="ki">◷</div><div><b>47</b><span>Pending</span></div></div></section><div class="work"><aside class="steps"><div class="progress">Registration Progress<div class="track"><div id="bar" class="bar"></div></div></div><button class="step active" onclick="showStep(0)"><span class="num">1</span>Facility Profile</button><button class="step" onclick="showStep(1)"><span class="num">2</span>Licensing & Classification</button><button class="step" onclick="showStep(2)"><span class="num">3</span>Infrastructure & Services</button><button class="step" onclick="showStep(3)"><span class="num">4</span>Contacts & SPOCs</button><button class="step" onclick="showStep(4)"><span class="num">5</span>Systems & Interoperability</button><button class="step" onclick="showStep(5)"><span class="num">6</span>Documents</button><button class="step" onclick="showStep(6)"><span class="num">7</span>Verification</button><button class="step" onclick="showStep(7)"><span class="num">8</span>Review & Submit</button></aside><section class="content"><div class="head"><div><h2 id="stepTitle">Facility Profile</h2><p>Complete the applicable details and continue.</p></div><div style="margin-top: 10px"><span class="chip">Draft</span></div></div><div id="t0" class="tab active"><div class="section"><h3>Facility Details</h3><div class="grid"><div class="" data-role-field=""><label>Facility Registration ID</label><input type="text" value="QNDHM-FAC-2026-00081"></div><div class="" data-role-field=""><label>Facility Name</label><input type="text" value="Doha Care Hospital"></div><div class="" data-role-field=""><label>Facility Type</label><select><option>Hospital</option><option>Clinic</option><option>Laboratory</option><option>Pharmacy</option></select></div><div class="" data-role-field=""><label>Ownership</label><select><option>Government</option><option>Private</option></select></div><div class="full" data-role-field=""><label>Registered Address</label><textarea>West Bay, Doha</textarea></div></div></div></div><div id="t1" class="tab"><div class="section"><h3>License & Accreditation</h3><div class="grid"><div class="" data-role-field=""><label>Commercial Registration No.</label><input type="text" value="CRN-248501"></div><div class="" data-role-field=""><label>MoPH Facility License</label><input type="text" value="MOPH-FL-78210"></div><div class="" data-role-field=""><label>Valid From</label><input type="date" value=""></div><div class="" data-role-field=""><label>Valid To</label><input type="date" value=""></div><div class="" data-role-field=""><label>Accreditation</label><select><option>JCI</option><option>ISO</option><option>Other</option></select></div></div></div></div><div id="t2" class="tab"><div class="section"><h3>Capacity</h3><div class="grid"><div class="" data-role-field=""><label>Total Beds</label><input type="number" value="250"></div><div class="" data-role-field=""><label>ICU Beds</label><input type="number" value="32"></div><div class="" data-role-field=""><label>Operating Theatres</label><input type="number" value="8"></div><div class="" data-role-field=""><label>24x7 Emergency</label><select><option>Yes</option><option>No</option></select></div></div></div><div class="section"><h3>Services</h3><div class="checks"><label class="check"><input type="checkbox"> OPD</label><label class="check"><input type="checkbox"> IPD</label><label class="check"><input type="checkbox"> Emergency</label><label class="check"><input type="checkbox"> Laboratory</label><label class="check"><input type="checkbox"> Radiology</label><label class="check"><input type="checkbox"> Pharmacy</label><label class="check"><input type="checkbox"> Telemedicine</label><label class="check"><input type="checkbox"> Blood Bank</label></div></div></div><div id="t3" class="tab"><div class="section"><h3>Contacts</h3><div class="grid"><div class="" data-role-field=""><label>Primary Contact</label><input type="text" value="Ahmed Al Kuwari"></div><div class="" data-role-field=""><label>Designation</label><input type="text" value="Facility Administrator"></div><div class="" data-role-field=""><label>Email</label><input type="email" value="admin@dohacare.qa"></div><div class="" data-role-field=""><label>Mobile</label><input type="text" value="+974 5012 3456"></div></div></div></div><div id="t4" class="tab"><div class="section"><h3>Digital Systems</h3><div class="grid three"><div class="" data-role-field=""><label>Primary HIS/HMIS</label><input type="text" value="DohaCare HIS"></div><div class="" data-role-field=""><label>HMIS Vendor</label><input type="text" value="HealthSoft Qatar"></div><div class="" data-role-field=""><label>Deployment</label><select><option>On-Premises</option><option>Cloud</option><option>Hybrid</option></select></div><div class="" data-role-field=""><label>EMR Available</label><select><option>Yes</option><option>No</option></select></div><div class="" data-role-field=""><label>LIS</label><input type="text" value="LabConnect"></div><div class="" data-role-field=""><label>RIS/PACS</label><input type="text" value="MediImage PACS"></div></div></div><div class="section"><h3>QNDHM Scope</h3><div class="checks"><label class="check"><input type="checkbox"> Q-HFR</label><label class="check"><input type="checkbox"> Q-HPR</label><label class="check"><input type="checkbox"> Q-HIE</label><label class="check"><input type="checkbox"> Consent Manager</label><label class="check"><input type="checkbox"> ePrescription</label><label class="check"><input type="checkbox"> Claims Exchange</label></div></div></div><div id="t5" class="tab"><div class="section"><h3>Required Documents</h3><div class="upload">Trade License, MoPH License, Accreditation, Authorization, Privacy and Security Documents</div></div></div><div id="t6" class="tab"><div class="section"><h3>Verification</h3><div class="grid"><div class="" data-role-field=""><label>Status</label><select><option>Pending</option><option>In Review</option><option>Verified</option><option>Rejected</option></select></div><div class="" data-role-field=""><label>Verifier</label><input type="text" value="QNDHM Verification Team"></div><div class="" data-role-field=""><label>Verification Date</label><input type="date" value=""></div><div class="full" data-role-field=""><label>Observations</label><textarea></textarea></div></div></div></div><div id="t7" class="tab"><div class="section"><h3>Review</h3>Facility registration is ready for review and submission.</div></div></section></div></section><section id="supportView" class="view">
+        <div class="notice">Create a new support ticket and track its complete status, assignment, SLA and activity timeline.</div><div class="ticket-tabs"><button id="ttTrack" class="ticket-tab active" onclick="showTicketSection('track')">Track Tickets</button><button id="ttNew" class="ticket-tab" onclick="showTicketSection('new')">Generate New Ticket</button></div><div id="ticketTrackSection" class="support-grid"><div><div class="panel"><div class="panel-head"><div><h2>Support & Ticket Management</h2><small id="supportScope">All tickets visible for current role</small></div><button class="btn primary" onclick="newTicket()">+ Create Ticket</button></div><div class="filters"><input id="ticketSearch" placeholder="Search ticket ID, subject or registration ID" oninput="filterTickets()"><select id="ticketStatus" onchange="filterTickets()"><option value="">All Statuses</option><option>Open</option><option>In Progress</option><option>Awaiting User</option><option>Resolved</option><option>Closed</option></select><select id="ticketPriority" onchange="filterTickets()"><option value="">All Priorities</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select><select id="ticketCategory" onchange="filterTickets()"><option value="">All Categories</option><option>Registration</option><option>Documents</option><option>Integration</option><option>Compliance</option><option>Security</option><option>Production</option></select><button class="btn light" onclick="resetTickets()">Reset</button></div><div class="tablewrap"><table><thead><tr><th>Ticket ID</th><th>Registration ID</th><th>Subject</th><th>Category</th><th>Priority</th><th>Status</th><th>Assigned To</th><th>SLA</th><th>Action</th></tr></thead><tbody id="ticketRows"></tbody></table></div></div></div><aside><div class="section"><h3>Add / Update Ticket</h3><div class="grid"><div><label>Registration ID</label><input id="fReg" value="REG-2026-00125"></div><div><label>Ticket ID</label><input id="fTicket" value="QNDHM-TKT-2026-0112"></div><div class="full"><label>Subject</label><input id="fSubject" value="Sandbox authentication support"></div><div><label>Category</label><select id="fCategory"><option>Registration</option><option>Documents</option><option>Integration</option><option>Compliance</option><option>Security</option><option>Production</option></select></div><div><label>Priority</label><select id="fPriority"><option>Low</option><option>Medium</option><option selected>High</option><option>Critical</option></select></div><div data-role-field="agent"><label>Status</label><select id="fStatus"><option>Open</option><option>In Progress</option><option>Awaiting User</option><option>Resolved</option><option>Closed</option></select></div><div data-role-field="agent"><label>Assigned Agent</label><input id="fAgent" value="Integration Support"></div><div class="full"><label>Interaction Summary</label><textarea id="fSummary">Describe issue, response, action item and next step.</textarea></div></div><div class="support-actions"><button class="btn primary" onclick="saveTicket()">Save Ticket</button></div></div><div class="section"><h3>Role Permissions</h3><div id="permissions"></div></div></aside></div>
+        <div id="ticketNewSection" class="section hidden" style="margin:18px"><h3>Generate New Support Ticket</h3><div class="grid three"><div><label>Registration Type</label><select id="nType"><option>Healthcare Facility</option><option>Healthcare Professional</option><option>DSC / Integrator</option></select></div><div><label>Registration ID *</label><input id="nReg" placeholder="Enter registration ID"></div><div><label>Auto-Generated Ticket ID</label><input id="nTicket" readonly></div><div class="full"><label>Ticket Subject *</label><input id="nSubject" placeholder="Enter a clear issue title"></div><div><label>Issue Category *</label><select id="nCategory"><option>Registration</option><option>Profile Update</option><option>Document Verification</option><option>Sandbox / API</option><option>Integration</option><option>Compliance</option><option>Security</option><option>Production</option></select></div><div><label>Priority</label><select id="nPriority"><option>Low</option><option selected>Medium</option><option>High</option><option>Critical</option></select></div><div><label>Raised By</label><input id="nRaisedBy" value="Current Portal User"></div><div><label>Contact Email</label><input id="nEmail" type="email" placeholder="name@organization.qa"></div><div><label>Contact Mobile</label><input id="nMobile" placeholder="+974"></div><div class="full"><label>Issue Description *</label><textarea id="nDescription" placeholder="Describe the issue, steps performed, error message and expected result"></textarea></div><div class="full"><label>Attachment / Log Reference</label><input id="nAttachment" placeholder="Screenshot, log, document or secure file reference"></div></div><div class="support-actions"><button class="btn light" onclick="clearNewTicket()">Clear</button><button class="btn primary" onclick="generateTicket()">Generate Ticket</button></div></div>
+        <div id="ticketTimelineSection" class="section hidden" style="margin:18px"><div class="panel-head" style="padding:0 0 14px;border:0"><div><h2 id="timelineTitle">Ticket Tracking</h2><small id="timelineSub"></small></div><button class="btn light" onclick="showTicketSection('track')">Back to Tickets</button></div><div class="grid three"><div><label>Current Status</label><input id="trackStatus" readonly></div><div><label>Assigned Team</label><input id="trackAgent" readonly></div><div><label>SLA</label><input id="trackSla" readonly></div></div><div class="timeline-box" id="timelineBox"></div><div class="section"><h3>Add Comment</h3><textarea id="trackComment" placeholder="Add update, response or additional information"></textarea><div class="support-actions"><button class="btn primary" onclick="addTrackingComment()">Add Comment</button></div></div></div>
+    </section>
+</div>
+</main>
+</div>
+<div id="formFooter" class="footer"><small id="saved">Draft not saved</small><div><button class="btn outline" onclick="saveDraft()">Save Draft</button><button class="btn light" onclick="move(-1)">Previous</button><button class="btn primary" onclick="move(1)">Save & Continue</button></div></div>
+<script>
+        const steps = ['Facility Profile', 'Licensing & Classification', 'Infrastructure & Services', 'Contacts & SPOCs', 'Systems & Interoperability', 'Documents', 'Verification', 'Review & Submit']; let cur = 0; let tickets = [{ id: 'QNDHM-TKT-2026-0112', reg: 'FAC-2026-00125', subject: 'Sandbox authentication support', category: 'Integration', priority: 'High', status: 'Open', agent: 'Integration Support', sla: 'Within SLA', owner: 'registrant', events: [{ title: 'Ticket Created', date: '28 Aug 2026', note: 'Ticket generated through QNDHM portal' }, { title: 'Assigned', date: '28 Aug 2026', note: 'Assigned to Integration Support' }] }, { id: 'QNDHM-TKT-2026-0098', reg: 'FAC-2026-00125', subject: 'Additional authorization document required', category: 'Documents', priority: 'Medium', status: 'Resolved', agent: 'Registration Support', sla: 'Met', owner: 'registrant', events: [{ title: 'Ticket Created', date: '24 Aug 2026', note: 'Document request raised' }, { title: 'Resolved', date: '25 Aug 2026', note: 'Required document received and reviewed' }] }, { id: 'QNDHM-TKT-2026-0074', reg: 'OTHER-2026-00044', subject: 'Compliance observation clarification', category: 'Compliance', priority: 'Low', status: 'In Progress', agent: 'Compliance Team', sla: 'Within SLA', owner: 'other', events: [{ title: 'Ticket Created', date: '20 Aug 2026', note: 'Compliance clarification requested' }] }];
+        function showView(v) { document.getElementById('registrationView').classList.toggle('active', v === 'registration'); document.getElementById('supportView').classList.toggle('active', v === 'support'); document.getElementById('navRegistration').classList.toggle('active', v === 'registration'); document.getElementById('navSupport').classList.toggle('active', v === 'support'); document.getElementById('formFooter').classList.toggle('hidden', v === 'support'); if (v === 'support') renderTickets() }
+        function showStep(i) { cur = Math.max(0, Math.min(i, steps.length - 1)); document.querySelectorAll('.tab').forEach(x => x.classList.remove('active')); document.getElementById('t' + cur).classList.add('active'); document.querySelectorAll('.step').forEach((x, j) => x.classList.toggle('active', j === cur)); document.getElementById('stepTitle').textContent = steps[cur]; document.getElementById('bar').style.width = ((cur + 1) / steps.length * 100) + '%'; scrollTo(0, 0) } function move(d) { showStep(cur + d) } function saveDraft() { let n = new Date().toLocaleString(); localStorage.setItem('QNDHM_Healthcare_Facility_Role_Based.html', n); document.getElementById('saved').textContent = 'Saved locally: ' + n }
+        function applyRole() { let role = document.getElementById('role').value; document.querySelectorAll('[data-admin-only]').forEach(x => x.classList.toggle('hidden', role !== 'admin')); document.querySelectorAll('[data-role-field="agent"]').forEach(x => x.classList.toggle('hidden', role === 'registrant')); let p = { registrant: 'Create tickets and view tickets linked to own registration. Cannot assign agents or close tickets.', support: 'View assigned tickets, update status, add response and resolution notes.', reviewer: 'Read-only access to registration and complete support history.', admin: 'Full access to all tickets, reassignment, escalation, status closure and role management.' }; document.getElementById('permissions').textContent = p[role]; document.getElementById('supportScope').textContent = role === 'registrant' ? 'Tickets linked to this registration only' : 'All tickets permitted for ' + role; renderTickets() }
+        function renderTickets() { let role = document.getElementById('role').value, q = (document.getElementById('ticketSearch')?.value || '').toLowerCase(), st = document.getElementById('ticketStatus')?.value || '', pr = document.getElementById('ticketPriority')?.value || '', cat = document.getElementById('ticketCategory')?.value || ''; let data = tickets.filter(t => (role !== 'registrant' || t.owner === 'registrant') && (!q || Object.values(t).join(' ').toLowerCase().includes(q)) && (!st || t.status === st) && (!pr || t.priority === pr) && (!cat || t.category === cat)); document.getElementById('ticketRows').innerHTML = data.map(t => `<tr><td>${t.id}</td><td>${t.reg}</td><td>${t.subject}</td><td>${t.category}</td><td><span class="pill ${t.priority === 'High' ? 'red' : t.priority === 'Medium' ? 'amber' : 'blue'}">${t.priority}</span></td><td><span class="pill ${t.status === 'Resolved' || t.status === 'Closed' ? 'green' : t.status === 'Open' ? 'red' : 'blue'}">${t.status}</span></td><td>${t.agent}</td><td>${t.sla}</td><td><button class="btn light" onclick="trackTicket('${t.id}')">Track</button></td></tr>`).join('') }
+        function filterTickets() { renderTickets() } function resetTickets() { ['ticketSearch', 'ticketStatus', 'ticketPriority', 'ticketCategory'].forEach(i => document.getElementById(i).value = ''); renderTickets() } function newTicket() { showTicketSection('new'); prepareNewTicket(); return; document.getElementById('fTicket').value = 'QNDHM-TKT-2026-' + String(120 + tickets.length); document.getElementById('fSubject').value = '' } function loadTicket(id) { let t = tickets.find(x => x.id === id); if (!t) return; fTicket.value = t.id; fReg.value = t.reg; fSubject.value = t.subject; fCategory.value = t.category; fPriority.value = t.priority; fStatus.value = t.status; fAgent.value = t.agent } function saveTicket() { let existing = tickets.find(x => x.id === fTicket.value); let obj = { id: fTicket.value, reg: fReg.value, subject: fSubject.value, category: fCategory.value, priority: fPriority.value, status: fStatus.value, agent: fAgent.value, sla: 'Within SLA', owner: 'registrant', events: [{ title: 'Ticket Created', date: '28 Aug 2026', note: 'Ticket generated through QNDHM portal' }, { title: 'Assigned', date: '28 Aug 2026', note: 'Assigned to Integration Support' }] }; if (existing) Object.assign(existing, obj); else tickets.unshift(obj); renderTickets(); alert('Ticket saved') } let trackedTicket = null;
+        function showTicketSection(which) { document.getElementById('ticketTrackSection').classList.toggle('hidden', which !== 'track'); document.getElementById('ticketNewSection').classList.toggle('hidden', which !== 'new'); document.getElementById('ticketTimelineSection').classList.toggle('hidden', which !== 'timeline'); document.getElementById('ttTrack').classList.toggle('active', which === 'track' || which === 'timeline'); document.getElementById('ttNew').classList.toggle('active', which === 'new'); if (which === 'new') prepareNewTicket(); if (which === 'track') renderTickets() }
+        function prepareNewTicket() { document.getElementById('nTicket').value = 'QNDHM-TKT-' + new Date().getFullYear() + '-' + String(1000 + tickets.length + 1).padStart(4, '0') }
+        function clearNewTicket() { ['nReg', 'nSubject', 'nEmail', 'nMobile', 'nDescription', 'nAttachment'].forEach(x => document.getElementById(x).value = ''); prepareNewTicket() }
+        function generateTicket() { let reg = nReg.value.trim(), subject = nSubject.value.trim(), desc = nDescription.value.trim(); if (!reg || !subject || !desc) { alert('Registration ID, subject and issue description are required'); return } let now = new Date().toLocaleString(); let obj = { id: nTicket.value, reg: reg, subject: subject, category: nCategory.value.replace('Sandbox / API', 'Integration'), priority: nPriority.value, status: 'Open', agent: 'Unassigned', sla: 'SLA Started', owner: 'registrant', events: [{ title: 'Ticket Created', date: now, note: desc }] }; tickets.unshift(obj); let id = obj.id; clearNewTicket(); renderTickets(); showTicketSection('track'); alert('New ticket generated: ' + id) }
+        function trackTicket(id) { trackedTicket = tickets.find(x => x.id === id); if (!trackedTicket) return; timelineTitle.textContent = trackedTicket.id + ' - ' + trackedTicket.subject; timelineSub.textContent = 'Registration ID: ' + trackedTicket.reg + ' | Category: ' + trackedTicket.category + ' | Priority: ' + trackedTicket.priority; trackStatus.value = trackedTicket.status; trackAgent.value = trackedTicket.agent; trackSla.value = trackedTicket.sla; renderTimeline(); showTicketSection('timeline') }
+        function renderTimeline() { timelineBox.innerHTML = (trackedTicket.events || []).map(e => `<div class="timeline-item"><b>${e.title}</b><small>${e.date}</small><div>${e.note}</div></div>`).join('') }
+        function addTrackingComment() { let text = trackComment.value.trim(); if (!trackedTicket || !text) return; trackedTicket.events.push({ title: 'Comment Added', date: new Date().toLocaleString(), note: text }); trackComment.value = ''; renderTimeline() }
+        applyRole(); showStep(0);
+</script></body>
+</html>

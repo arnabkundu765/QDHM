@@ -2,25 +2,25 @@
     "Support Operations Center": {
         username: "support",
         password: "support@123",
-        redirect: "/Support/Dashboard"
+        redirect: "/Home/Dashboard"
     },
 
     "Healthcare Facility Portal": {
         username: "facility",
         password: "facility@123",
-        redirect: "/Facility/Dashboard"
+        redirect: "/Auth/HfrRegistration"
     },
 
     "Healthcare Professional Portal": {
         username: "doctor",
         password: "doc@123",
-        redirect: "/Professional/Dashboard"
+        redirect: "/Auth/HprRegistration"
     },
 
     "DSC / Integrator Portal": {
         username: "dev",
         password: "dev@123",
-        redirect: "/Auth/Registration"
+        redirect: "/Auth/DscRegistration"
     }
 
 };

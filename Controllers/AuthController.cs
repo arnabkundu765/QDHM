@@ -17,6 +17,20 @@ namespace QDHM.Controllers
         {
             return View();
         }
-        
+        public IActionResult HFRRegistration(bool show = true)
+        {
+            ViewBag.Show = show;
+            return View();
+        }
+        public IActionResult HPRRegistration(bool show = true)
+        {
+            ViewBag.Show = show;
+            return View();
+        }
+        public IActionResult DSCRegistration(bool show = true)
+        {
+            ViewBag.Show = show;
+            return View();
+        }
     }
 }
