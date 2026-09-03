@@ -454,6 +454,18 @@
                         background: #f1dfe5;
                     }
 
+            .step.completed {
+                color: var(--ok);
+                font-weight: 700;
+            }
+
+                .step.completed .num {
+                    background: var(--ok);
+                    border-color: var(--ok);
+                    color: #fff;
+                    font-weight: 800;
+                }
+
             .btn {
                 border: 0;
                 border-radius: 8px;
@@ -775,7 +787,44 @@
 </section></div></main></div><div id="formFooter" class="footer"><small id="saved">Draft not saved</small><div><button class="btn outline" onclick="saveDraft()">Save Draft</button><button class="btn light" onclick="move(-1)">Previous</button><button class="btn primary" onclick="move(1)">Save & Continue</button></div></div><script>
 const steps=['Company Profile', 'Contacts & SPOCs', 'HMIS / Product Portfolio', 'Technical Architecture', 'Integration Scope', 'Testing & Certification', 'Security & Compliance', 'Support & Go-Live', 'Documents', 'Review & Submit'];let cur=0;let tickets=[{id:'QNDHM-TKT-2026-0112',reg:'DSC-2026-00125',subject:'Sandbox authentication support',category:'Integration',priority:'High',status:'Open',agent:'Integration Support',sla:'Within SLA',owner:'registrant',events:[{title:'Ticket Created',date:'28 Aug 2026',note:'Ticket generated through QNDHM portal'},{title:'Assigned',date:'28 Aug 2026',note:'Assigned to Integration Support'}]},{id:'QNDHM-TKT-2026-0098',reg:'DSC-2026-00125',subject:'Additional authorization document required',category:'Documents',priority:'Medium',status:'Resolved',agent:'Registration Support',sla:'Met',owner:'registrant',events:[{title:'Ticket Created',date:'24 Aug 2026',note:'Document request raised'},{title:'Resolved',date:'25 Aug 2026',note:'Required document received and reviewed'}]},{id:'QNDHM-TKT-2026-0074',reg:'OTHER-2026-00044',subject:'Compliance observation clarification',category:'Compliance',priority:'Low',status:'In Progress',agent:'Compliance Team',sla:'Within SLA',owner:'other',events:[{title:'Ticket Created',date:'20 Aug 2026',note:'Compliance clarification requested'}]}];
 function showView(v){document.getElementById('registrationView').classList.toggle('active',v==='registration');document.getElementById('supportView').classList.toggle('active',v==='support');document.getElementById('navRegistration').classList.toggle('active',v==='registration');document.getElementById('navSupport').classList.toggle('active',v==='support');document.getElementById('formFooter').classList.toggle('hidden',v==='support');if(v==='support')renderTickets()}
-function showStep(i){cur=Math.max(0,Math.min(i,steps.length-1));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById('t'+cur).classList.add('active');document.querySelectorAll('.step').forEach((x,j)=>x.classList.toggle('active',j===cur));document.getElementById('stepTitle').textContent=steps[cur];document.getElementById('bar').style.width=((cur+1)/steps.length*100)+'%';scrollTo(0,0)}function move(d){showStep(cur+d)}function saveDraft(){let n=new Date().toLocaleString();localStorage.setItem('QNDHM_DSC_Integrator_Role_Based.html',n);document.getElementById('saved').textContent='Saved locally: '+n}
+// function showStep(i){cur=Math.max(0,Math.min(i,steps.length-1));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById('t'+cur).classList.add('active');document.querySelectorAll('.step').forEach((x,j)=>x.classList.toggle('active',j===cur));document.getElementById('stepTitle').textContent=steps[cur];document.getElementById('bar').style.width=((cur+1)/steps.length*100)+'%';scrollTo(0,0)}function move(d){showStep(cur+d)}function saveDraft(){let n=new Date().toLocaleString();localStorage.setItem('QNDHM_DSC_Integrator_Role_Based.html',n);document.getElementById('saved').textContent='Saved locally: '+n}
+        function showStep(i) {
+            cur = Math.max(0, Math.min(i, steps.length - 1));
+
+            // Show current tab
+            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+            document.getElementById('t' + cur).classList.add('active');
+
+            // Update step navigation
+            document.querySelectorAll('.step').forEach((x, j) => {
+                x.classList.remove('active', 'completed');
+
+                const num = x.querySelector('.num');
+
+                if (j < cur) {
+                    // Completed steps
+                    x.classList.add('completed');
+                    num.textContent = '✓';
+                }
+                else if (j === cur) {
+                    // Current step
+                    x.classList.add('active');
+                    num.textContent = j + 1;
+                }
+                else {
+                    // Future steps
+                    num.textContent = j + 1;
+                }
+            });
+
+            // Update title and progress
+            document.getElementById('stepTitle').textContent = steps[cur];
+            document.getElementById('bar').style.width =
+                ((cur + 1) / steps.length * 100) + '%';
+
+            scrollTo(0, 0);
+        }
+
 function applyRole(){let role=document.getElementById('role').value;document.querySelectorAll('[data-admin-only]').forEach(x=>x.classList.toggle('hidden',role!=='admin'));document.querySelectorAll('[data-role-field="agent"]').forEach(x=>x.classList.toggle('hidden',role==='registrant'));let p={registrant:'Create tickets and view tickets linked to own registration. Cannot assign agents or close tickets.',support:'View assigned tickets, update status, add response and resolution notes.',reviewer:'Read-only access to registration and complete support history.',admin:'Full access to all tickets, reassignment, escalation, status closure and role management.'};document.getElementById('permissions').textContent=p[role];document.getElementById('supportScope').textContent=role==='registrant'?'Tickets linked to this registration only':'All tickets permitted for '+role;renderTickets()}
 function renderTickets(){let role=document.getElementById('role').value,q=(document.getElementById('ticketSearch')?.value||'').toLowerCase(),st=document.getElementById('ticketStatus')?.value||'',pr=document.getElementById('ticketPriority')?.value||'',cat=document.getElementById('ticketCategory')?.value||'';let data=tickets.filter(t=>(role!=='registrant'||t.owner==='registrant')&&(!q||Object.values(t).join(' ').toLowerCase().includes(q))&&(!st||t.status===st)&&(!pr||t.priority===pr)&&(!cat||t.category===cat));document.getElementById('ticketRows').innerHTML=data.map(t=>`<tr><td>${t.id}</td><td>${t.reg}</td><td>${t.subject}</td><td>${t.category}</td><td><span class="pill ${t.priority==='High'?'red':t.priority==='Medium'?'amber':'blue'}">${t.priority}</span></td><td><span class="pill ${t.status==='Resolved'||t.status==='Closed'?'green':t.status==='Open'?'red':'blue'}">${t.status}</span></td><td>${t.agent}</td><td>${t.sla}</td><td><button class="btn light" onclick="trackTicket('${t.id}')">Track</button></td></tr>`).join('')}
 function filterTickets(){renderTickets()}function resetTickets(){['ticketSearch','ticketStatus','ticketPriority','ticketCategory'].forEach(i=>document.getElementById(i).value='');renderTickets()}function newTicket(){showTicketSection('new');prepareNewTicket();return;document.getElementById('fTicket').value='QNDHM-TKT-2026-'+String(120+tickets.length);document.getElementById('fSubject').value=''}function loadTicket(id){let t=tickets.find(x=>x.id===id);if(!t)return;fTicket.value=t.id;fReg.value=t.reg;fSubject.value=t.subject;fCategory.value=t.category;fPriority.value=t.priority;fStatus.value=t.status;fAgent.value=t.agent}function saveTicket(){let existing=tickets.find(x=>x.id===fTicket.value);let obj={id:fTicket.value,reg:fReg.value,subject:fSubject.value,category:fCategory.value,priority:fPriority.value,status:fStatus.value,agent:fAgent.value,sla:'Within SLA',owner:'registrant',events:[{title:'Ticket Created',date:'28 Aug 2026',note:'Ticket generated through QNDHM portal'},{title:'Assigned',date:'28 Aug 2026',note:'Assigned to Integration Support'}]};if(existing)Object.assign(existing,obj);else tickets.unshift(obj);renderTickets();alert('Ticket saved')}let trackedTicket=null;
