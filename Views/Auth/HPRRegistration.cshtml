@@ -716,7 +716,7 @@
                         <label for="Professional">Professional License</label>
                         <input type="file" id="Professional" name="Professional"
                                accept=".pdf,.jpg,.jpeg,.png">
-                        <a href="#" id="Professional"
+                        <a href="#" id="ProfessionalLink"
                            target="_blank"
                            title="View uploaded Professional License">👁</a>
                     </div>
@@ -782,7 +782,7 @@
         function addTrackingComment() { let text = trackComment.value.trim(); if (!trackedTicket || !text) return; trackedTicket.events.push({ title: 'Comment Added', date: new Date().toLocaleString(), note: text }); trackComment.value = ''; renderTimeline() }
         applyRole(); showStep(0);
         const documentTypes = [
-            'Identity', 'Professional', 'Degree', 'Experience', 'Photograph ', 'Authorization'
+            'Identity', 'Professional', 'Degree', 'Experience', 'Photograph', 'Authorization'
         ];
 
         documentTypes.forEach(function(id) {
