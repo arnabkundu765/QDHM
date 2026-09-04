@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QNDHM | Facilities Integration Command Centre</title>
+<style>
+:root{
+ --maroon:#7d1236;--maroon-dark:#4e0b23;--maroon-soft:#f8edf1;--gold:#b79255;
+ --bg:#f5f6f8;--surface:#fff;--ink:#202833;--muted:#697586;--line:#e3e7ed;
+ --green:#16794b;--green-bg:#e8f6ef;--amber:#a96808;--amber-bg:#fff3df;
+ --red:#bd3048;--red-bg:#fdecef;--blue:#176aa6;--blue-bg:#eaf4fb;
+ --shadow:0 8px 24px rgba(25,32,42,.06)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:13px "Segoe UI",Arial,sans-serif}
+button,input,select{font:inherit}.app{min-height:100vh;display:flex}.side{position:fixed;inset:0 auto 0 0;width:250px;background:linear-gradient(180deg,var(--maroon-dark),var(--maroon));color:#fff;padding:22px 16px;z-index:20}
+.brand{padding:4px 10px 20px;border-bottom:1px solid #ffffff25}.brand-mark{width:40px;height:40px;border:1px solid #ffffff45;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:15px;margin-bottom:12px}.brand b{display:block;font-size:17px;letter-spacing:.2px}.brand small{display:block;color:#f3dfe6;line-height:1.45;margin-top:5px}
+.nav-label{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#e9cfd8;margin:24px 10px 8px}.nav{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#fff;text-align:left;padding:11px 12px;border-radius:8px;margin:3px 0;cursor:pointer}.nav:hover,.nav.active{background:#ffffff18}.nav .ico{width:20px;text-align:center;opacity:.85}.side-note{position:absolute;bottom:24px;left:24px;right:24px;text-align:center;color:#e8c89b;font-size:11px;line-height:1.5}
+.main{margin-left:250px;width:calc(100% - 250px);min-width:0}.top{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:10}.eyebrow{font-size:10px;letter-spacing:1.3px;color:var(--gold);font-weight:800}.top h1{margin:3px 0 0;color:var(--maroon);font-size:18px}.period{min-width:150px}
+.page{max-width:1720px;margin:auto;padding:24px 30px 44px}.hero{background:linear-gradient(105deg,var(--maroon-dark),var(--maroon) 65%,#9d234c);color:#fff;border-radius:16px;padding:24px 26px;display:flex;justify-content:space-between;gap:25px;align-items:center;box-shadow:0 12px 30px rgba(93,14,42,.15);margin-bottom:18px}.hero h2{font-size:21px;margin:0 0 7px}.hero p{margin:0;color:#f7e9ee;max-width:780px;line-height:1.55}.hero-stat{text-align:right;min-width:190px;border-left:1px solid #ffffff30;padding-left:25px}.hero-stat strong{font-size:30px;display:block}.hero-stat span{font-size:11px;color:#f3dfe6}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);cursor:pointer}.kpi:hover{border-color:#cda4b3}.kpi-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px}.kpi strong{display:block;color:var(--maroon);font-size:25px;margin:5px 0 1px}.kpi small{color:var(--muted)}
+.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(340px,.75fr);gap:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-head h3{margin:0;font-size:14px}.panel-head p{margin:4px 0 0;color:var(--muted);font-size:11px}.body{padding:18px}
+.funnel{display:grid;gap:8px}.stage-row{display:grid;grid-template-columns:185px 1fr 55px;align-items:center;gap:12px;cursor:pointer}.stage-row:hover .stage-name{color:var(--maroon)}.stage-name{font-size:11px;font-weight:600}.bar{height:24px;background:#f0f2f5;border-radius:5px;overflow:hidden}.bar i{height:100%;display:block;background:linear-gradient(90deg,var(--maroon),#b43b63);border-radius:5px}.stage-count{text-align:right;font-weight:800;color:var(--maroon)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.metric-list{display:grid;gap:10px}.metric{padding:11px 12px;background:#fafbfc;border:1px solid var(--line);border-radius:9px;cursor:pointer}.metric:hover{border-color:#d1a9b7}.metric-line{display:flex;justify-content:space-between}.metric b{color:var(--maroon);font-size:18px}.metric small{color:var(--muted)}
+.action-list{display:grid}.action{display:grid;grid-template-columns:8px 1fr auto;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);align-items:start}.action:last-child{border-bottom:0}.dot{width:7px;height:7px;border-radius:50%;margin-top:5px;background:var(--red)}.action strong{font-size:11px;line-height:1.4}.pill{display:inline-flex;align-items:center;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:800;white-space:nowrap}.red{background:var(--red-bg);color:var(--red)}.amber{background:var(--amber-bg);color:var(--amber)}.green{background:var(--green-bg);color:var(--green)}.blue{background:var(--blue-bg);color:var(--blue)}.gray{background:#eef1f5;color:#5b6675}
+.bottom{margin-top:16px}.toolbar{display:grid;grid-template-columns:minmax(220px,2fr) repeat(4,1fr) auto auto;gap:8px;padding:12px 14px;background:#fafbfc;border-bottom:1px solid var(--line)}input,select,button{height:36px;padding:0 10px;border:1px solid #d3dae3;border-radius:7px;background:#fff;color:var(--ink)}input:focus,select:focus{outline:2px solid #ead1db;border-color:var(--maroon)}button{cursor:pointer}.primary{background:var(--maroon);border-color:var(--maroon);color:#fff;font-weight:700}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:1320px}th{position:sticky;top:0;background:#343b45;color:#fff;text-align:left;padding:10px;font-size:10px;white-space:nowrap}td{padding:10px;border-bottom:1px solid var(--line);font-size:11px;vertical-align:middle}tr:hover td{background:#fcf8fa}.id{color:var(--maroon);font-weight:800;cursor:pointer}.id:hover{text-decoration:underline}.empty{display:none;padding:40px;text-align:center;color:var(--muted)}
+.note{padding:12px 16px;color:var(--muted);font-size:10px;border-top:1px solid var(--line);background:#fbfcfd}
+.drawer-bg{position:fixed;inset:0;background:#11182780;display:none;z-index:50}.drawer-bg.open{display:block}.drawer{position:absolute;right:0;top:0;bottom:0;width:min(780px,94vw);background:var(--bg);overflow:auto;padding:20px}.drawer-head{display:flex;justify-content:space-between;align-items:flex-start}.drawer-head h2{margin:0;color:var(--maroon);font-size:21px}.drawer-head p{margin:5px 0;color:var(--muted)}.close{width:36px;border-radius:50%;font-size:20px}.details{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.detail{background:#fff;border:1px solid var(--line);border-radius:9px;padding:11px}.detail span{display:block;color:var(--muted);font-size:10px}.detail b{display:block;margin-top:4px;font-size:12px}.timeline{border-left:3px solid var(--maroon);padding-left:18px}.event{position:relative;padding:0 0 16px}.event:before{content:"";position:absolute;left:-24px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--maroon)}.event small{display:block;color:var(--muted);margin-top:3px}.footer{margin-top:14px;color:var(--muted);font-size:10px;text-align:right}
+@media(max-width:1250px){.kpis{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.toolbar{grid-template-columns:2fr repeat(3,1fr) auto}.toolbar select:nth-of-type(4){display:none}}
+@media(max-width:850px){.side{display:none}.main{margin-left:0;width:100%}.top{padding:0 16px}.page{padding:16px}.hero{display:block}.hero-stat{text-align:left;border:0;padding:14px 0 0}.split{grid-template-columns:1fr}.stage-row{grid-template-columns:150px 1fr 42px}.toolbar{grid-template-columns:1fr 1fr}.details{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.kpis{grid-template-columns:1fr}.stage-row{grid-template-columns:120px 1fr 35px}.top h1{font-size:14px}.top .eyebrow{display:none}.period{min-width:120px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="brand-mark">QH</div><b>QNDHM Control Centre</b><small>Facilities, onboarding & integration</small></div>
+  <div class="nav-label">Workspace</div>
+  <button class="nav active" onclick="resetFilters()"><span class="ico">▦</span> Overview</button>
+  <button class="nav" onclick="focusList()"><span class="ico">☷</span> Facility Register</button>
+  <div class="nav-label">Quick filters</div>
+  <button class="nav" onclick="filterBy('type','Hospital')"><span class="ico">+</span> Hospitals</button>
+  <button class="nav" onclick="filterBy('type','Clinic / Polyclinic')"><span class="ico">+</span> Clinics & Polyclinics</button>
+  <button class="nav" onclick="filterBy('type','Pharmacy')"><span class="ico">+</span> Pharmacies</button>
+  <button class="nav" onclick="filterBy('ticket','Open')"><span class="ico">!</span> Open tickets</button>
+  <button class="nav" onclick="filterBy('cycle','Over 150 days')"><span class="ico">◷</span> Cycle-time risk</button>
+  <div class="side-note"><b>QNDHM</b><br>One Nation · One Health Network</div>
+</aside>
+
+<main class="main">
+<header class="top">
+  <div><div class="eyebrow">QATAR NATIONAL DIGITAL HEALTH MISSION</div><h1>Facilities Integration Command Centre</h1></div>
+  <select id="period" class="period"><option>Current Quarter</option><option>Last Quarter</option><option>Year to Date</option></select>
+</header>
+
+<div class="page">
+<section class="hero">
+  <div><h2>Healthcare facility onboarding at a glance</h2><p>Monitor registration, integration progress, operational support and delivery priorities from one consolidated view.</p></div>
+  <div class="hero-stat"><strong>1,425</strong><span>Total facility universe</span></div>
+</section>
+
+<section class="kpis">
+  <div class="kpi" onclick="filterBy('type','')"><div class="kpi-top"><span>Facility universe</span><span>01</span></div><strong>1,425</strong><small>25 hospitals · 400 clinics · 1,000 pharmacies</small></div>
+  <div class="kpi" onclick="filterBy('registered','All Registered')"><div class="kpi-top"><span>Sandbox registered</span><span>02</span></div><strong>380</strong><small>26.7% of the total facility universe</small></div>
+  <div class="kpi" onclick="filterBy('stage','Live / Integrated')"><div class="kpi-top"><span>Live / integrated</span><span>03</span></div><strong>30</strong><small>20 last quarter · 10 this quarter</small></div>
+  <div class="kpi" onclick="filterBy('ticket','Open')"><div class="kpi-top"><span>Open support tickets</span><span>04</span></div><strong>126</strong><small><span class="pill red">Needs action</span></small></div>
+</section>
+
+<div class="layout">
+<section class="panel">
+  <div class="panel-head"><div><h3>Onboarding pipeline</h3><p>Registered facilities by current delivery stage · 380 total</p></div><span class="pill blue">Reconciled</span></div>
+  <div class="body funnel">
+    <div class="stage-row" onclick="filterBy('registered','All Registered')"><span class="stage-name">Sandbox Registered</span><span class="bar"><i style="width:100%"></i></span><span class="stage-count">380</span></div>
+    <div class="stage-row" onclick="filterBy('stage','Not Started')"><span class="stage-name">Not Started</span><span class="bar"><i style="width:57%"></i></span><span class="stage-count">217</span></div>
+    <div class="stage-row" onclick="filterBy('stage','Sandbox Development Complete')"><span class="stage-name">Sandbox Development Complete</span><span class="bar"><i style="width:13.2%"></i></span><span class="stage-count">50</span></div>
+    <div class="stage-row" onclick="filterBy('stage','In Development')"><span class="stage-name">In Development</span><span class="bar"><i style="width:11.8%"></i></span><span class="stage-count">45</span></div>
+    <div class="stage-row" onclick="filterBy('stage','UAT')"><span class="stage-name">In UAT</span><span class="bar"><i style="width:5.3%"></i></span><span class="stage-count">20</span></div>
+    <div class="stage-row" onclick="filterBy('stage','Security')"><span class="stage-name">Security</span><span class="bar"><i style="width:2.6%"></i></span><span class="stage-count">10</span></div>
+    <div class="stage-row" onclick="filterBy('stage','Pre-Production')"><span class="stage-name">Pre-Production</span><span class="bar"><i style="width:2.1%"></i></span><span class="stage-count">8</span></div>
+    <div class="stage-row" onclick="filterBy('stage','Live / Integrated')"><span class="stage-name">Live / Integrated</span><span class="bar"><i style="width:7.9%"></i></span><span class="stage-count">30</span></div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><div><h3>Action queue</h3><p>Priorities requiring delivery attention</p></div><span class="pill red">7 items</span></div>
+  <div class="action-list">
+    <div class="action"><i class="dot"></i><strong>Move 8 Pre-Production facilities to Live</strong><span class="pill red">Immediate</span></div>
+    <div class="action"><i class="dot"></i><strong>Close security assessment for 10 facilities</strong><span class="pill red">Immediate</span></div>
+    <div class="action"><i class="dot"></i><strong>Complete UAT for 20 facilities</strong><span class="pill amber">This week</span></div>
+    <div class="action"><i class="dot"></i><strong>Move 50 Sandbox-complete facilities into UAT</strong><span class="pill amber">This month</span></div>
+    <div class="action"><i class="dot"></i><strong>Accelerate development for 45 facilities</strong><span class="pill amber">This month</span></div>
+    <div class="action"><i class="dot"></i><strong>Plan delivery for 217 Not Started facilities</strong><span class="pill blue">Plan</span></div>
+    <div class="action"><i class="dot"></i><strong>Escalate 3 live facilities above 150 days</strong><span class="pill red">Escalate</span></div>
+  </div>
+</section>
+</div>
+
+<div class="split">
+<section class="panel">
+ <div class="panel-head"><div><h3>Integration performance</h3><p>Quarterly live and planned movement</p></div></div>
+ <div class="body metric-list">
+  <div class="metric" onclick="filterBy('quarter','Last Quarter')"><div class="metric-line"><span>Integrated last quarter</span><b>20</b></div><small>Q2 2026</small></div>
+  <div class="metric" onclick="filterBy('quarter','This Quarter')"><div class="metric-line"><span>Integrated this quarter</span><b>10</b></div><small>Q3 2026 to date</small></div>
+  <div class="metric" onclick="filterBy('quarter','Planned This Quarter')"><div class="metric-line"><span>Planned this quarter</span><b>18</b></div><small>8 Pre-Production + 10 Security</small></div>
+ </div>
+</section>
+<section class="panel">
+ <div class="panel-head"><div><h3>Operational health</h3><p>Support load and live cycle-time indicators</p></div></div>
+ <div class="body metric-list">
+  <div class="metric" onclick="filterBy('ticket','Open')"><div class="metric-line"><span>Open tickets</span><b>126</b></div><small><span class="pill red">Needs action</span></small></div>
+  <div class="metric" onclick="filterBy('ticket','In Progress')"><div class="metric-line"><span>Tickets in progress</span><b>74</b></div><small>Assigned and being worked</small></div>
+  <div class="metric" onclick="filterBy('cycle','Over 150 days')"><div class="metric-line"><span>Live facilities over 150 days</span><b>3</b></div><small><span class="pill red">Escalate</span></small></div>
+ </div>
+</section>
+</div>
+
+<section class="panel bottom" id="listPanel">
+ <div class="panel-head"><div><h3 id="listTitle">Facility register</h3><p id="listSub">Search and filter the available facility records. Select a Facility ID for details.</p></div><button onclick="resetFilters()">Reset</button></div>
+ <div class="toolbar">
+  <input id="search" placeholder="Search facility, ID, integrator, technology or SPOC" oninput="renderRows()">
+  <select id="typeFilter" onchange="renderRows()"><option value="">All Types</option><option>Hospital</option><option>Clinic / Polyclinic</option><option>Pharmacy</option></select>
+  <select id="statusFilter" onchange="renderRows()"><option value="">All Stages</option><option>In Development</option><option>Sandbox Development Complete</option><option>UAT</option><option>Security</option><option>Pre-Production</option><option>Live / Integrated</option><option>Not Started</option></select>
+  <select id="techFilter" onchange="renderRows()"><option value="">All Technology</option><option>HMIS</option><option>LMIS</option><option>Pharmacy Platform</option><option>HealthTech</option></select>
+  <select id="ticketFilter" onchange="renderRows()"><option value="">All Tickets</option><option>Open</option><option>In Progress</option><option>Awaiting Facility</option><option>Resolved</option></select>
+  <button class="primary" onclick="exportCSV()">Export CSV</button>
+ </div>
+ <div class="tablewrap"><table><thead><tr><th>Facility ID</th><th>Facility</th><th>Type</th><th>Integrator / Product</th><th>Technology</th><th>Current Stage</th><th>Development</th><th>UAT</th><th>Security</th><th>Pre-Production</th><th>Ticket</th><th>First Ticket</th><th>Live Date</th><th>Cycle</th><th>Last API Hit</th><th>Last Interaction</th><th>SPOC</th><th>Next Action</th></tr></thead><tbody id="rows"></tbody></table></div>
+ <div id="empty" class="empty">No facility matches the selected filters.</div>
+ <div class="note">Planning baseline: 1,425 facilities. Sandbox registration: 380. Stage and technology totals are logically reconciled to the supplied baseline. Cycle-time buckets apply to the 30 live facilities only.</div>
+</section>
+<div class="footer">QNDHM Facilities Integration Command Centre · Planning dashboard</div>
+</div>
+</main>
+</div>
+
+<div class="drawer-bg" id="drawerBg" onclick="if(event.target===this)closeDrawer()">
+ <div class="drawer">
+  <div class="drawer-head"><div><h2 id="dTitle"></h2><p id="dSub"></p></div><button class="close" onclick="closeDrawer()">×</button></div>
+  <div class="details" id="detailGrid"></div>
+  <section class="panel" style="margin-top:14px"><div class="panel-head"><h3>Facility journey</h3></div><div class="body timeline" id="timeline"></div></section>
+  <section class="panel" style="margin-top:14px"><div class="panel-head"><h3>Recommended next actions</h3></div><div class="body" id="recommend"></div></section>
+ </div>
+</div>
+
+<script>
+const facilities=[
+{id:'QF-00001',name:'Hamad General Hospital',type:'Hospital',integrator:'Enterprise Health Platform',tech:'HMIS',status:'Live / Integrated',development:'100%',uat:'Passed',security:'Cleared',preprod:'Complete',ticket:'Resolved',quarter:'Last Quarter',first:'05 Jan 2026',live:'20 Feb 2026',days:46,cycle:'0–60 days',api:'03 Sep 2026 19:10',interaction:'02 Sep 2026',spoc:'Facility Digital SPOC',next:'Monitor API success and adoption'},
+{id:'QF-00002',name:'Sidra Medicine',type:'Hospital',integrator:'Clinical Exchange Platform',tech:'HealthTech',status:'Pre-Production',development:'100%',uat:'Passed',security:'Cleared',preprod:'In Progress',ticket:'In Progress',quarter:'Planned This Quarter',first:'18 Apr 2026',live:'',days:138,cycle:'Not Live',api:'03 Sep 2026 17:21',interaction:'01 Sep 2026',spoc:'Integration Lead',next:'Complete production checklist and schedule go-live'},
+{id:'QF-00003',name:'Doha Specialist Hospital',type:'Hospital',integrator:'MediConnect HMIS',tech:'HMIS',status:'Security',development:'100%',uat:'Passed',security:'In Progress',preprod:'Not Started',ticket:'Open',quarter:'Planned This Quarter',first:'29 Apr 2026',live:'',days:127,cycle:'Not Live',api:'02 Sep 2026 13:05',interaction:'30 Aug 2026',spoc:'Technical SPOC',next:'Close security observations'},
+{id:'QF-00115',name:'West Bay Polyclinic',type:'Clinic / Polyclinic',integrator:'ClinicCare HMIS',tech:'HMIS',status:'In Development',development:'55%',uat:'Not Started',security:'Not Started',preprod:'Not Started',ticket:'Open',quarter:'Pipeline',first:'14 Aug 2026',live:'',days:20,cycle:'Not Live',api:'31 Aug 2026 09:18',interaction:'28 Aug 2026',spoc:'IT Manager',next:'Complete patient identity and facility discovery development'},
+{id:'QF-00116',name:'Al Rayyan Family Clinic',type:'Clinic / Polyclinic',integrator:'CareFlow EMR',tech:'HealthTech',status:'Not Started',development:'0%',uat:'Not Started',security:'Not Started',preprod:'Not Started',ticket:'Awaiting Facility',quarter:'Pipeline',first:'28 Aug 2026',live:'',days:6,cycle:'Not Live',api:'No API hit',interaction:'29 Aug 2026',spoc:'Clinic Administrator',next:'Complete kickoff and integration planning'},
+{id:'QF-00117',name:'Pearl Medical Polyclinic',type:'Clinic / Polyclinic',integrator:'MediConnect HMIS',tech:'HMIS',status:'Live / Integrated',development:'100%',uat:'Passed',security:'Cleared',preprod:'Complete',ticket:'Resolved',quarter:'This Quarter',first:'04 May 2026',live:'16 Aug 2026',days:104,cycle:'90–150 days',api:'03 Sep 2026 18:42',interaction:'25 Aug 2026',spoc:'Operations SPOC',next:'Monitor adoption and transaction volume'},
+{id:'QF-00702',name:'Central Care Pharmacy',type:'Pharmacy',integrator:'Qatar eRx Platform',tech:'Pharmacy Platform',status:'Live / Integrated',development:'100%',uat:'Passed',security:'Cleared',preprod:'Complete',ticket:'Resolved',quarter:'This Quarter',first:'11 Jun 2026',live:'29 Jul 2026',days:48,cycle:'0–60 days',api:'03 Sep 2026 20:01',interaction:'31 Aug 2026',spoc:'Pharmacy Network SPOC',next:'Expand ePrescription workflow'},
+{id:'QF-00703',name:'West Bay Pharmacy Network',type:'Pharmacy',integrator:'PharmaLink',tech:'Pharmacy Platform',status:'UAT',development:'100%',uat:'In Progress',security:'Not Started',preprod:'Not Started',ticket:'In Progress',quarter:'Pipeline',first:'22 May 2026',live:'',days:104,cycle:'Not Live',api:'03 Sep 2026 15:44',interaction:'03 Sep 2026',spoc:'Network Integration SPOC',next:'Close UAT observations'},
+{id:'QF-00704',name:'City Health Pharmacy',type:'Pharmacy',integrator:'PharmaLink',tech:'Pharmacy Platform',status:'Sandbox Development Complete',development:'100%',uat:'Planned',security:'Not Started',preprod:'Not Started',ticket:'Open',quarter:'Pipeline',first:'15 Mar 2026',live:'',days:172,cycle:'Not Live',api:'12 Aug 2026 10:11',interaction:'10 Aug 2026',spoc:'Technical SPOC',next:'Schedule UAT start'},
+{id:'QF-00705',name:'Doha Community Pharmacy',type:'Pharmacy',integrator:'RetailRx',tech:'Pharmacy Platform',status:'In Development',development:'63%',uat:'Not Started',security:'Not Started',preprod:'Not Started',ticket:'Awaiting Facility',quarter:'Pipeline',first:'25 Aug 2026',live:'',days:9,cycle:'Not Live',api:'01 Sep 2026 11:30',interaction:'30 Aug 2026',spoc:'Pharmacy Manager',next:'Provide missing test evidence'},
+{id:'QF-00118',name:'Lusail Medical Clinic',type:'Clinic / Polyclinic',integrator:'ClinicCare HMIS',tech:'HMIS',status:'Live / Integrated',development:'100%',uat:'Passed',security:'Cleared',preprod:'Complete',ticket:'Resolved',quarter:'Last Quarter',first:'02 Jan 2026',live:'13 Apr 2026',days:101,cycle:'90–150 days',api:'03 Sep 2026 16:18',interaction:'27 Aug 2026',spoc:'Facility SPOC',next:'Maintain API availability'},
+{id:'QF-00004',name:'Qatar Specialist Hospital',type:'Hospital',integrator:'LabConnect',tech:'LMIS',status:'Sandbox Development Complete',development:'100%',uat:'Planned',security:'Not Started',preprod:'Not Started',ticket:'Open',quarter:'Pipeline',first:'17 Jul 2026',live:'',days:48,cycle:'Not Live',api:'30 Aug 2026 08:20',interaction:'26 Aug 2026',spoc:'Digital Transformation Lead',next:'Schedule UAT'},
+{id:'QF-00005',name:'National Reference Laboratory',type:'Clinic / Polyclinic',integrator:'National LMIS',tech:'LMIS',status:'Live / Integrated',development:'100%',uat:'Passed',security:'Cleared',preprod:'Complete',ticket:'Resolved',quarter:'Last Quarter',first:'03 Feb 2026',live:'18 May 2026',days:104,cycle:'90–150 days',api:'03 Sep 2026 14:22',interaction:'01 Sep 2026',spoc:'Laboratory SPOC',next:'Monitor laboratory result exchange'},
+{id:'QF-00006',name:'Digital Care Network',type:'Clinic / Polyclinic',integrator:'Digital Care App',tech:'HealthTech',status:'Live / Integrated',development:'100%',uat:'Passed',security:'Cleared',preprod:'Complete',ticket:'Resolved',quarter:'Last Quarter',first:'01 Jan 2026',live:'20 Jun 2026',days:170,cycle:'Over 150 days',api:'03 Sep 2026 12:40',interaction:'02 Sep 2026',spoc:'HealthTech SPOC',next:'Review long cycle-time lessons learned'},
+{id:'QF-00007',name:'Al Noor Hospital',type:'Hospital',integrator:'Al Noor HIS',tech:'HMIS',status:'Live / Integrated',development:'100%',uat:'Passed',security:'Cleared',preprod:'Complete',ticket:'Resolved',quarter:'Last Quarter',first:'01 Mar 2026',live:'19 May 2026',days:79,cycle:'60–90 days',api:'03 Sep 2026 11:25',interaction:'30 Aug 2026',spoc:'Hospital IT SPOC',next:'Track post-live stability'}
+];
+let activeSpecial={key:'',value:''};
+const $=id=>document.getElementById(id);
+function filterBy(key,value){
+ activeSpecial={key,value};
+ $('typeFilter').value=key==='type'?value:'';
+ $('statusFilter').value=key==='stage'?value:'';
+ $('techFilter').value=key==='tech'?value:'';
+ $('ticketFilter').value=key==='ticket'&&['Open','In Progress','Awaiting Facility','Resolved'].includes(value)?value:'';
+ $('listTitle').textContent=value?(value+' · Facility Register'):'Facility Register';
+ $('listSub').textContent=key==='registered'?'All 380 Sandbox-registered facilities across the reconciled stage funnel.':'Filtered from the selected dashboard metric.';
+ renderRows(); focusList();
+}
+function focusList(){ $('listPanel').scrollIntoView({behavior:'smooth',block:'start'}); }
+function filtered(){
+ let q=$('search').value.toLowerCase(),t=$('typeFilter').value,s=$('statusFilter').value,tech=$('techFilter').value,k=$('ticketFilter').value;
+ return facilities.filter(x=>
+  (!q||Object.values(x).join(' ').toLowerCase().includes(q))&&(!t||x.type===t)&&(!s||x.status===s)&&(!tech||x.tech===tech)&&(!k||x.ticket===k)&&
+  (!activeSpecial.value||['type','stage','tech','registered'].includes(activeSpecial.key)||
+   (activeSpecial.key==='ticket'?(activeSpecial.value==='Raising Tickets'||x.ticket===activeSpecial.value):
+    activeSpecial.key==='quarter'?x.quarter===activeSpecial.value:
+    activeSpecial.key==='cycle'?x.cycle===activeSpecial.value:true))
+ );
+}
+function statusClass(v){return v==='Live / Integrated'||v==='Resolved'?'green':v==='Security'||v==='Pre-Production'||v==='Open'?'amber':v==='Not Started'?'gray':'blue'}
+function renderRows(){
+ let out=filtered();
+ $('rows').innerHTML=out.map(x=>`<tr>
+ <td class="id" onclick="openFacility('${x.id}')">${x.id}</td><td><b>${x.name}</b></td><td>${x.type}</td><td>${x.integrator}</td>
+ <td><span class="pill blue">${x.tech}</span></td><td><span class="pill ${statusClass(x.status)}">${x.status}</span></td>
+ <td>${x.development}</td><td>${x.uat}</td><td>${x.security}</td><td>${x.preprod}</td>
+ <td><span class="pill ${statusClass(x.ticket)}">${x.ticket}</span></td><td>${x.first}</td><td>${x.live||'Not Live'}</td>
+ <td>${x.live?x.days+' days':'N/A'}</td><td>${x.api}</td><td>${x.interaction}</td><td>${x.spoc}</td><td>${x.next}</td></tr>`).join('');
+ $('empty').style.display=out.length?'none':'block';
+}
+function resetFilters(){
+ $('search').value='';$('typeFilter').value='';$('statusFilter').value='';$('techFilter').value='';$('ticketFilter').value='';
+ activeSpecial={key:'',value:''};$('listTitle').textContent='Facility register';$('listSub').textContent='Search and filter the available facility records. Select a Facility ID for details.';renderRows();
+}
+function openFacility(id){
+ let x=facilities.find(a=>a.id===id); if(!x)return;
+ $('dTitle').textContent=x.name;$('dSub').textContent=x.id+'  ·  '+x.type+'  ·  '+x.integrator;
+ $('detailGrid').innerHTML=[
+ ['Current Stage',x.status],['Technology',x.tech],['Development',x.development],['UAT',x.uat],['Security',x.security],['Pre-Production',x.preprod],
+ ['Ticket Status',x.ticket],['First Ticket',x.first],['Live Date',x.live||'Not Live'],['Cycle Time',x.live?x.days+' days':'N/A until live'],
+ ['Last API Hit',x.api],['Last Interaction',x.interaction],['Primary SPOC',x.spoc],['Target Go-Live',x.quarter==='Planned This Quarter'?'Current Quarter':'As per delivery plan'],
+ ['Open Tickets',x.ticket==='Resolved'?'0':'1'],['API Success','Prototype metric']
+ ].map(d=>`<div class="detail"><span>${d[0]}</span><b>${d[1]}</b></div>`).join('');
+ $('timeline').innerHTML=[['First Ticket Created',x.first],['Current Stage',x.status],['Last Interaction',x.interaction],['Live / Current State',x.live||x.status]].map(e=>`<div class="event"><b>${e[0]}</b><small>${e[1]}</small></div>`).join('');
+ $('recommend').innerHTML=`<ol><li>${x.next}</li><li>Owner: ${x.spoc}</li><li>Validate next API activity and outstanding ticket status.</li><li>${x.live&&x.days>150?'Escalate because live cycle time exceeds 150 days.':'Continue within the standard onboarding cadence.'}</li></ol>`;
+ $('drawerBg').classList.add('open');
+}
+function closeDrawer(){$('drawerBg').classList.remove('open')}
+function exportCSV(){
+ let h=['ID','Facility','Type','Integrator','Technology','Stage','Development','UAT','Security','Pre-Production','Ticket','First Ticket','Live Date','Cycle Days','Last API','Last Interaction','SPOC','Next Action'];
+ let a=[h,...filtered().map(x=>[x.id,x.name,x.type,x.integrator,x.tech,x.status,x.development,x.uat,x.security,x.preprod,x.ticket,x.first,x.live,x.live?x.days:'',x.api,x.interaction,x.spoc,x.next])];
+ let csv=a.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\n');
+ let b=new Blob([csv],{type:'text/csv'}),u=URL.createObjectURL(b),l=document.createElement('a');l.href=u;l.download='QNDHM_Facility_Status_List.csv';l.click();URL.revokeObjectURL(u);
+}
+renderRows();
+</script>
+</body>
+</html>

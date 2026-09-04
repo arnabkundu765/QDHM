@@ -2,7 +2,7 @@
     "Support Operations Center": {
         username: "support",
         password: "support@123",
-        redirect: "/Home/Dashboard"
+        redirect: "/Home/MainDashboard"
     },
 
     "Healthcare Facility Portal": {
