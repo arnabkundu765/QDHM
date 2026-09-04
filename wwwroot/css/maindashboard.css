@@ -625,3 +625,43 @@ td {
 .metric small {
     color: var(--muted)
 }
+.nav {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    text-align: left;
+    padding: 11px 12px;
+    border-radius: 8px;
+    margin: 4px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+    .nav svg {
+        width: 17px;
+        height: 17px;
+        flex: 0 0 17px;
+        stroke-width: 1.8px;
+    }
+
+    .nav span {
+        white-space: nowrap;
+    }
+
+    .nav:hover {
+        background: #ffffff18;
+    }
+
+    .nav.active {
+        background: #ffffff20;
+    }
+
+        .nav.active svg {
+            stroke-width: 2.2;
+        }

@@ -8,13 +8,59 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>QNDHM Facilities Status & Action Dashboard</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="~/css/maindashboard.css" rel="stylesheet" />
 </head>
 <body>
     <div class="app">
-        <aside class="side"><div class="brand"><b>QNDHM Facilities Control</b><small>Onboarding, Integration & Action Plan</small></div><button class="nav active" onclick="resetFilters();setNav(this);">▦ Facilities Dashboard</button><button class="nav" onclick="filterBy('type','Hospital');setNav(this);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V7l8-4 8 4v14" /><path d="M9 21v-6h6v6" /><path d="M12 7v4M10 9h4" /></svg> Hospitals</button><button class="nav" onclick="filterBy('type','Clinic / Polyclinic');setNav(this);">▤ Clinics & Polyclinics</button><button class="nav" onclick="filterBy('type','Pharmacy');setNav(this);">✚ Pharmacies</button><button class="nav" onclick="setNav(this);filterBy('stage','In Development')">⇄ In Development</button><button class="nav" onclick="setNav(this);filterBy('stage','Pre-Production')">✓ Pre-Production</button><button class="nav" onclick="setNav(this);filterBy('ticket','Open')">◷ Tickets</button><button class="nav" onclick="setNav(this);filterBy('cycle','Over 150 days')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Cycle Time</button><div class="side-note"><b>QNDHM</b><br>One Nation · One Health Network</div></aside>
+        <aside class="side"><div class="brand"><b>QNDHM Facilities Control</b><small>Onboarding, Integration & Action Plan</small></div>
+            @* <button class="nav active" onclick="resetFilters();setNav(this);">▦ Facilities Dashboard</button><button class="nav" onclick="filterBy('type','Hospital');setNav(this);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V7l8-4 8 4v14" /><path d="M9 21v-6h6v6" /><path d="M12 7v4M10 9h4" /></svg> Hospitals</button><button class="nav" onclick="filterBy('type','Clinic / Polyclinic');setNav(this);">▤ Clinics & Polyclinics</button><button class="nav" onclick="filterBy('type','Pharmacy');setNav(this);">✚ Pharmacies</button><button class="nav" onclick="setNav(this);filterBy('stage','In Development')">⇄ In Development</button><button class="nav" onclick="setNav(this);filterBy('stage','Pre-Production')">✓ Pre-Production</button><button class="nav" onclick="setNav(this);filterBy('ticket','Open')">◷ Tickets</button><button class="nav" onclick="setNav(this);filterBy('cycle','Over 150 days')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Cycle Time</button> *@
+            <button class="nav active" onclick="resetFilters();setNav(this);">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Facilities Dashboard</span>
+            </button>
+
+            <button class="nav" onclick="filterBy('type','Hospital');setNav(this);">
+                <i data-lucide="hospital"></i>
+                <span>Hospitals</span>
+            </button>
+
+            <button class="nav" onclick="filterBy('type','Clinic / Polyclinic');setNav(this);">
+                <i data-lucide="building-2"></i>
+                <span>Clinics & Polyclinics</span>
+            </button>
+
+            <button class="nav" onclick="filterBy('type','Pharmacy');setNav(this);">
+                <i data-lucide="pill"></i>
+                <span>Pharmacies</span>
+            </button>
+
+            <button class="nav" onclick="setNav(this);filterBy('stage','In Development')">
+                <i data-lucide="code-2"></i>
+                <span>In Development</span>
+            </button>
+
+            <button class="nav" onclick="setNav(this);filterBy('stage','Pre-Production')">
+                <i data-lucide="rocket"></i>
+                <span>Pre-Production</span>
+            </button>
+
+            <button class="nav" onclick="setNav(this);filterBy('ticket','Open')">
+                <i data-lucide="ticket"></i>
+                <span>Tickets</span>
+            </button>
+
+            <button class="nav" onclick="setNav(this);filterBy('cycle','Over 150 days')">
+                <i data-lucide="timer"></i>
+                <span>Cycle Time</span>
+            </button>
+
+            <script>
+                            lucide.createIcons();
+            </script>
+            <div class="side-note"><b>QNDHM</b><br>One Nation · One Health Network</div></aside>
         <main class="main">
-        <header class="top"><div><h1>QATAR NATIONAL DIGITAL HEALTH MISSION (QNDHM)</h1><p>Healthcare Facilities Status, Integration and Action Dashboard</p></div><select id="period"><option>Current Quarter</option><option>Last Quarter</option><option>Year to Date</option></select></header><div class="page">
+            <header class="top"><div><h1>QATAR NATIONAL DIGITAL HEALTH MISSION (QNDHM)</h1><p>Healthcare Facilities Status, Integration and Action Dashboard &bull; Illustration Purpose Only</p></div><select id="period"><option>Current Quarter</option><option>Last Quarter</option><option>Year to Date</option></select></header><div class="page">
         <div class="hero"><div><h2>Qatar Healthcare Facility Universe</h2><div>Track the complete journey from Sandbox registration through Development, UAT, Security, Pre-Production and Live operation.</div></div><div class="hero-right"><b>1,425 Facilities</b><small>User-provided planning baseline</small></div></div>
         <div class="grid universe"><div class="card click" onclick="filterBy('type','')"><span>Total Qatar Facilities</span><b>1,425</b><small>100% planning universe</small></div><div class="card click" onclick="filterBy('type','Hospital')"><span>Hospitals</span><b>25</b><small>1.8% of total</small></div><div class="card click" onclick="filterBy('type','Clinic / Polyclinic')"><span>Clinics & Polyclinics</span><b>400</b><small>28.1% of total</small></div><div class="card click" onclick="filterBy('type','Pharmacy')"><span>Pharmacies</span><b>1,000</b><small>70.2% of total</small></div></div>
 
@@ -64,7 +110,7 @@
                     </div>
                 </section>
 </div>
-        <section class="panel list-panel" id="listPanel"><div class="panel-head"><div><h3 id="listTitle">All Facility Records</h3><small id="listSub">Click a Facility ID for detailed information.</small></div><button onclick="resetFilters()">Reset List</button></div><div class="filters"><input id="search" placeholder="Search facility, ID, integrator, HMIS or SPOC" oninput="renderRows()"><select id="typeFilter" onchange="renderRows()"><option value="">All Facility Types</option><option>Hospital</option><option>Clinic / Polyclinic</option><option>Pharmacy</option></select><select id="statusFilter" onchange="renderRows()"><option value="">All Onboarding Stages</option><option>In Development</option><option>Sandbox Development Complete</option><option>UAT</option><option>Security</option><option>Pre-Production</option><option>Live / Integrated</option><option>Not Started</option></select><select id="techFilter" onchange="renderRows()"><option value="">All Technology Types</option><option>HMIS</option><option>LMIS</option><option>Pharmacy Platform</option><option>HealthTech</option></select><select id="ticketFilter" onchange="renderRows()"><option value="">All Ticket Statuses</option><option>Open</option><option>In Progress</option><option>Awaiting Facility</option><option>Resolved</option></select><button class="primary" onclick="exportCSV()">Export CSV</button></div><div class="tablewrap"><table><thead><tr><th>Facility ID</th><th>Facility</th><th>Type</th><th>Integrator / Product</th><th>Technology</th><th>Current Stage</th><th>Development</th><th>UAT</th><th>Security</th><th>Pre-Production</th><th>Ticket Status</th><th>First Ticket</th><th>Live Date</th><th>Cycle Time</th><th>Last API Hit</th><th>Last Interaction</th><th>SPOC</th><th>Next Action</th></tr></thead><tbody id="rows"></tbody></table></div><div id="empty" class="empty">No facility matches the selected filter.</div></section><div class="footnote">Facility-universe counts of 25 hospitals, 400 clinics/polyclinics and 1,000 pharmacies were provided by the user. The 380 Sandbox registrations reconcile as 45 In Development + 50 Sandbox Development Complete + 20 UAT + 10 Security + 8 Pre-Production + 30 Live + 217 Not Started = 380. Technology also reconciles as 210 HMIS + 45 LMIS + 100 Pharmacy Platforms + 25 HealthTech = 380. Total Live reconciles as 20 last quarter + 10 this quarter = 30. Planned current-quarter go-lives reconcile as 8 Pre-Production + 10 Security = 18. Cycle-time buckets apply only to the 30 live facilities and total 30.</div>
+        <section class="panel list-panel" id="listPanel"><div class="panel-head"><div><h3 id="listTitle">All Facility Records</h3><small id="listSub">Click a Facility ID for detailed information.</small></div><button onclick="resetFilters()">Reset List</button></div><div class="filters"><input id="search" placeholder="Search facility, ID, integrator, HMIS or SPOC" oninput="renderRows()"><select id="typeFilter" onchange="renderRows()"><option value="">All Facility Types</option><option>Hospital</option><option>Clinic / Polyclinic</option><option>Pharmacy</option></select><select id="statusFilter" onchange="renderRows()"><option value="">All Onboarding Stages</option><option>In Development</option><option>Sandbox Development Complete</option><option>UAT</option><option>Security</option><option>Pre-Production</option><option>Live / Integrated</option><option>Not Started</option></select><select id="techFilter" onchange="renderRows()"><option value="">All Technology Types</option><option>HMIS</option><option>LMIS</option><option>Pharmacy Platform</option><option>HealthTech</option></select><select id="ticketFilter" onchange="renderRows()"><option value="">All Ticket Statuses</option><option>Open</option><option>In Progress</option><option>Awaiting Facility</option><option>Resolved</option></select><button class="primary" onclick="exportCSV()">Export CSV</button></div><div class="tablewrap"><table><thead><tr><th>Facility ID</th><th>Facility</th><th>Type</th><th>Integrator / Product</th><th>Technology</th><th>Current Stage</th><th>Development</th><th>UAT</th><th>Security</th><th>Pre-Production</th><th>Ticket Status</th><th>First Ticket</th><th>Live Date</th><th>Cycle Time</th><th>Last API Hit</th><th>Last Interaction</th><th>SPOC</th><th>Next Action</th></tr></thead><tbody id="rows"></tbody></table></div><div id="empty" class="empty">No facility matches the selected filter.</div></section>@* <div class="footnote">Facility-universe counts of 25 hospitals, 400 clinics/polyclinics and 1,000 pharmacies were provided by the user. The 380 Sandbox registrations reconcile as 45 In Development + 50 Sandbox Development Complete + 20 UAT + 10 Security + 8 Pre-Production + 30 Live + 217 Not Started = 380. Technology also reconciles as 210 HMIS + 45 LMIS + 100 Pharmacy Platforms + 25 HealthTech = 380. Total Live reconciles as 20 last quarter + 10 this quarter = 30. Planned current-quarter go-lives reconcile as 8 Pre-Production + 10 Security = 18. Cycle-time buckets apply only to the 30 live facilities and total 30.</div> *@
     </div>
 </main>
 </div>

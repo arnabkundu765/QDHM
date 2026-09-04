@@ -10,5 +10,9 @@ namespace QDHM.Controllers
         {
             return View();
         }
+        public IActionResult MainDashboard()
+        {
+            return View();
+        }
     }
 }
