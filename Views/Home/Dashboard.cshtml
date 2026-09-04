@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QNDHM Partner CRM Summary</title>
     <link href="~/css/dashboard.css" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -18,17 +19,26 @@
             <div class="brand">
                 <div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div>
             </div>
-            <div class="nav-title">CRM workspace</div>
-                <a class="nav active" href="/home/dashboard">▦ Summary Dashboard</a>
-                <a class="nav" href="/auth/HfrRegistration?show=false">＋ HFR Registration</a>
-                <a class="nav" href="/auth/HprRegistration?show=false">＋ HPR Registration</a>
-                <a class="nav" href="/auth/DscRegistration?show=false">＋ DSC Registration</a>
-                @*<a class="nav" href="#">♙ Partners</a>
-                <a class="nav" href="#">◫ Onboarding Pipeline</a>
-                <a class="nav" href="#">◷ Support Tickets</a>
-                <a class="nav" href="#">✓ Compliance</a>
-                <a class="nav" href="#">⇄ Integrations</a>
-                <a class="nav" href="#">▤ Reports</a>*@ 
+            @* <div class="nav-title">CRM workspace</div> *@
+            <a class="nav active" href="/home/dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Summary Dashboard</span>
+            </a>
+
+            <a class="nav" href="/auth/HfrRegistration?show=false">
+                <i data-lucide="hospital"></i>
+                <span>HFR Registration</span>
+            </a>
+
+            <a class="nav" href="/auth/HprRegistration?show=false">
+                <i data-lucide="user-round"></i>
+                <span>HPR Registration</span>
+            </a>
+
+            <a class="nav" href="/auth/DscRegistration?show=false">
+                <i data-lucide="badge-check"></i>
+                <span>DSC Registration</span>
+            </a>
     <div class="mission"><b>QNDHM</b><br><small>One Nation &bull; One Health Network</small></div>
 </aside>
 <main class="main">

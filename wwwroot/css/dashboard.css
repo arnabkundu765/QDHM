@@ -1,6 +1,7 @@
 ﻿
 :root {
     --maroon: #8A1538;
+    --md: #5b0d27;
     --dark: #5C0D28;
     --soft: #F8EEF2;
     --gold: #B89555;
@@ -39,10 +40,10 @@ button, input, select {
 .sidebar {
     position: fixed;
     inset: 0 auto 0 0;
-    width: 238px;
-    padding: 18px 14px;
+    width: 245px;
+    background: linear-gradient(180deg,var(--md),var(--maroon) 60%,#650e2d);
     color: #fff;
-    background: linear-gradient(180deg,var(--dark),var(--maroon) 58%,#690F30);
+    padding: 18px 14px;
     z-index: 20
 }
 
@@ -51,7 +52,8 @@ button, input, select {
     gap: 11px;
     align-items: center;
     padding: 4px 5px 20px;
-    border-bottom: 1px solid rgba(255,255,255,.15)
+    border-bottom: 1px solid rgba(255,255,255,.15) ;
+    margin: 20px 8px 12px;
 }
 
 .logo {
@@ -80,6 +82,44 @@ button, input, select {
     opacity: .55
 }
 
+/*.nav {
+    display: flex;
+    gap: 11px;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 11px 12px;
+    border-radius: 9px;
+    margin: 3px 0;
+    opacity: .82
+}
+
+    .nav:hover, .nav.active {
+        background: rgba(255,255,255,.14);
+        opacity: 1
+    }
+    .nav svg {
+        width: 17px;
+        height: 17px;
+        flex: 0 0 17px;
+        stroke-width: 1.8px;
+    }
+
+    .nav span {
+        white-space: nowrap;
+    }
+
+    .nav:hover {
+        background: #ffffff18;
+    }
+
+    .nav.active {
+        background: #ffffff20;
+    }
+
+        .nav.active svg {
+            stroke-width: 2.2;
+        }*/
 .nav {
     display: flex;
     gap: 11px;
@@ -97,6 +137,24 @@ button, input, select {
         opacity: 1
     }
 
+    .nav svg {
+        width: 17px;
+        height: 17px;
+        flex: 0 0 17px;
+        stroke-width: 1.8px;
+    }
+
+    .nav span {
+        white-space: nowrap;
+    }
+
+    .nav.active {
+        background: #ffffff20;
+    }
+
+        .nav.active svg {
+            stroke-width: 2.2px;
+        }
 .mission {
     position: absolute;
     bottom: 25px;

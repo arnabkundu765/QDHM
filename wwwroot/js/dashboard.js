@@ -1,4 +1,5 @@
-﻿const records = [
+﻿lucide.createIcons();
+const records = [
     { id: 'QNDHM-DSC-2026-00125', org: 'MediTech Solutions W.L.L.', type: 'Digital Solution Company', spoc: 'Ahmed Al Qahtani', product: 'MediConnect HIE', stage: 'Compliance', progress: 60, tickets: 2, goLive: '15 Dec 2026', status: 'Observation Open', risk: 'Low', updated: '28 Aug 2026' },
     { id: 'QNDHM-HSP-2026-00124', org: 'Hamad Medical Corporation', type: 'Hospital', spoc: 'Ibrahim Al-Abdulla', product: 'HMC Clinical Exchange', stage: 'Production', progress: 100, tickets: 0, goLive: '02 Nov 2026', status: 'Live', risk: 'Low', updated: '27 Aug 2026' },
     { id: 'QNDHM-HSP-2026-00123', org: 'Sidra Medicine', type: 'Hospital', spoc: 'Faisal Al-Thani', product: 'Sidra EMR Gateway', stage: 'Certified', progress: 90, tickets: 1, goLive: '20 Sep 2026', status: 'Approved', risk: 'Low', updated: '27 Aug 2026' },

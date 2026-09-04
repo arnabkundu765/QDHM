@@ -8,10 +8,37 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Healthcare Facility Registration</title>
     <link href="~/css/hfr.css" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="app">
-        <aside class="sidebar"><div class="brand"><div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div></div><div class="label">Registration Workspace</div><button class="nav active" id="navRegistration" onclick="showView('registration')">▤ Facility Registration</button><button class="nav" id="navSupport" onclick="showView('support')">◷ Support & Tickets <span class="badge">3</span></button><button class="nav" onclick="location.href='/home/dashboard'">▦ Summary Dashboard</button><button class="nav" data-admin-only onclick="alert('Role and permission management')">⚙ Role Management</button><div class="rolebox" style="display:none;"><label>Demo access role</label><select id="role" onchange="applyRole()"><option value="registrant">Registrant</option><option value="support">Support Agent</option><option value="reviewer">Reviewer</option><option value="admin">Administrator</option></select></div><div class="mission"><b>QNDHM</b><br><small>One Nation &bull; One Health Network</small></div></aside>
+        @* <aside class="sidebar"><div class="brand"><div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div></div><div class="label">Registration Workspace</div><button class="nav active" id="navRegistration" onclick="showView('registration')">▤ Facility Registration</button><button class="nav" id="navSupport" onclick="showView('support')">◷ Support & Tickets <span class="badge">3</span></button><button class="nav" onclick="location.href='/home/dashboard'">▦ Summary Dashboard</button><button class="nav" data-admin-only onclick="alert('Role and permission management')">⚙ Role Management</button><div class="rolebox" style="display:none;"><label>Demo access role</label><select id="role" onchange="applyRole()"><option value="registrant">Registrant</option><option value="support">Support Agent</option><option value="reviewer">Reviewer</option><option value="admin">Administrator</option></select></div><div class="mission"><b>QNDHM</b><br><small>One Nation &bull; One Health Network</small></div></aside> *@
+        <aside class="sidebar">
+            <div class="brand">
+                <div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div>
+            </div>
+            @* <div class="nav-title">CRM workspace</div> *@
+            <a class="nav" href="/home/dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Summary Dashboard</span>
+            </a>
+
+            <a class="nav active" href="/auth/HfrRegistration?show=false">
+                <i data-lucide="hospital"></i>
+                <span>HFR Registration</span>
+            </a>
+
+            <a class="nav" href="/auth/HprRegistration?show=false">
+                <i data-lucide="user-round"></i>
+                <span>HPR Registration</span>
+            </a>
+
+            <a class="nav" href="/auth/DscRegistration?show=false">
+                <i data-lucide="badge-check"></i>
+                <span>DSC Registration</span>
+            </a>
+            <div class="mission"><b>QNDHM</b><br><small>One Nation &bull; One Health Network</small></div>
+        </aside>
             <main class="main">
         <header class="top">
             <div><h1>QATAR NATIONAL DIGITAL HEALTH MISSION (QNDHM)</h1><p>Healthcare Facility Registration &bull; Illustration Purpose Only</p></div><div class="user">
