@@ -71,3 +71,147 @@ documentTypes.forEach(function (id) {
         }
     });
 });
+
+function toggleNavSection(button) {
+
+    const currentSection = button.closest('.nav-section');
+
+    if (!currentSection) return;
+
+    const sections = document.querySelectorAll('.nav-section');
+
+    sections.forEach(section => {
+
+        if (section === currentSection) return;
+
+        const group = section.querySelector('.nav-group');
+
+        if (!group || section.classList.contains('collapsed')) return;
+
+        // Current height before collapsing
+        const height = group.scrollHeight;
+
+        group.style.height = height + 'px';
+
+        // Force browser to register the current height
+        requestAnimationFrame(() => {
+
+            section.classList.add('collapsed');
+            group.style.height = '0px';
+
+        });
+
+        // Clean inline height after animation
+        group.addEventListener('transitionend', function handler(e) {
+
+            if (e.propertyName !== 'height') return;
+
+            group.style.height = '';
+            group.removeEventListener('transitionend', handler);
+
+        });
+
+    });
+
+
+    // Toggle clicked section
+    const currentGroup = currentSection.querySelector('.nav-group');
+
+    if (!currentGroup) return;
+
+    if (currentSection.classList.contains('collapsed')) {
+
+        currentSection.classList.remove('collapsed');
+
+        // Start from zero
+        currentGroup.style.height = '0px';
+
+        requestAnimationFrame(() => {
+            currentGroup.style.height = currentGroup.scrollHeight + 'px';
+        });
+
+        currentGroup.addEventListener('transitionend', function handler(e) {
+
+            if (e.propertyName !== 'height') return;
+
+            currentGroup.style.height = 'auto';
+            currentGroup.removeEventListener('transitionend', handler);
+
+        });
+
+    } else {
+
+        currentGroup.style.height = currentGroup.scrollHeight + 'px';
+
+        requestAnimationFrame(() => {
+            currentSection.classList.add('collapsed');
+            currentGroup.style.height = '0px';
+        });
+
+    }
+}
+document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll('.nav-section').forEach(section => {
+        section.classList.add('collapsed');
+    });
+
+    const activeNav = document.querySelector('.nav.active');
+
+    if (activeNav) {
+        const parentSection = activeNav.closest('.nav-section');
+
+        if (parentSection) {
+            parentSection.classList.remove('collapsed');
+        }
+    }
+});
+// function setNav(el) {
+
+//     document.querySelectorAll('.nav').forEach(n => {
+//         n.classList.remove('active');
+//     });
+
+//     if (!el) return;
+
+//     el.classList.add('active');
+
+//     Find the section containing the clicked nav
+//     const currentSection = el.closest('.nav-section');
+
+//     if (!currentSection) return;
+
+//     Close every other section
+//     document.querySelectorAll('.nav-section').forEach(section => {
+//         if (section !== currentSection) {
+//             section.classList.add('collapsed');
+//         }
+//     });
+
+// Open the active section
+//     currentSection.classList.remove('collapsed');
+// }
+function setNav(el) {
+
+    document.querySelectorAll('.nav').forEach(n => {
+        n.classList.remove('active');
+    });
+
+    if (!el) return;
+
+    el.classList.add('active');
+
+    const currentSection = el.closest('.nav-section');
+
+    if (!currentSection) return;
+
+    document.querySelectorAll('.nav-section').forEach(section => {
+
+        if (section !== currentSection) {
+            section.classList.add('collapsed');
+        }
+
+    });
+
+    currentSection.classList.remove('collapsed');
+}

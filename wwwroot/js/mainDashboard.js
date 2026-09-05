@@ -23,7 +23,172 @@ function renderRows() { let out = filtered(); rows.innerHTML = out.map(x => `<tr
 function resetFilters() { search.value = ''; typeFilter.value = ''; statusFilter.value = ''; techFilter.value = ''; ticketFilter.value = ''; activeSpecial = { key: '', value: '' }; listTitle.textContent = 'All Facility Records'; listSub.textContent = 'Click a Facility ID for detailed information.'; renderRows() }
 function openFacility(id) { let x = facilities.find(a => a.id === id); dTitle.textContent = x.name; dSub.textContent = x.id + ' | ' + x.type + ' | ' + x.integrator; detailGrid.innerHTML = [['Current Stage', x.status], ['Technology', x.tech], ['Development Completion', x.development], ['UAT Status', x.uat], ['Security Status', x.security], ['Pre-Production Status', x.preprod], ['Ticket Status', x.ticket], ['First Ticket Date', x.first], ['Live Date', x.live || 'Not Live'], ['Cycle Time', x.live ? x.days + ' days' : 'N/A until live'], ['Last API Hit', x.api], ['Last Interaction', x.interaction], ['Primary SPOC', x.spoc], ['Target Go-Live', x.quarter === 'Planned This Quarter' ? 'Current Quarter' : 'As per delivery plan'], ['Open Tickets', x.ticket === 'Resolved' ? '0' : '1'], ['API Success', 'Prototype metric']].map(d => `<div class="detail"><span>${d[0]}</span><b>${d[1]}</b></div>`).join(''); timeline.innerHTML = [['First Ticket Created', x.first], ['Current Stage', x.status], ['Last Interaction', x.interaction], ['Live / Current State', x.live || x.status]].map(e => `<div class="event"><b>${e[0]}</b><small>${e[1]}</small></div>`).join(''); recommend.innerHTML = `<ol><li>${x.next}</li><li>Owner: ${x.spoc}</li><li>Validate next API activity and outstanding ticket status.</li><li>${x.live && x.days > 150 ? 'Escalate because live cycle time exceeds 150 days.' : 'Continue within the standard onboarding cadence.'}</li></ol>`; drawerBg.classList.add('open') }
 function closeDrawer() { drawerBg.classList.remove('open') } function exportCSV() { let h = ['ID', 'Facility', 'Type', 'Integrator', 'Technology', 'Stage', 'Development', 'UAT', 'Security', 'Pre-Production', 'Ticket', 'First Ticket', 'Live Date', 'Cycle Days', 'Last API', 'Last Interaction', 'SPOC', 'Next Action']; let a = [h, ...filtered().map(x => [x.id, x.name, x.type, x.integrator, x.tech, x.status, x.development, x.uat, x.security, x.preprod, x.ticket, x.first, x.live, x.live ? x.days : '', x.api, x.interaction, x.spoc, x.next])]; let csv = a.map(r => r.map(v => '"' + String(v).replaceAll('"', '""') + '"').join(',')).join('\n'); let b = new Blob([csv], { type: 'text/csv' }), u = URL.createObjectURL(b), l = document.createElement('a'); l.href = u; l.download = 'QNDHM_Facility_Status_List.csv'; l.click(); URL.revokeObjectURL(u) } renderRows();
+// function setNav(el) {
+//     document.querySelectorAll('.nav').forEach(n => n.classList.remove('active'));
+//     if (el) el.classList.add('active');
+// }
+// function toggleNavSection(button) {
+//     const section = button.closest('.nav-section');
+
+//     if (!section) return;
+
+//     section.classList.toggle('collapsed');
+// }
+// function toggleNavSection(button) {
+//     const currentSection = button.closest('.nav-section');
+
+//     if (!currentSection) return;
+
+//     const sections = document.querySelectorAll('.nav-section');
+
+//     sections.forEach(section => {
+//         if (section !== currentSection) {
+//             section.classList.add('collapsed');
+//         }
+//     });
+
+//     currentSection.classList.toggle('collapsed');
+// }
+function toggleNavSection(button) {
+
+    const currentSection = button.closest('.nav-section');
+
+    if (!currentSection) return;
+
+    const sections = document.querySelectorAll('.nav-section');
+
+    sections.forEach(section => {
+
+        if (section === currentSection) return;
+
+        const group = section.querySelector('.nav-group');
+
+        if (!group || section.classList.contains('collapsed')) return;
+
+        // Current height before collapsing
+        const height = group.scrollHeight;
+
+        group.style.height = height + 'px';
+
+        // Force browser to register the current height
+        requestAnimationFrame(() => {
+
+            section.classList.add('collapsed');
+            group.style.height = '0px';
+
+        });
+
+        // Clean inline height after animation
+        group.addEventListener('transitionend', function handler(e) {
+
+            if (e.propertyName !== 'height') return;
+
+            group.style.height = '';
+            group.removeEventListener('transitionend', handler);
+
+        });
+
+    });
+
+
+    // Toggle clicked section
+    const currentGroup = currentSection.querySelector('.nav-group');
+
+    if (!currentGroup) return;
+
+    if (currentSection.classList.contains('collapsed')) {
+
+        currentSection.classList.remove('collapsed');
+
+        // Start from zero
+        currentGroup.style.height = '0px';
+
+        requestAnimationFrame(() => {
+            currentGroup.style.height = currentGroup.scrollHeight + 'px';
+        });
+
+        currentGroup.addEventListener('transitionend', function handler(e) {
+
+            if (e.propertyName !== 'height') return;
+
+            currentGroup.style.height = 'auto';
+            currentGroup.removeEventListener('transitionend', handler);
+
+        });
+
+    } else {
+
+        currentGroup.style.height = currentGroup.scrollHeight + 'px';
+
+        requestAnimationFrame(() => {
+            currentSection.classList.add('collapsed');
+            currentGroup.style.height = '0px';
+        });
+
+    }
+}
+document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll('.nav-section').forEach(section => {
+        section.classList.add('collapsed');
+    });
+
+    const activeNav = document.querySelector('.nav.active');
+
+    if (activeNav) {
+        const parentSection = activeNav.closest('.nav-section');
+
+        if (parentSection) {
+            parentSection.classList.remove('collapsed');
+        }
+    }
+});
+// function setNav(el) {
+
+//     document.querySelectorAll('.nav').forEach(n => {
+//         n.classList.remove('active');
+//     });
+
+//     if (!el) return;
+
+//     el.classList.add('active');
+
+//     Find the section containing the clicked nav
+//     const currentSection = el.closest('.nav-section');
+
+//     if (!currentSection) return;
+
+//     Close every other section
+//     document.querySelectorAll('.nav-section').forEach(section => {
+//         if (section !== currentSection) {
+//             section.classList.add('collapsed');
+//         }
+//     });
+
+// Open the active section
+//     currentSection.classList.remove('collapsed');
+// }
 function setNav(el) {
-    document.querySelectorAll('.nav').forEach(n => n.classList.remove('active'));
-    if (el) el.classList.add('active');
+
+    document.querySelectorAll('.nav').forEach(n => {
+        n.classList.remove('active');
+    });
+
+    if (!el) return;
+
+    el.classList.add('active');
+
+    const currentSection = el.closest('.nav-section');
+
+    if (!currentSection) return;
+
+    document.querySelectorAll('.nav-section').forEach(section => {
+
+        if (section !== currentSection) {
+            section.classList.add('collapsed');
+        }
+
+    });
+
+    currentSection.classList.remove('collapsed');
 }

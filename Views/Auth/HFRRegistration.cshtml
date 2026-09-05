@@ -13,12 +13,12 @@
 <body>
     <div class="rolebox" style="display:none;"><label>Demo access role</label><select id="role" onchange="applyRole()"><option value="registrant">Registrant</option><option value="support">Support Agent</option><option value="reviewer">Reviewer</option><option value="admin">Administrator</option></select></div>
     <div class="app">
-        @* <aside class="sidebar"><div class="brand"><div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div></div><div class="label">Registration Workspace</div><button class="nav active" id="navRegistration" onclick="showView('registration')">▤ Facility Registration</button><button class="nav" id="navSupport" onclick="showView('support')">◷ Support & Tickets <span class="badge">3</span></button><button class="nav" onclick="location.href='/home/dashboard'">▦ Summary Dashboard</button><button class="nav" data-admin-only onclick="alert('Role and permission management')">⚙ Role Management</button><div class="rolebox" style="display:none;"><label>Demo access role</label><select id="role" onchange="applyRole()"><option value="registrant">Registrant</option><option value="support">Support Agent</option><option value="reviewer">Reviewer</option><option value="admin">Administrator</option></select></div><div class="mission"><b>QNDHM</b><br><small>One Nation &bull; One Health Network</small></div></aside> *@
+        @* <aside class="sidebar"><div class="brand"><div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div></div><div class="label">Registration Workspace</div><button class="nav active" id="navRegistration" onclick="showView('registration')">▤ Facility Registration</button><button class="nav" id="navSupport" onclick="showView('support')">◷ Support & Tickets <span class="badge">3</span></button><button class="nav" onclick="location.href='/home/dashboard'">▦ Summary Dashboard</button><button class="nav" data-admin-only onclick="alert('Role and permission management')">⚙ Role Management</button><div class="rolebox" style="display:none;"><label>Demo access role</label><select id="role" onchange="applyRole()"><option value="registrant">Registrant</option><option value="support">Support Agent</option><option value="reviewer">Reviewer</option><option value="admin">Administrator</option></select></div><div class="mission"><b>QNDHM</b><br><small>One Nation &bull; One Health Network</small></div></aside> 
         <aside class="sidebar">
             <div class="brand">
                 <div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div>
             </div>
-            @* <div class="nav-title">CRM workspace</div> *@
+            <div class="nav-title">CRM workspace</div>
             <a class="nav" href="/home/dashboard">
                 <i data-lucide="layout-dashboard"></i>
                 <span>Summary Dashboard</span>
@@ -35,10 +35,136 @@
             </a>
 
             <a class="nav" href="/auth/DscRegistration?show=false">
-                <i data-lucide="badge-check"></i>
+                <i data-lucide="code-xml"></i>
                 <span>DSC Registration</span>
             </a>
             <div class="mission"><b>QNDHM</b><br><small>One Nation &bull; One Health Network</small></div>
+        </aside>*@
+        <aside class="side">
+
+            <!-- BRAND -->
+            <div class="brand">
+                <div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div>
+            </div>
+
+
+            <!-- =========================
+         CRM WORKSPACE
+         ========================= -->
+            <div class="side-menu">
+                <div class="nav-section" data-section="crm">
+
+                    <button class="nav-title" type="button" onclick="toggleNavSection(this)">
+                        <span>CRM Workspace</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+
+                    <div class="nav-group">
+
+                        <a class="nav" href="/home/dashboard">
+                            <i data-lucide="layout-dashboard"></i>
+                            <span>Summary Dashboard</span>
+                        </a>
+
+                        <a class="nav active" href="/auth/HfrRegistration?show=false">
+                            <i data-lucide="hospital"></i>
+                            <span>HFR Registration</span>
+                        </a>
+
+                        <a class="nav" href="/auth/HprRegistration?show=false">
+                            <i data-lucide="user-round"></i>
+                            <span>HPR Registration</span>
+                        </a>
+
+                        <a class="nav" href="/auth/DscRegistration?show=false">
+                            <i data-lucide="code-xml"></i>
+                            <span>DSC Registration</span>
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <!-- =========================
+         FACILITY UNIVERSE
+         ========================= -->
+                <div class="nav-section" data-section="facility">
+
+                    <button class="nav-title" type="button" onclick="toggleNavSection(this)">
+                        <span>Facility Universe</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+
+                    <div class="nav-group">
+
+                        <a class="nav" href="/home/MainDashboard">
+                            <i data-lucide="layout-dashboard"></i>
+                            <span>Facilities Dashboard</span>
+                        </a>
+
+                        <a class="nav" href="/home/MainDashboard">
+                            <i data-lucide="hospital"></i>
+                            <span>Hospitals</span>
+                        </a>
+
+                        <a class="nav" href="/home/MainDashboard">
+                            <i data-lucide="building-2"></i>
+                            <span>Clinics &amp; Polyclinics</span>
+                        </a>
+
+                        <a class="nav" href="/home/MainDashboard">
+                            <i data-lucide="pill"></i>
+                            <span>Pharmacies</span>
+                        </a>
+
+                        <a class="nav" href="/home/MainDashboard">
+                            <i data-lucide="workflow"></i>
+                            <span>In Development</span>
+                        </a>
+
+                        <a class="nav" href="/home/MainDashboard">
+                            <i data-lucide="rocket"></i>
+                            <span>Pre-Production</span>
+                        </a>
+
+                        <a class="nav"
+                           href="/home/MainDashboard">
+                            <i data-lucide="ticket"></i>
+                            <span>Tickets</span>
+                        </a>
+
+                        <a class="nav"
+                           href="/home/MainDashboard">
+                            <i data-lucide="timer"></i>
+                            <span>Cycle Time</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="nav-section" data-section="crm">
+
+                    <button class="nav-title" type="button" onclick="toggleNavSection(this)">
+                        <span>Executive Workspace</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+
+                    <div class="nav-group">
+
+                        <a class="nav" href="#">
+                            <i data-lucide="layout-dashboard"></i>
+                            <span> Dashboard</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- FOOTER -->
+            <div class="side-note">
+                <b>QNDHM</b><br>
+                One Nation · One Health Network
+            </div>
+
         </aside>
             <main class="main">
         <header class="top">

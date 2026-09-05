@@ -27,7 +27,7 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font: 14px Segoe UI,Arial,sans-serif
+    font: 13px Segoe UI,Arial,sans-serif
 }
 
 .app {
@@ -50,10 +50,19 @@ body {
     display: flex;
     gap: 11px;
     align-items: center;
-    padding: 4px 6px 20px;
-    border-bottom: 1px solid #ffffff26;
-    margin: 20px 8px 12px;
+    padding: 4px 5px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+    margin: 8px 8px 4px;
 }
+
+    .brand b {
+        display: block;
+    }
+
+    .brand small {
+        opacity: .75;
+        margin-top: 5px;
+    }
 
 .logo {
     width: 45px;
@@ -65,14 +74,6 @@ body {
     font-weight: 800
 }
 
-.brand b {
-    display: block
-}
-
-.brand small {
-    opacity: .75
-}
-
 .label {
     margin: 21px 10px 8px;
     text-transform: uppercase;
@@ -81,7 +82,7 @@ body {
     opacity: .55
 }
 
-.nav {
+/*.nav {
     display: flex;
     gap: 11px;
     align-items: center;
@@ -114,7 +115,7 @@ body {
 
         .nav.active svg {
             stroke-width: 2.2px;
-        }
+        }*/
 
 
 .badge {
@@ -682,7 +683,7 @@ td {
     display: none !important
 }
 
-@@media(max-width:950px) {
+@media(max-width:950px) {
     .sidebar {
         display: none
     }
@@ -719,3 +720,133 @@ td {
         grid-template-columns: 1fr
     }
 }
+.nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    text-align: left;
+    padding: 11px 12px;
+    border-radius: 8px;
+    margin: 4px 0;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+    .nav svg {
+        width: 17px;
+        height: 17px;
+        flex: 0 0 17px;
+        stroke-width: 1.8px;
+    }
+
+    .nav span {
+        white-space: nowrap;
+    }
+
+    .nav:hover {
+        background: #ffffff18;
+    }
+
+    .nav.active {
+        background: #ffffff20;
+    }
+
+        .nav.active svg {
+            stroke-width: 2.2;
+        }
+
+.nav-section.collapsed .nav-group {
+    max-height: 0;
+    opacity: 0;
+}
+
+.nav-section.collapsed .nav-title i {
+    transform: rotate(-90deg);
+}
+
+.nav-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0 8px;
+    padding: 7px 10px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: .65;
+    cursor: pointer;
+    text-align: left;
+}
+
+    .nav-title i {
+        width: 15px;
+        height: 15px;
+        transition: transform .25s ease;
+    }
+
+.nav-section {
+    flex: 0 0 auto;
+}
+
+.nav-group {
+    display: block;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height .25s ease, opacity .2s ease;
+}
+
+.side-note {
+    flex: 0 0 auto;
+    margin-top: auto;
+    padding: 16px 8px 4px;
+    color: #efd29d;
+    text-align: center;
+    line-height: 1.7;
+    border-top: 1px solid #ffffff18;
+}
+
+.side {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 238px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 14px;
+    color: #fff;
+    background: linear-gradient( 180deg, var(--md), var(--m) 62%, #680f30 );
+    z-index: 10;
+    overflow: hidden;
+}
+
+.side-menu {
+    flex: 1 1 auto;
+    /*
+       VERY IMPORTANT
+       Allows flex child to become smaller
+       instead of forcing sidebar to overflow.
+    */
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 3px;
+}
+
+
+    /* Sidebar scrollbar */
+
+    .side-menu::-webkit-scrollbar {
+        display: none;
+    }

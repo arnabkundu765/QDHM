@@ -13,8 +13,29 @@
 </head>
 <body>
     <div class="app">
-        <aside class="side"><div class="brand"><b>QNDHM Facilities Control</b><small>Onboarding, Integration & Action Plan</small></div>
-            @* <button class="nav active" onclick="resetFilters();setNav(this);">▦ Facilities Dashboard</button><button class="nav" onclick="filterBy('type','Hospital');setNav(this);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V7l8-4 8 4v14" /><path d="M9 21v-6h6v6" /><path d="M12 7v4M10 9h4" /></svg> Hospitals</button><button class="nav" onclick="filterBy('type','Clinic / Polyclinic');setNav(this);">▤ Clinics & Polyclinics</button><button class="nav" onclick="filterBy('type','Pharmacy');setNav(this);">✚ Pharmacies</button><button class="nav" onclick="setNav(this);filterBy('stage','In Development')">⇄ In Development</button><button class="nav" onclick="setNav(this);filterBy('stage','Pre-Production')">✓ Pre-Production</button><button class="nav" onclick="setNav(this);filterBy('ticket','Open')">◷ Tickets</button><button class="nav" onclick="setNav(this);filterBy('cycle','Over 150 days')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Cycle Time</button> *@
+        @* <aside class="side"><div class="brand"><b>QNDHM Facilities Control</b><small>Onboarding, Integration & Action Plan</small></div>
+            @* <button class="nav active" onclick="resetFilters();setNav(this);">▦ Facilities Dashboard</button><button class="nav" onclick="filterBy('type','Hospital');setNav(this);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V7l8-4 8 4v14" /><path d="M9 21v-6h6v6" /><path d="M12 7v4M10 9h4" /></svg> Hospitals</button><button class="nav" onclick="filterBy('type','Clinic / Polyclinic');setNav(this);">▤ Clinics & Polyclinics</button><button class="nav" onclick="filterBy('type','Pharmacy');setNav(this);">✚ Pharmacies</button><button class="nav" onclick="setNav(this);filterBy('stage','In Development')">⇄ In Development</button><button class="nav" onclick="setNav(this);filterBy('stage','Pre-Production')">✓ Pre-Production</button><button class="nav" onclick="setNav(this);filterBy('ticket','Open')">◷ Tickets</button><button class="nav" onclick="setNav(this);filterBy('cycle','Over 150 days')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Cycle Time</button>
+            <div class="nav-title">CRM workspace</div>
+            <a class="nav" href="/home/dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Summary Dashboard</span>
+            </a>
+
+            <a class="nav" href="/auth/HfrRegistration?show=false">
+                <i data-lucide="hospital"></i>
+                <span>HFR Registration</span>
+            </a>
+
+            <a class="nav" href="/auth/HprRegistration?show=false">
+                <i data-lucide="user-round"></i>
+                <span>HPR Registration</span>
+            </a>
+
+            <a class="nav" href="/auth/DscRegistration?show=false">
+                <i data-lucide="code-xml"></i>
+                <span>DSC Registration</span>
+            </a>
+            <div class="nav-title">Facility Universe</div>
             <button class="nav active" onclick="resetFilters();setNav(this);">
                 <i data-lucide="layout-dashboard"></i>
                 <span>Facilities Dashboard</span>
@@ -55,7 +76,140 @@
                 <span>Cycle Time</span>
             </button>
 
-            <div class="side-note"><b>QNDHM</b><br>One Nation · One Health Network</div></aside>
+            <div class="side-note"><b>QNDHM</b><br>One Nation · One Health Network</div></aside> *@
+
+        <aside class="side">
+
+            <!-- BRAND -->
+            <div class="brand">
+                <div><b>Ministry of Public Health</b><small>State of Qatar<br>QNDHM</small></div>
+            </div>
+
+
+            <!-- =========================
+         CRM WORKSPACE
+         ========================= -->
+         <div class="side-menu">
+            <div class="nav-section" data-section="crm">
+
+                <button class="nav-title" type="button" onclick="toggleNavSection(this)">
+                    <span>CRM Workspace</span>
+                    <i data-lucide="chevron-down"></i>
+                </button>
+
+                <div class="nav-group">
+
+                    <a class="nav" href="/home/dashboard">
+                        <i data-lucide="layout-dashboard"></i>
+                        <span>Summary Dashboard</span>
+                    </a>
+
+                    <a class="nav" href="/auth/HfrRegistration?show=false">
+                        <i data-lucide="hospital"></i>
+                        <span>HFR Registration</span>
+                    </a>
+
+                    <a class="nav" href="/auth/HprRegistration?show=false">
+                        <i data-lucide="user-round"></i>
+                        <span>HPR Registration</span>
+                    </a>
+
+                    <a class="nav" href="/auth/DscRegistration?show=false">
+                        <i data-lucide="code-xml"></i>
+                        <span>DSC Registration</span>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <!-- =========================
+         FACILITY UNIVERSE
+         ========================= -->
+            <div class="nav-section" data-section="facility">
+
+                <button class="nav-title" type="button" onclick="toggleNavSection(this)">
+                    <span>Facility Universe</span>
+                    <i data-lucide="chevron-down"></i>
+                </button>
+
+                <div class="nav-group">
+
+                    <button class="nav active"
+                            onclick="resetFilters(); setNav(this);">
+                        <i data-lucide="layout-dashboard"></i>
+                        <span>Facilities Dashboard</span>
+                    </button>
+
+                    <button class="nav"
+                            onclick="filterBy('type','Hospital'); setNav(this);">
+                        <i data-lucide="hospital"></i>
+                        <span>Hospitals</span>
+                    </button>
+
+                    <button class="nav"
+                            onclick="filterBy('type','Clinic / Polyclinic'); setNav(this);">
+                        <i data-lucide="building-2"></i>
+                        <span>Clinics &amp; Polyclinics</span>
+                    </button>
+
+                    <button class="nav"
+                            onclick="filterBy('type','Pharmacy'); setNav(this);">
+                        <i data-lucide="pill"></i>
+                        <span>Pharmacies</span>
+                    </button>
+
+                    <button class="nav"
+                            onclick="filterBy('stage','In Development'); setNav(this);">
+                        <i data-lucide="workflow"></i>
+                        <span>In Development</span>
+                    </button>
+
+                    <button class="nav"
+                            onclick="filterBy('stage','Pre-Production'); setNav(this);">
+                        <i data-lucide="rocket"></i>
+                        <span>Pre-Production</span>
+                    </button>
+
+                    <button class="nav"
+                            onclick="filterBy('ticket','Open'); setNav(this);">
+                        <i data-lucide="ticket"></i>
+                        <span>Tickets</span>
+                    </button>
+
+                    <button class="nav"
+                            onclick="filterBy('cycle','Over 150 days'); setNav(this);">
+                        <i data-lucide="timer"></i>
+                        <span>Cycle Time</span>
+                    </button>
+
+                </div>
+            </div>
+                <div class="nav-section" data-section="crm">
+
+                    <button class="nav-title" type="button" onclick="toggleNavSection(this)">
+                        <span>Executive Workspace</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+
+                    <div class="nav-group">
+
+                        <a class="nav" href="#">
+                            <i data-lucide="layout-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </div>
+                </div>
+        </div>
+
+
+            <!-- FOOTER -->
+            <div class="side-note">
+                <b>QNDHM</b><br>
+                One Nation · One Health Network
+            </div>
+
+        </aside>
         <main class="main">
             <header class="top"><div><h1>QATAR NATIONAL DIGITAL HEALTH MISSION (QNDHM)</h1><p>Healthcare Facilities Status, Integration and Action Dashboard &bull; Illustration Purpose Only</p></div><select id="period"><option>Current Quarter</option><option>Last Quarter</option><option>Year to Date</option></select></header><div class="page">
         <div class="hero"><div><h2>Qatar Healthcare Facility Universe</h2><div>Track the complete journey from Sandbox registration through Development, UAT, Security, Pre-Production and Live operation.</div></div><div class="hero-right"><b>1,425 Facilities</b><small>User-provided planning baseline</small></div></div>
